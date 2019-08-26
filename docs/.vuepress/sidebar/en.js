@@ -4,8 +4,6 @@ module.exports = [
         collapsable: false,
         children: [
           '/',
-          '/admin-desktop',
-          '/admin-panel',
         ]
       },
   

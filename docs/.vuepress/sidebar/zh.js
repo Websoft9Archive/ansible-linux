@@ -6,11 +6,11 @@ module.exports = [
       '/zh/',
       '/zh/admin-concept',
       '/zh/admin-desktop',
-      '/zh/admin-panel',
       '/zh/admin-file',
       '/zh/admin-user',
       '/zh/admin-package',
       '/zh/admin-safe',
+      '/zh/admin-automation',
       '/zh/admin-practices',
     ]
   },
