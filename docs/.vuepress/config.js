@@ -5,6 +5,10 @@ module.exports = {
 base: '/docs/linux/',
 dest: 'html/linux',
 
+head: [
+  ['link', { rel: 'icon', href: '/favcon.ico' }]
+],
+
 //vuepress多语言，区别于主题多语言
 locales: {
     '/': {
