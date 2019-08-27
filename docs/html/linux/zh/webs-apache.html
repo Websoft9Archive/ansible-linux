@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Apache | Linux 实践指南</title>
+    <meta name="description" content="本文档是Websoft9在实践中，总结的与Linux有关的操作、命令、脚本，帮助云计算用户快速掌握Linux相关的技能">
+    <link rel="icon" href="/docs/linux/favcon.ico">
+    
+    <link rel="preload" href="/docs/linux/assets/css/0.styles.576d3c71.css" as="style"><link rel="preload" href="/docs/linux/assets/js/app.a83cbc0f.js" as="script"><link rel="preload" href="/docs/linux/assets/js/2.a9bd2ee6.js" as="script"><link rel="preload" href="/docs/linux/assets/js/23.917c2e9b.js" as="script"><link rel="prefetch" href="/docs/linux/assets/js/10.523c509d.js"><link rel="prefetch" href="/docs/linux/assets/js/11.8a6139a8.js"><link rel="prefetch" href="/docs/linux/assets/js/12.8adb8a9e.js"><link rel="prefetch" href="/docs/linux/assets/js/13.6e701fd4.js"><link rel="prefetch" href="/docs/linux/assets/js/14.db44a12e.js"><link rel="prefetch" href="/docs/linux/assets/js/15.c3df7aaf.js"><link rel="prefetch" href="/docs/linux/assets/js/16.1ed13346.js"><link rel="prefetch" href="/docs/linux/assets/js/17.5ebb59de.js"><link rel="prefetch" href="/docs/linux/assets/js/18.624edcf3.js"><link rel="prefetch" href="/docs/linux/assets/js/19.4409573d.js"><link rel="prefetch" href="/docs/linux/assets/js/20.40b9763b.js"><link rel="prefetch" href="/docs/linux/assets/js/21.bdaaab99.js"><link rel="prefetch" href="/docs/linux/assets/js/22.77385610.js"><link rel="prefetch" href="/docs/linux/assets/js/24.f1c25d5a.js"><link rel="prefetch" href="/docs/linux/assets/js/25.0a721241.js"><link rel="prefetch" href="/docs/linux/assets/js/26.2bfaaa96.js"><link rel="prefetch" href="/docs/linux/assets/js/27.5ae79123.js"><link rel="prefetch" href="/docs/linux/assets/js/3.6b487419.js"><link rel="prefetch" href="/docs/linux/assets/js/4.b72cfc44.js"><link rel="prefetch" href="/docs/linux/assets/js/5.fdaf2c2d.js"><link rel="prefetch" href="/docs/linux/assets/js/6.2380b310.js"><link rel="prefetch" href="/docs/linux/assets/js/7.aaf5baa5.js"><link rel="prefetch" href="/docs/linux/assets/js/8.26789faf.js"><link rel="prefetch" href="/docs/linux/assets/js/9.7725cb97.js">
+    <link rel="stylesheet" href="/docs/linux/assets/css/0.styles.576d3c71.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/docs/linux/zh/" class="home-link router-link-active"><!----> <span class="site-name">Linux 实践指南</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/docs/linux/zh/" class="nav-link">首页</a></div><div class="nav-item"><a href="https://support.websoft9.com/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  支持
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title">语言</span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/docs/linux/" class="nav-link">English</a></li><li class="dropdown-item"><!----> <a href="/docs/linux/zh/webs-apache.html" class="nav-link router-link-exact-active router-link-active">中文</a></li></ul></div></div> <a href="https://github.com/Websoft9/linux" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/docs/linux/zh/" class="nav-link">首页</a></div><div class="nav-item"><a href="https://support.websoft9.com/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  支持
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title">语言</span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/docs/linux/" class="nav-link">English</a></li><li class="dropdown-item"><!----> <a href="/docs/linux/zh/webs-apache.html" class="nav-link router-link-exact-active router-link-active">中文</a></li></ul></div></div> <a href="https://github.com/Websoft9/linux" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>系统</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/docs/linux/zh/" class="sidebar-link">关于</a></li><li><a href="/docs/linux/zh/admin-concept.html" class="sidebar-link">概念</a></li><li><a href="/docs/linux/zh/admin-desktop.html" class="sidebar-link">桌面</a></li><li><a href="/docs/linux/zh/admin-file.html" class="sidebar-link">磁盘与文件</a></li><li><a href="/docs/linux/zh/admin-user.html" class="sidebar-link">用户管理</a></li><li><a href="/docs/linux/zh/admin-package.html" class="sidebar-link">包管理</a></li><li><a href="/docs/linux/zh/admin-safe.html" class="sidebar-link">网络与安全</a></li><li><a href="/docs/linux/zh/admin-automation.html" class="sidebar-link">自动化运维</a></li><li><a href="/docs/linux/zh/admin-practices.html" class="sidebar-link">最佳实践</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>应用服务器</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/docs/linux/zh/webs-apache.html" class="active sidebar-link">Apache</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/docs/linux/zh/webs-apache.html#安装" class="sidebar-link">安装</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/docs/linux/zh/webs-apache.html#安装apache" class="sidebar-link">安装Apache</a></li><li class="sidebar-sub-header"><a href="/docs/linux/zh/webs-apache.html#安装apache模块" class="sidebar-link">安装Apache模块</a></li></ul></li><li class="sidebar-sub-header"><a href="/docs/linux/zh/webs-apache.html#工作模式" class="sidebar-link">工作模式</a></li><li class="sidebar-sub-header"><a href="/docs/linux/zh/webs-apache.html#语言支持" class="sidebar-link">语言支持</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/docs/linux/zh/webs-apache.html#php" class="sidebar-link">PHP</a></li><li class="sidebar-sub-header"><a href="/docs/linux/zh/webs-apache.html#java" class="sidebar-link">Java</a></li></ul></li><li class="sidebar-sub-header"><a href="/docs/linux/zh/webs-apache.html#配置" class="sidebar-link">配置</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/docs/linux/zh/webs-apache.html#配置文件" class="sidebar-link">配置文件</a></li><li class="sidebar-sub-header"><a href="/docs/linux/zh/webs-apache.html#配置说明" class="sidebar-link">配置说明</a></li><li class="sidebar-sub-header"><a href="/docs/linux/zh/webs-apache.html#配置注意事项" class="sidebar-link">配置注意事项</a></li><li class="sidebar-sub-header"><a href="/docs/linux/zh/webs-apache.html#问题：关闭apache-test-page-欢迎页面" class="sidebar-link">问题：关闭Apache Test Page 欢迎页面</a></li><li class="sidebar-sub-header"><a href="/docs/linux/zh/webs-apache.html#问题：关闭缺省情况目录列表可查看" class="sidebar-link">问题：关闭缺省情况目录列表可查看</a></li></ul></li><li class="sidebar-sub-header"><a href="/docs/linux/zh/webs-apache.html#伪静态" class="sidebar-link">伪静态</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/docs/linux/zh/webs-apache.html#场景：重定向" class="sidebar-link">场景：重定向</a></li><li class="sidebar-sub-header"><a href="/docs/linux/zh/webs-apache.html#场景：隐藏后缀名" class="sidebar-link">场景：隐藏后缀名</a></li></ul></li><li class="sidebar-sub-header"><a href="/docs/linux/zh/webs-apache.html#虚拟主机" class="sidebar-link">虚拟主机</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/docs/linux/zh/webs-apache.html#http-virtualhost-template" class="sidebar-link">HTTP VirtualHost template</a></li><li class="sidebar-sub-header"><a href="/docs/linux/zh/webs-apache.html#apache-alias-template" class="sidebar-link">Apache Alias template</a></li><li class="sidebar-sub-header"><a href="/docs/linux/zh/webs-apache.html#apache-https-virtualhost-template" class="sidebar-link">Apache HTTPS VirtualHost template</a></li><li class="sidebar-sub-header"><a href="/docs/linux/zh/webs-apache.html#默认首页" class="sidebar-link">默认首页</a></li><li class="sidebar-sub-header"><a href="/docs/linux/zh/webs-apache.html#禁用ip访问-防止恶意解析" class="sidebar-link">禁用IP访问,防止恶意解析</a></li><li class="sidebar-sub-header"><a href="/docs/linux/zh/webs-apache.html#访问权限" class="sidebar-link">访问权限</a></li></ul></li><li class="sidebar-sub-header"><a href="/docs/linux/zh/webs-apache.html#代理" class="sidebar-link">代理</a></li><li class="sidebar-sub-header"><a href="/docs/linux/zh/webs-apache.html#服务启停" class="sidebar-link">服务启停</a></li><li class="sidebar-sub-header"><a href="/docs/linux/zh/webs-apache.html#日志" class="sidebar-link">日志</a></li><li class="sidebar-sub-header"><a href="/docs/linux/zh/webs-apache.html#缓存" class="sidebar-link">缓存</a></li></ul></li><li><a href="/docs/linux/zh/webs-nginx.html" class="sidebar-link">Nginx</a></li><li><a href="/docs/linux/zh/webs-caddy.html" class="sidebar-link">Caddy</a></li><li><a href="/docs/linux/zh/webs-tomcat.html" class="sidebar-link">Tomcat</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>程序开发</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/docs/linux/zh/lang-php.html" class="sidebar-link">PHP</a></li><li><a href="/docs/linux/zh/lang-java.html" class="sidebar-link">Java</a></li><li><a href="/docs/linux/zh/lang-python.html" class="sidebar-link">Python</a></li><li><a href="/docs/linux/zh/lang-nodejs.html" class="sidebar-link">Node.js</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>其他</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/docs/linux/zh/else-faq.html" class="sidebar-link">FAQ</a></li><li><a href="/docs/linux/zh/else-troubleshooting.html" class="sidebar-link">故障处理</a></li><li><a href="/docs/linux/zh/else-glossary.html" class="sidebar-link">词汇表</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="apache"><a href="#apache" aria-hidden="true" class="header-anchor">#</a> Apache</h1> <h2 id="安装"><a href="#安装" aria-hidden="true" class="header-anchor">#</a> 安装</h2> <h3 id="安装apache"><a href="#安装apache" aria-hidden="true" class="header-anchor">#</a> 安装Apache</h3> <div class="language- extra-class"><pre class="language-text"><code># Installing on Fedora/CentOS/Red Hat Enterprise Linux
+sudo yum install httpd
+sudo systemctl enable httpd
+sudo systemctl start httpd
+
+# Installing on Ubuntu/Debian
+sudo apt install apache2
+sudo service apache2 start
+</code></pre></div><h3 id="安装apache模块"><a href="#安装apache模块" aria-hidden="true" class="header-anchor">#</a> 安装Apache模块</h3> <h2 id="工作模式"><a href="#工作模式" aria-hidden="true" class="header-anchor">#</a> 工作模式</h2> <p>Apache工作模式有event,prefork,worker等单重</p> <h2 id="语言支持"><a href="#语言支持" aria-hidden="true" class="header-anchor">#</a> 语言支持</h2> <h3 id="php"><a href="#php" aria-hidden="true" class="header-anchor">#</a> PHP</h3> <p>我们知道Apache被广泛用于PHP环境，Apache有两种PHP处理机制：</p> <ul><li>php-fpm</li> <li>mod_php</li></ul> <h3 id="java"><a href="#java" aria-hidden="true" class="header-anchor">#</a> Java</h3> <h2 id="配置"><a href="#配置" aria-hidden="true" class="header-anchor">#</a> 配置</h2> <h3 id="配置文件"><a href="#配置文件" aria-hidden="true" class="header-anchor">#</a> 配置文件</h3> <p>主配置文件</p> <div class="language- extra-class"><pre class="language-text"><code>/etc/httpd/conf/httpd.conf
+</code></pre></div><p>扩展配置文件</p> <div class="language- extra-class"><pre class="language-text"><code>1./etc/httpd/conf.d/*.conf
+2.当Apache启动时，会加载/etc/httpd/conf.d/目录中的所有以.conf结尾的文件，做为配置文件来使用，所以管理员可以将配置推荐写在.conf中，如果将配置项写入主配置文件，系统升级时，配置项还要重新修改一遍，如果写在扩展配置项，则不存在此问题，同时也可以从繁杂的主配置文件中脱离出来。
+</code></pre></div><h3 id="配置说明"><a href="#配置说明" aria-hidden="true" class="header-anchor">#</a> 配置说明</h3> <p>ServerTokens OS</p> <div class="language- extra-class"><pre class="language-text"><code>系统信息,在访问出错时出现;把OS改为Minor,就不显示系统信息
+</code></pre></div><p>ServerSignature On</p> <div class="language- extra-class"><pre class="language-text"><code>把On改为Off就连普通的系统都给隐藏起来;改为Email就会显示管理员的邮箱(邮箱需要另外配置 ServerAdmin 
+</code></pre></div><p>ServerAdmin root@localhost</p> <div class="language- extra-class"><pre class="language-text"><code>管理员邮箱
+</code></pre></div><p>ServerName localhost</p> <div class="language- extra-class"><pre class="language-text"><code>服务器的主机名,一般是用虚拟机来设置,通常这个值是自动指定的，推荐显式的指定它以防止启动时出错
+</code></pre></div><p>UseCanonicalName Off</p> <div class="language- extra-class"><pre class="language-text"><code>设置为&quot;On&quot;,Apache会使用ServerName指令的值
+设置为 &quot;Off&quot;时,Apache会使用用户端提供的主机名和端口号。 
+如果有虚拟主机，必须设置为Off
+</code></pre></div><p>ServerRoot &quot;/etc/httpd&quot;</p> <div class="language- extra-class"><pre class="language-text"><code>配置项的根目录，类似html里面的base;默认到这个路径里面找;
+</code></pre></div><p>PidFile run/httpd.pid</p> <div class="language- extra-class"><pre class="language-text"><code>进程PID,位置在 /etc/httpd/run/httpd.pid,主进程决定着子进程  
+</code></pre></div><p>Timeout 60</p> <div class="language- extra-class"><pre class="language-text"><code>若60秒后没有收到或送出任何数据就切断该连接
+</code></pre></div><p>KeepAlive Off</p> <div class="language- extra-class"><pre class="language-text"><code>是否开启持久化链接,访问网站时要对网站的很多资源,如css,js,image等等创建不同的链接;事实上我们可以建立一个持久化链接来应对多个请求;
+</code></pre></div><p>MaxKeepAliveRequests 100</p> <div class="language- extra-class"><pre class="language-text"><code>一个持久化链接最多能应对多少个请求
+</code></pre></div><p>KeepAliveTimeout 15</p> <div class="language- extra-class"><pre class="language-text"><code>15秒不链接就断开
+</code></pre></div><p>Listen 80</p> <div class="language- extra-class"><pre class="language-text"><code>监听端口,默认是80,一般不同改变;
+
+如果要改变,注意以下几点:
+1. 如果修改为192.168.1.22:8080,表示只能通过192.168.1.22:8080访问
+2. 如果这里要更改为其他端口比如88的话,下面的ServerName localhost:88也得更改(如果是注释掉的,要取消注释)
+3. 如果要监听多个端口,就多写几个Listen
+</code></pre></div><p>Include conf.d/*.conf</p> <div class="language- extra-class"><pre class="language-text"><code>扩展配置文件 /etc/httpd/conf.d/
+我们一般在配置文件尾部再加上一句Include conf/vhosts/*.conf,把其他虚拟主机的配置分离开
+</code></pre></div><p>User apache</p> <div class="language- extra-class"><pre class="language-text"><code>Apache子进程所有者
+</code></pre></div><p>Group apache</p> <div class="language- extra-class"><pre class="language-text"><code>Apache子进程所属组
+</code></pre></div><p>DirectoryIndex index.html index.html.var</p> <div class="language- extra-class"><pre class="language-text"><code>默认主文件,
+</code></pre></div><p>DocumentRoot &quot;/var/www/html&quot;</p> <div class="language- extra-class"><pre class="language-text"><code>网站数据根目录。		
+</code></pre></div><p>ErrorDocument 404 /404.html</p> <div class="language- extra-class"><pre class="language-text"><code>创建404文件 echo &quot;:) File Not Found!&quot; &gt;/var/www/html/404.html
+404可以通过PHP程序来处理(在框架中),可以通过rewrite来处理,但是最理想的模式是让Apache来处理	
+</code></pre></div><p>Directory</p> <div class="language- extra-class"><pre class="language-text"><code>&lt;Directory /&gt;
+Options Indexes FollowSymLinks		
+AllowOverride None
+&lt;/Directory&gt;
+
+Directory /
+定位目录 /(也就是Apache网站根目录)
+
+Indexes
+如果访问的文件不存在，显示目录文件列表；要禁止的话前面加上一个 - （-indexes）
+
+FollowSymLinks	
+在目录下创建a.html软链接，
+ln -s /ab/index.html  /var/www/html/a.html
+Options Indexes FollowSymLinks时软链接可用,可以直接在根目录下访问这个软连接
+Options Indexes –FollowSymLinks软链接不可用
+
+AllowOverride 
+是否允许目录配置文件.htaccess有效ALL有效，None无效
+
+Order allow，deny
+Allow from all
+deny from 192.168.1.106
+↑↑ 先匹配allow允许，后匹配deny禁止，虽然192.168.1.106满足Allow，但deny是在allow后匹配的，所以192.168.1.106不允许访问
+
+Order deny,allow
+deny from all
+allow from 192.168.1.106
+↑↑ 只允许192.168.1.106访问
+</code></pre></div><p>IfModule</p> <div class="language- extra-class"><pre class="language-text"><code>如果存在模块mod_userdir.c
+
+&lt;IfModule mod_userdir.c&gt; 
+UserDir disabled       #句首加上#号,就表示开启家目录
+#UserDir public_html   #设置家目录的文件夹,在此文件夹里面的文件可以访问得到,前提是有读写权限
+&lt;/IfModule&gt;
+
+&lt;Directory /home/*/public_html&gt;
+.*  #跟上面配合,设置可访问家目录的权限
+&lt;/Directory&gt;
+</code></pre></div><h3 id="配置注意事项"><a href="#配置注意事项" aria-hidden="true" class="header-anchor">#</a> 配置注意事项</h3> <p>1.Apache对文件的操作就会用系统给的一个临时账号Apache作为第三方other来运行,所以要注意ugo的o的权限设置;</p> <p>2.Apache的配置规则是 <strong>后出现,先应用</strong> 后面的出现的配置会覆盖前面的。</p> <p>3.以上配置都应该在扩展配置里面覆盖更改或增加;</p> <h3 id="问题：关闭apache-test-page-欢迎页面"><a href="#问题：关闭apache-test-page-欢迎页面" aria-hidden="true" class="header-anchor">#</a> 问题：关闭Apache Test Page 欢迎页面</h3> <h3 id="问题：关闭缺省情况目录列表可查看"><a href="#问题：关闭缺省情况目录列表可查看" aria-hidden="true" class="header-anchor">#</a> 问题：关闭缺省情况目录列表可查看</h3> <p>Apache httpd服务器在缺省的情况下，开启了基于目录列表的访问，这是一个存在安全隐患的问题，因此可以关闭这个功能。</p> <h2 id="伪静态"><a href="#伪静态" aria-hidden="true" class="header-anchor">#</a> 伪静态</h2> <p>使用伪静态有三个步骤：</p> <ol><li>确保Rewrite模块（apache模块配置文件：/etc/httpd/conf.modules.d/00-base.conf）已经被加载（去掉LoadModule rewrite_module modules/mod_rewrite.so前面的#）。</li> <li>虚拟主机配置文件中增加AllowOverride All</li> <li>网站根目录中增加.htaccess文件，并配置伪静态规则</li></ol> <h3 id="场景：重定向"><a href="#场景：重定向" aria-hidden="true" class="header-anchor">#</a> 场景：重定向</h3> <ol><li>开启Apache的rewrite模块</li> <li>在网站根目录中增加.htaccess文件</li></ol> <div class="language-shell extra-class"><pre class="language-shell"><code>
+<span class="token operator">&lt;</span>IfModule mod_rewrite.c<span class="token operator">&gt;</span>
+RewriteEngine On
+Redirect <span class="token number">301</span> <span class="token string">&quot;/empirecmsall-image-guide&quot;</span> <span class="token string">&quot;/xdocs/empirecms-image-guide&quot;</span>
+Redirect <span class="token number">301</span> <span class="token string">&quot;/wordpress-image-guide&quot;</span> <span class="token string">&quot;/xdocs/wordpressold-image-guide&quot;</span>
+
+<span class="token operator">&lt;</span>/IfModule<span class="token operator">&gt;</span>
+
+</code></pre></div><h3 id="场景：隐藏后缀名"><a href="#场景：隐藏后缀名" aria-hidden="true" class="header-anchor">#</a> 场景：隐藏后缀名</h3> <div class="language- extra-class"><pre class="language-text"><code>&lt;IfModule mod_rewrite.c&gt;
+RewriteRule ^test$ test.php
+ErrorDocument 404 /404.txt
+
+&lt;/IfModule&gt;
+
+</code></pre></div><h2 id="虚拟主机"><a href="#虚拟主机" aria-hidden="true" class="header-anchor">#</a> 虚拟主机</h2> <p>Apahce中的虚拟主机是通过VirtualHost进行配置的</p> <h3 id="http-virtualhost-template"><a href="#http-virtualhost-template" aria-hidden="true" class="header-anchor">#</a> HTTP VirtualHost template</h3> <div class="language- extra-class"><pre class="language-text"><code>&lt;VirtualHost *:80&gt;
+ServerName www.mydomain.com
+ServerAlias other.mydomain.com
+DocumentRoot &quot;/data/wwwroot/zdoo&quot;
+ErrorLog &quot;/var/log/httpd/www.mydomain.com_error_apache.log&quot;
+CustomLog &quot;/var/log/httpd/www.mydomain.com_apache.log&quot; common
+&lt;Directory &quot;/data/wwwroot/zdoo&quot;&gt;
+Options Indexes FollowSymlinks
+AllowOverride All
+Require all granted
+&lt;/Directory&gt;
+&lt;/VirtualHost&gt;
+</code></pre></div><h3 id="apache-alias-template"><a href="#apache-alias-template" aria-hidden="true" class="header-anchor">#</a> Apache Alias template</h3> <div class="language- extra-class"><pre class="language-text"><code>Alias /path /data/wwwroot/zdoo
+&lt;Directory &quot;/data/wwwroot/zdoo&quot;&gt;
+Options Indexes FollowSymlinks
+AllowOverride All
+Require all granted
+&lt;/Directory&gt;
+</code></pre></div><h3 id="apache-https-virtualhost-template"><a href="#apache-https-virtualhost-template" aria-hidden="true" class="header-anchor">#</a> Apache HTTPS VirtualHost template</h3> <div class="language- extra-class"><pre class="language-text"><code>&lt;VirtualHost *:443&gt;
+ServerName  www.mydomain.com
+DocumentRoot &quot;/data/wwwroot/zdoo&quot;
+#ErrorLog &quot;logs/www.mydomain.com-error_log&quot;
+#CustomLog &quot;logs/www.mydomain.com-access_log&quot; common
+&lt;Directory &quot;/data/wwwroot/zdoo&quot;&gt;
+Options Indexes FollowSymlinks
+AllowOverride All
+Require all granted
+&lt;/Directory&gt;
+SSLEngine on
+SSLCertificateFile  /data/cert/www.mydomain.com.crt
+SSLCertificateKeyFile  /data/cert/www.mydomain.com.key
+SSLCertificateChainFile  /data/cert/root_bundle.crt
+&lt;/VirtualHost&gt;
+</code></pre></div><h3 id="默认首页"><a href="#默认首页" aria-hidden="true" class="header-anchor">#</a> 默认首页</h3> <p>默认访问目录之时，系统会自动根据顺序寻找列出的页面，并显示其中一个。</p> <div class="language- extra-class"><pre class="language-text"><code>&lt;VirtualHost *:80&gt;
+ServerName win.websoft9.com
+&lt;IfModule dir_module&gt;
+  DirectoryIndex index.hmtl defalut.html README.html readme.html about.html
+&lt;/IfModule&gt;
+DocumentRoot &quot;/data/wwwroot/default/site&quot;
+...
+</code></pre></div><h3 id="禁用ip访问-防止恶意解析"><a href="#禁用ip访问-防止恶意解析" aria-hidden="true" class="header-anchor">#</a> 禁用IP访问,防止恶意解析</h3> <hr> <ol><li>给指定网站程序设置域名</li> <li>将一下内容加入 <code>/etc/httpd/conf/httpd.conf</code> 的末尾或者在 <code>/etc/httpd/conf.d/</code> 目录下新建一个 <code>deny-ip.conf</code>的文件将内容写入<div class="language- extra-class"><pre class="language-text"><code>&lt;VirtualHost *:80&gt;
+  ServerName 服务器IP地址
+  &lt;Location /&gt;
+       Order Allow,Deny
+       Deny from all
+  &lt;/Location&gt;
+&lt;/VirtualHost&gt;
+
+&lt;VirtualHost *:443&gt;
+   ServerName 服务器IP地址
+   SSLEngine on
+   SSLCertificateFile /etc/pki/tls/certs/localhost.crt
+   SSLCertificateKeyFile /etc/pki/tls/private/localhost.key
+   &lt;Location /&gt;
+     Order Allow,Deny
+     Deny from all
+   &lt;/Location&gt;
+&lt;/VirtualHost&gt;
+</code></pre></div></li> <li>重启 apache
+<code>systemctl restart httpd</code></li></ol> <h3 id="访问权限"><a href="#访问权限" aria-hidden="true" class="header-anchor">#</a> 访问权限</h3> <h2 id="代理"><a href="#代理" aria-hidden="true" class="header-anchor">#</a> 代理</h2> <h2 id="服务启停"><a href="#服务启停" aria-hidden="true" class="header-anchor">#</a> 服务启停</h2> <div class="language- extra-class"><pre class="language-text"><code>#CentOS or Redhat
+systemctl start httpd
+systemctl stop httpd
+systemctl restart httpd
+systemctl status httpd
+
+# Ubutnu
+systemctl start apache2
+systemctl stop apache2
+systemctl restart apache2
+systemctl status apache2
+</code></pre></div><h2 id="日志"><a href="#日志" aria-hidden="true" class="header-anchor">#</a> 日志</h2> <p>Apache 访问日志在实际工作中非常有用，比较典型的例子是进行网站流量统计，查看用户访问时间、地理位置分布、页面点击率等。Apache 的访问日志具有如下4个方面的作用：</p> <ul><li>记录访问服务器的远程主机IP 地址，从而可以得知浏览者来自何处；</li> <li>记录浏览者访问的Web资源，可以了解网站中的哪些部分最受欢迎；</li> <li>记录浏览者使用的浏览器，可以根据大多数浏览者使用的浏览器对站点进行优化；</li> <li>记录浏览者的访问时间；</li></ul> <h2 id="缓存"><a href="#缓存" aria-hidden="true" class="header-anchor">#</a> 缓存</h2></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/Websoft9/linux/edit/master/docs/zh/webs-apache.md" target="_blank" rel="noopener noreferrer">在Github上编辑</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <div class="last-updated"><span class="prefix">Last Updated: </span> <span class="time">2019-8-26 19:23:21</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+        ←
+        <a href="/docs/linux/zh/admin-practices.html" class="prev">
+          最佳实践
+        </a></span> <span class="next"><a href="/docs/linux/zh/webs-nginx.html">
+          Nginx
+        </a>
+        →
+      </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/docs/linux/assets/js/app.a83cbc0f.js" defer></script><script src="/docs/linux/assets/js/2.a9bd2ee6.js" defer></script><script src="/docs/linux/assets/js/23.917c2e9b.js" defer></script>
+  </body>
+</html>
