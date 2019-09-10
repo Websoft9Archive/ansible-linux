@@ -10,8 +10,6 @@
 
 ## 如何设置计划任务？
 
-## 推荐可视化面板工具？
-
 ## 如何安装图形化桌面
 
 ### Centos/Oracle Linux
@@ -31,6 +29,9 @@ systemctl get-default
 yum install tigervnc-server -y
 
 ```
+
+
+## 推荐可视化面板工具？
 
 
 Linux命令行操作功能强大的同时，也让一些用户望而生畏。Linux面板工具可以通过Web页面，对服务器进行可视化操作，降低Linux使用门槛。
