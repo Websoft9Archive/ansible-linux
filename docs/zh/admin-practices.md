@@ -17,7 +17,6 @@
 yum groupinstall -y "GNOME Desktop" 
 systemctl set-default graphical.target
 systemctl set-default graphical.target
-systemctl get-default
 
 ```
 
