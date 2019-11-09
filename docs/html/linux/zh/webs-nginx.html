@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Nginx | Linux 实践指南</title>
+    <meta name="description" content="本文档是Websoft9在实践中，总结的与Linux有关的操作、命令、脚本，帮助云计算用户快速掌握Linux相关的技能">
+    <link rel="icon" href="/docs/linux/favcon.ico">
+    
+    <link rel="preload" href="/docs/linux/assets/css/0.styles.576d3c71.css" as="style"><link rel="preload" href="/docs/linux/assets/js/app.a83cbc0f.js" as="script"><link rel="preload" href="/docs/linux/assets/js/2.a9bd2ee6.js" as="script"><link rel="preload" href="/docs/linux/assets/js/25.0a721241.js" as="script"><link rel="prefetch" href="/docs/linux/assets/js/10.523c509d.js"><link rel="prefetch" href="/docs/linux/assets/js/11.8a6139a8.js"><link rel="prefetch" href="/docs/linux/assets/js/12.8adb8a9e.js"><link rel="prefetch" href="/docs/linux/assets/js/13.6e701fd4.js"><link rel="prefetch" href="/docs/linux/assets/js/14.db44a12e.js"><link rel="prefetch" href="/docs/linux/assets/js/15.c3df7aaf.js"><link rel="prefetch" href="/docs/linux/assets/js/16.1ed13346.js"><link rel="prefetch" href="/docs/linux/assets/js/17.5ebb59de.js"><link rel="prefetch" href="/docs/linux/assets/js/18.624edcf3.js"><link rel="prefetch" href="/docs/linux/assets/js/19.4409573d.js"><link rel="prefetch" href="/docs/linux/assets/js/20.40b9763b.js"><link rel="prefetch" href="/docs/linux/assets/js/21.bdaaab99.js"><link rel="prefetch" href="/docs/linux/assets/js/22.77385610.js"><link rel="prefetch" href="/docs/linux/assets/js/23.917c2e9b.js"><link rel="prefetch" href="/docs/linux/assets/js/24.f1c25d5a.js"><link rel="prefetch" href="/docs/linux/assets/js/26.2bfaaa96.js"><link rel="prefetch" href="/docs/linux/assets/js/27.5ae79123.js"><link rel="prefetch" href="/docs/linux/assets/js/3.6b487419.js"><link rel="prefetch" href="/docs/linux/assets/js/4.b72cfc44.js"><link rel="prefetch" href="/docs/linux/assets/js/5.fdaf2c2d.js"><link rel="prefetch" href="/docs/linux/assets/js/6.2380b310.js"><link rel="prefetch" href="/docs/linux/assets/js/7.aaf5baa5.js"><link rel="prefetch" href="/docs/linux/assets/js/8.26789faf.js"><link rel="prefetch" href="/docs/linux/assets/js/9.7725cb97.js">
+    <link rel="stylesheet" href="/docs/linux/assets/css/0.styles.576d3c71.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/docs/linux/zh/" class="home-link router-link-active"><!----> <span class="site-name">Linux 实践指南</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/docs/linux/zh/" class="nav-link">首页</a></div><div class="nav-item"><a href="https://support.websoft9.com/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  支持
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title">语言</span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/docs/linux/" class="nav-link">English</a></li><li class="dropdown-item"><!----> <a href="/docs/linux/zh/webs-nginx.html" class="nav-link router-link-exact-active router-link-active">中文</a></li></ul></div></div> <a href="https://github.com/Websoft9/linux" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/docs/linux/zh/" class="nav-link">首页</a></div><div class="nav-item"><a href="https://support.websoft9.com/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  支持
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title">语言</span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/docs/linux/" class="nav-link">English</a></li><li class="dropdown-item"><!----> <a href="/docs/linux/zh/webs-nginx.html" class="nav-link router-link-exact-active router-link-active">中文</a></li></ul></div></div> <a href="https://github.com/Websoft9/linux" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>系统</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/docs/linux/zh/" class="sidebar-link">关于</a></li><li><a href="/docs/linux/zh/admin-concept.html" class="sidebar-link">概念</a></li><li><a href="/docs/linux/zh/admin-desktop.html" class="sidebar-link">桌面</a></li><li><a href="/docs/linux/zh/admin-file.html" class="sidebar-link">磁盘与文件</a></li><li><a href="/docs/linux/zh/admin-user.html" class="sidebar-link">用户管理</a></li><li><a href="/docs/linux/zh/admin-package.html" class="sidebar-link">包管理</a></li><li><a href="/docs/linux/zh/admin-safe.html" class="sidebar-link">网络与安全</a></li><li><a href="/docs/linux/zh/admin-automation.html" class="sidebar-link">自动化运维</a></li><li><a href="/docs/linux/zh/admin-practices.html" class="sidebar-link">最佳实践</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>应用服务器</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/docs/linux/zh/webs-apache.html" class="sidebar-link">Apache</a></li><li><a href="/docs/linux/zh/webs-nginx.html" class="active sidebar-link">Nginx</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/docs/linux/zh/webs-nginx.html#安装" class="sidebar-link">安装</a></li><li class="sidebar-sub-header"><a href="/docs/linux/zh/webs-nginx.html#模块" class="sidebar-link">模块</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/docs/linux/zh/webs-nginx.html#安装模块" class="sidebar-link">安装模块</a></li><li class="sidebar-sub-header"><a href="/docs/linux/zh/webs-nginx.html#查询模块" class="sidebar-link">查询模块</a></li></ul></li><li class="sidebar-sub-header"><a href="/docs/linux/zh/webs-nginx.html#更新" class="sidebar-link">更新</a></li><li class="sidebar-sub-header"><a href="/docs/linux/zh/webs-nginx.html#请求处理机制" class="sidebar-link">请求处理机制</a></li><li class="sidebar-sub-header"><a href="/docs/linux/zh/webs-nginx.html#语言支持" class="sidebar-link">语言支持</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/docs/linux/zh/webs-nginx.html#php" class="sidebar-link">PHP</a></li><li class="sidebar-sub-header"><a href="/docs/linux/zh/webs-nginx.html#java" class="sidebar-link">Java</a></li><li class="sidebar-sub-header"><a href="/docs/linux/zh/webs-nginx.html#python" class="sidebar-link">Python</a></li><li class="sidebar-sub-header"><a href="/docs/linux/zh/webs-nginx.html#node-js" class="sidebar-link">Node.js</a></li><li class="sidebar-sub-header"><a href="/docs/linux/zh/webs-nginx.html#go" class="sidebar-link">Go</a></li><li class="sidebar-sub-header"><a href="/docs/linux/zh/webs-nginx.html#ruby" class="sidebar-link">Ruby</a></li></ul></li><li class="sidebar-sub-header"><a href="/docs/linux/zh/webs-nginx.html#伪静态" class="sidebar-link">伪静态</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/docs/linux/zh/webs-nginx.html#重定向" class="sidebar-link">重定向</a></li><li class="sidebar-sub-header"><a href="/docs/linux/zh/webs-nginx.html#隐藏后缀名" class="sidebar-link">隐藏后缀名</a></li></ul></li><li class="sidebar-sub-header"><a href="/docs/linux/zh/webs-nginx.html#virtualhost配置" class="sidebar-link">VirtualHost配置</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/docs/linux/zh/webs-nginx.html#http-virtualhost-template" class="sidebar-link">HTTP VirtualHost template</a></li><li class="sidebar-sub-header"><a href="/docs/linux/zh/webs-nginx.html#apache-alias-template" class="sidebar-link">Apache Alias template</a></li><li class="sidebar-sub-header"><a href="/docs/linux/zh/webs-nginx.html#apache-https-virtualhost-template" class="sidebar-link">Apache HTTPS VirtualHost template</a></li><li class="sidebar-sub-header"><a href="/docs/linux/zh/webs-nginx.html#默认首页名称顺序" class="sidebar-link">默认首页名称顺序</a></li><li class="sidebar-sub-header"><a href="/docs/linux/zh/webs-nginx.html#禁用ip访问-防止恶意解析" class="sidebar-link">禁用IP访问,防止恶意解析</a></li></ul></li><li class="sidebar-sub-header"><a href="/docs/linux/zh/webs-nginx.html#代理" class="sidebar-link">代理</a></li><li class="sidebar-sub-header"><a href="/docs/linux/zh/webs-nginx.html#服务启停" class="sidebar-link">服务启停</a></li><li class="sidebar-sub-header"><a href="/docs/linux/zh/webs-nginx.html#日志" class="sidebar-link">日志</a></li><li class="sidebar-sub-header"><a href="/docs/linux/zh/webs-nginx.html#缓存" class="sidebar-link">缓存</a></li></ul></li><li><a href="/docs/linux/zh/webs-caddy.html" class="sidebar-link">Caddy</a></li><li><a href="/docs/linux/zh/webs-tomcat.html" class="sidebar-link">Tomcat</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>程序开发</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/docs/linux/zh/lang-php.html" class="sidebar-link">PHP</a></li><li><a href="/docs/linux/zh/lang-java.html" class="sidebar-link">Java</a></li><li><a href="/docs/linux/zh/lang-python.html" class="sidebar-link">Python</a></li><li><a href="/docs/linux/zh/lang-nodejs.html" class="sidebar-link">Node.js</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>其他</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/docs/linux/zh/else-faq.html" class="sidebar-link">FAQ</a></li><li><a href="/docs/linux/zh/else-troubleshooting.html" class="sidebar-link">故障处理</a></li><li><a href="/docs/linux/zh/else-glossary.html" class="sidebar-link">词汇表</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="nginx"><a href="#nginx" aria-hidden="true" class="header-anchor">#</a> Nginx</h1> <p>以Nginx在云服务器上最常见的应用场景为切入点，结合具体的操作，让没有基础的用户也能够快速上手。</p> <p>Nginx公司还有企业级的商业产品：
+NGINX Plus
+NGINX Controller
+NGINX Unit
+NGINX Amplify
+NGINX WAF</p> <h2 id="安装"><a href="#安装" aria-hidden="true" class="header-anchor">#</a> 安装</h2> <p>安装Nginx有在线安装和源码编译安装两种方式，在线安装通常称之为yum安装，源码安装即需要下载源码然后进行编译后方可使用。</p> <p>在线安装非常简单，下面是在线安装的范例：</p> <div class="language- extra-class"><pre class="language-text"><code># Installing on Fedora/CentOS/Red Hat Enterprise Linux
+sudo yum install httpd
+sudo systemctl enable httpd
+sudo systemctl start httpd
+
+# Installing on Ubuntu/Debian
+sudo apt install apache2
+sudo service apache2 start
+</code></pre></div><h2 id="模块"><a href="#模块" aria-hidden="true" class="header-anchor">#</a> 模块</h2> <p>Nginx是模块化的设计，安装模块：</p> <h3 id="安装模块"><a href="#安装模块" aria-hidden="true" class="header-anchor">#</a> 安装模块</h3> <div class="language- extra-class"><pre class="language-text"><code># Installing on Fedora/CentOS/Red Hat Enterprise Linux
+
+
+# Installing on Ubuntu/Debian
+
+</code></pre></div><h3 id="查询模块"><a href="#查询模块" aria-hidden="true" class="header-anchor">#</a> 查询模块</h3> <div class="language-bash extra-class"><pre class="language-bash"><code>~<span class="token comment"># nginx -V</span>
+nginx version: nginx/1.12.2
+built by gcc <span class="token number">4.8</span>.5 <span class="token number">20150623</span> <span class="token punctuation">(</span>Red Hat <span class="token number">4.8</span>.5-16<span class="token punctuation">)</span> <span class="token punctuation">(</span>GCC<span class="token punctuation">)</span>
+built with OpenSSL <span class="token number">1.0</span>.2k-fips  <span class="token number">26</span> Jan <span class="token number">2017</span>
+TLS SNI support enabled
+configure arguments: 
+--prefix<span class="token operator">=</span>/usr/share/nginx --sbin-path<span class="token operator">=</span>/usr/sbin/nginx --modules-path<span class="token operator">=</span>/usr/lib64/nginx/modules --conf-path<span class="token operator">=</span>/etc/nginx/nginx.conf --error-log-path<span class="token operator">=</span>/var/log/nginx/error.log --http-log-path<span class="token operator">=</span>/var/log/nginx/access.log --http-client-body-temp-path<span class="token operator">=</span>/var/lib/nginx/tmp/client_body --http-proxy-temp-path<span class="token operator">=</span>/var/lib/nginx/tmp/proxy --http-fastcgi-temp-path<span class="token operator">=</span>/var/lib/nginx/tmp/fastcgi --http-uwsgi-temp-path<span class="token operator">=</span>/var/lib/nginx/tmp/uwsgi --http-scgi-temp-path<span class="token operator">=</span>/var/lib/nginx/tmp/scgi --pid-path<span class="token operator">=</span>/run/nginx.pid --lock-path<span class="token operator">=</span>/run/lock/subsys/nginx --user<span class="token operator">=</span>nginx --group<span class="token operator">=</span>nginx --with-file-aio --with-ipv6 --with-http_auth_request_module --with-http_ssl_module --with-http_v2_module --with-http_realip_module --with-http_addition_module --with-http_xslt_module<span class="token operator">=</span>dynamic --with-http_image_filter_module<span class="token operator">=</span>dynamic --with-http_geoip_module<span class="token operator">=</span>dynamic --with-http_sub_module --with-http_dav_module --with-http_flv_module --with-http_mp4_module --with-http_gunzip_module --with-http_gzip_static_module --with-http_random_index_module --with-http_secure_link_module --with-http_degradation_module --with-http_slice_module --with-http_stub_status_module --with-http_perl_module<span class="token operator">=</span>dynamic --with-mail<span class="token operator">=</span>dynamic --with-mail_ssl_module --with-pcre --with-pcre-jit --with-stream<span class="token operator">=</span>dynamic --with-stream_ssl_module --with-google_perftools_module --with-debug --with-cc-opt<span class="token operator">=</span><span class="token string">'-O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong --param=ssp-buffer-size=4 -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -m64 -mtune=generic'</span> --with-ld-opt<span class="token operator">=</span><span class="token string">'-Wl,-z,relro -specs=/usr/lib/rpm/redhat/redhat-hardened-ld -Wl,-E'</span>
+</code></pre></div><h2 id="更新"><a href="#更新" aria-hidden="true" class="header-anchor">#</a> 更新</h2> <h2 id="请求处理机制"><a href="#请求处理机制" aria-hidden="true" class="header-anchor">#</a> 请求处理机制</h2> <p>Nginx有三种可选的并行处理机制：多进程方式、多线程方式和异步方式</p> <h2 id="语言支持"><a href="#语言支持" aria-hidden="true" class="header-anchor">#</a> 语言支持</h2> <h3 id="php"><a href="#php" aria-hidden="true" class="header-anchor">#</a> PHP</h3> <p>Nginx默认不支持PHP，需要搭配php-fmp使用</p> <h3 id="java"><a href="#java" aria-hidden="true" class="header-anchor">#</a> Java</h3> <p>Nginx需要搭配Tomcat来运行Java程序</p> <h3 id="python"><a href="#python" aria-hidden="true" class="header-anchor">#</a> Python</h3> <h3 id="node-js"><a href="#node-js" aria-hidden="true" class="header-anchor">#</a> Node.js</h3> <h3 id="go"><a href="#go" aria-hidden="true" class="header-anchor">#</a> Go</h3> <h3 id="ruby"><a href="#ruby" aria-hidden="true" class="header-anchor">#</a> Ruby</h3> <h2 id="伪静态"><a href="#伪静态" aria-hidden="true" class="header-anchor">#</a> 伪静态</h2> <p>使用伪静态有三个步骤：</p> <ol><li>确保Rewrite模块（apache模块配置文件：/etc/httpd/conf.modules.d/00-base.conf）已经被加载（去掉LoadModule rewrite_module modules/mod_rewrite.so前面的#）。</li> <li>虚拟主机配置文件中增加AllowOverride All</li> <li>网站根目录中增加.htaccess文件，并配置伪静态规则</li></ol> <h3 id="重定向"><a href="#重定向" aria-hidden="true" class="header-anchor">#</a> 重定向</h3> <ol><li>开启Apache的rewrite模块</li> <li>在网站根目录中增加.htaccess文件</li></ol> <div class="language-shell extra-class"><pre class="language-shell"><code>
+<span class="token operator">&lt;</span>IfModule mod_rewrite.c<span class="token operator">&gt;</span>
+RewriteEngine On
+Redirect <span class="token number">301</span> <span class="token string">&quot;/empirecmsall-image-guide&quot;</span> <span class="token string">&quot;/xdocs/empirecms-image-guide&quot;</span>
+Redirect <span class="token number">301</span> <span class="token string">&quot;/wordpress-image-guide&quot;</span> <span class="token string">&quot;/xdocs/wordpressold-image-guide&quot;</span>
+
+<span class="token operator">&lt;</span>/IfModule<span class="token operator">&gt;</span>
+
+</code></pre></div><h3 id="隐藏后缀名"><a href="#隐藏后缀名" aria-hidden="true" class="header-anchor">#</a> 隐藏后缀名</h3> <div class="language- extra-class"><pre class="language-text"><code>&lt;IfModule mod_rewrite.c&gt;
+RewriteRule ^test$ test.php
+ErrorDocument 404 /404.txt
+
+&lt;/IfModule&gt;
+
+</code></pre></div><h2 id="virtualhost配置"><a href="#virtualhost配置" aria-hidden="true" class="header-anchor">#</a> VirtualHost配置</h2> <h3 id="http-virtualhost-template"><a href="#http-virtualhost-template" aria-hidden="true" class="header-anchor">#</a> HTTP VirtualHost template</h3> <div class="language- extra-class"><pre class="language-text"><code>&lt;VirtualHost *:80&gt;
+ServerName www.mydomain.com
+ServerAlias other.mydomain.com
+DocumentRoot &quot;/data/wwwroot/zdoo&quot;
+ErrorLog &quot;/var/log/httpd/www.mydomain.com_error_apache.log&quot;
+CustomLog &quot;/var/log/httpd/www.mydomain.com_apache.log&quot; common
+&lt;Directory &quot;/data/wwwroot/zdoo&quot;&gt;
+Options Indexes FollowSymlinks
+AllowOverride All
+Require all granted
+&lt;/Directory&gt;
+&lt;/VirtualHost&gt;
+</code></pre></div><h3 id="apache-alias-template"><a href="#apache-alias-template" aria-hidden="true" class="header-anchor">#</a> Apache Alias template</h3> <div class="language- extra-class"><pre class="language-text"><code>Alias /path /data/wwwroot/zdoo
+&lt;Directory &quot;/data/wwwroot/zdoo&quot;&gt;
+Options Indexes FollowSymlinks
+AllowOverride All
+Require all granted
+&lt;/Directory&gt;
+</code></pre></div><h3 id="apache-https-virtualhost-template"><a href="#apache-https-virtualhost-template" aria-hidden="true" class="header-anchor">#</a> Apache HTTPS VirtualHost template</h3> <div class="language- extra-class"><pre class="language-text"><code>&lt;VirtualHost *:443&gt;
+ServerName  www.mydomain.com
+DocumentRoot &quot;/data/wwwroot/zdoo&quot;
+#ErrorLog &quot;logs/www.mydomain.com-error_log&quot;
+#CustomLog &quot;logs/www.mydomain.com-access_log&quot; common
+&lt;Directory &quot;/data/wwwroot/zdoo&quot;&gt;
+Options Indexes FollowSymlinks
+AllowOverride All
+Require all granted
+&lt;/Directory&gt;
+SSLEngine on
+SSLCertificateFile  /data/cert/www.mydomain.com.crt
+SSLCertificateKeyFile  /data/cert/www.mydomain.com.key
+SSLCertificateChainFile  /data/cert/root_bundle.crt
+&lt;/VirtualHost&gt;
+</code></pre></div><h3 id="默认首页名称顺序"><a href="#默认首页名称顺序" aria-hidden="true" class="header-anchor">#</a> 默认首页名称顺序</h3> <p>默认访问目录之时，系统会自动根据顺序寻找列出的页面，并显示其中一个。</p> <div class="language- extra-class"><pre class="language-text"><code>&lt;VirtualHost *:80&gt;
+ServerName win.websoft9.com
+&lt;IfModule dir_module&gt;
+  DirectoryIndex index.hmtl defalut.html README.html readme.html about.html
+&lt;/IfModule&gt;
+DocumentRoot &quot;/data/wwwroot/default/site&quot;
+...
+</code></pre></div><h3 id="禁用ip访问-防止恶意解析"><a href="#禁用ip访问-防止恶意解析" aria-hidden="true" class="header-anchor">#</a> 禁用IP访问,防止恶意解析</h3> <hr> <ol><li>给指定网站程序设置域名</li> <li>将一下内容加入 <code>/etc/httpd/conf/httpd.conf</code> 的末尾或者在 <code>/etc/httpd/conf.d/</code> 目录下新建一个 <code>deny-ip.conf</code>的文件将内容写入<div class="language- extra-class"><pre class="language-text"><code>&lt;VirtualHost *:80&gt;
+  ServerName 服务器IP地址
+  &lt;Location /&gt;
+       Order Allow,Deny
+       Deny from all
+  &lt;/Location&gt;
+&lt;/VirtualHost&gt;
+
+&lt;VirtualHost *:443&gt;
+   ServerName 服务器IP地址
+   SSLEngine on
+   SSLCertificateFile /etc/pki/tls/certs/localhost.crt
+   SSLCertificateKeyFile /etc/pki/tls/private/localhost.key
+   &lt;Location /&gt;
+     Order Allow,Deny
+     Deny from all
+   &lt;/Location&gt;
+&lt;/VirtualHost&gt;
+</code></pre></div></li> <li>重启 apache
+<code>systemctl restart httpd</code></li></ol> <h2 id="代理"><a href="#代理" aria-hidden="true" class="header-anchor">#</a> 代理</h2> <h2 id="服务启停"><a href="#服务启停" aria-hidden="true" class="header-anchor">#</a> 服务启停</h2> <div class="language- extra-class"><pre class="language-text"><code>#CentOS or Redhat
+systemctl start httpd
+systemctl stop httpd
+systemctl restart httpd
+systemctl status httpd
+
+# Ubutnu
+systemctl start apache2
+systemctl stop apache2
+systemctl restart apache2
+systemctl status apache2
+</code></pre></div><h2 id="日志"><a href="#日志" aria-hidden="true" class="header-anchor">#</a> 日志</h2> <h2 id="缓存"><a href="#缓存" aria-hidden="true" class="header-anchor">#</a> 缓存</h2></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/Websoft9/linux/edit/master/docs/zh/webs-nginx.md" target="_blank" rel="noopener noreferrer">在Github上编辑</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <div class="last-updated"><span class="prefix">Last Updated: </span> <span class="time">2019-8-26 19:23:21</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+        ←
+        <a href="/docs/linux/zh/webs-apache.html" class="prev">
+          Apache
+        </a></span> <span class="next"><a href="/docs/linux/zh/webs-caddy.html">
+          Caddy
+        </a>
+        →
+      </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/docs/linux/assets/js/app.a83cbc0f.js" defer></script><script src="/docs/linux/assets/js/2.a9bd2ee6.js" defer></script><script src="/docs/linux/assets/js/25.0a721241.js" defer></script>
+  </body>
+</html>
