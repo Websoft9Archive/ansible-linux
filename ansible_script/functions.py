@@ -3,7 +3,7 @@ import sys
 import platform
 
 # 安装ansible
-def install_ansible(a, distribution):
+def install_ansible(a):
     if a.lower() == ('y' or 'yes'):
         os.system("yum install epel-release.noarch git ansible -y")
     elif a.lower() == ('n' or 'no'):
