@@ -1,6 +1,5 @@
-import os
-import sys
-import platform
+import os, sys, platform, shutil
+from distutils.spawn import find_executable
 
 # 安装ansible
 def install_ansible(a, distribution):
@@ -15,9 +14,14 @@ def install_ansible(a, distribution):
         print("Only input yes or no!")
 
 # 克隆ansible仓库
-def download(url):
-    os.system("git clone " + url + " /tmp/ansible")
+def download(url, directory):
+    if not os.path.exists(directory):
+        os.system("git clone " + url + " /tmp/ansible")
+    elif os.path.exists(directory):
+        shutil.rmtree(directory)
+        os.system("git clone " + url + " /tmp/ansible")
 
+# 写入hosts文件
 def wirte_file_local(hosts):
     with open(hosts, 'w') as hosts:
         hosts.write("[local] \n")
