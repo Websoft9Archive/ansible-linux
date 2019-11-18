@@ -1,28 +1,33 @@
 #!/usr/bin/python env
 #coding: utf-8
+#redis : "https://github.com/Websoft9/ansible-redis.git"
+
 import os, sys, platform
 import functions as ft
 
+print(sys.argv)
+
 application = "redis"
-url = "https://github.com/Websoft9/ansible-redis.git"
+url = sys.argv[1]
 
 if os.getuid() != 0:
     print ("This program must be run as root. Aborting.")
     sys.exit(1)
 
 # 确认是否安装ansible
-a = input("Are you sure install ansible?[yes/no] ")
-while a != ('y' or 'yes' or 'n' or 'no'):
-    print('Input error, please input "y"/"yes" or "n"/"no"')
-    a = input("Are you sure install ansible?[yes/no] ")
+a = input("Are you sure install ansible?[yes/no] ").lower()
+while a not in ('yes', 'no'):
+    print('Input error, please input "yes" or "no"')
+    a = input("Are you sure  install ansible?[yes/no] ")
 # 确认在本地还是远端安装
 b = input("Do you want install this application on local server or remote server?[local/remote]")
-while b != ('local' or 'remote'):
+while b not in ('local', 'remote'):
     print('Input error, please input "local" or "remote".')
     b = input("Do you want install this application on local server or remote server?[local/remote]")
 
 # 判断系统发行版本,支持CentOS和Ubuntu
 distribution = platform.dist()[0]
+print(distribution)
 # 安装ansible
 ft.install_ansible(a, distribution)
 # 脚本存放路径

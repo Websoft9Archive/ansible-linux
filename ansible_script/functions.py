@@ -3,9 +3,9 @@ from distutils.spawn import find_executable
 
 # 安装ansible
 def install_ansible(a, distribution):
-    if a.lower() == ('y' or 'yes') and distribution == 'centos':
+    if a in ('yes', 'y') and distribution == 'centos':
         os.system("yum install epel-release.noarch git ansible -y")
-    elif a.lower() == ('y' or 'yes') and distribution == 'Ubuntu':
+    elif a in ('yes', 'y') and distribution == 'Ubuntu':
         os.system('apt update; apt install software-properties-common; apt-add-repository --yes --update ppa:ansible/ansible;\
         apt install git ansible -y')
     elif a.lower() == ('n' or 'no'):
