@@ -33,3 +33,5 @@ def write_file_remote(hosts, ip, username, password):
         hosts.write("[remote] \n")
         hosts.write(ip + "\t ansible_ssh_user=" + username + "\t ansible_ssh_pass=" + password + "\t ansible_sudo_pass=" + password)
 
+
+
