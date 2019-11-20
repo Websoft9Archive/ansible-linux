@@ -2,8 +2,42 @@
 #coding: utf-8
 #redis : "https://github.com/Websoft9/ansible-redis.git"
 
-import os, sys, platform
-import functions as ft
+import os, sys, platform, shutil
+from distutils.spawn import find_executable
+
+# 安装ansible
+def install_ansible(a, distribution):
+    if a in ('yes', 'y') and distribution == 'centos':
+        os.system("yum install epel-release.noarch git ansible -y")
+    elif a in ('yes', 'y') and distribution == 'Ubuntu':
+        os.system('apt update; apt install software-properties-common; apt-add-repository --yes --update ppa:ansible/ansible;\
+        apt install git ansible -y')
+    elif a.lower() == ('n' or 'no'):
+        sys.exit()
+    else:
+        print("Only input yes or no!")
+
+# 克隆ansible仓库
+def download(url, directory):
+    if not os.path.exists(directory):
+        os.system("git clone " + url + " /tmp/ansible")
+    elif os.path.exists(directory):
+        shutil.rmtree(directory)
+        os.system("git clone " + url + " /tmp/ansible")
+
+# 写入hosts文件
+def wirte_file_local(hosts):
+    with open(hosts, 'w') as hosts:
+        hosts.write("[local] \n")
+        hosts.write("localhost")
+
+def write_file_remote(hosts, ip, username, password):
+    os.system("sed -i 's/#host_key_checking = False/host_key_checking = False/g'  /etc/ansible/ansible.cfg")
+    with open(hosts, 'w') as hosts:
+        hosts.write("[remote] \n")
+        hosts.write(ip + "\t ansible_ssh_user=" + username + "\t ansible_ssh_pass=" + password + "\t ansible_sudo_pass=" + password)
+
+###############################################
 
 print(sys.argv)
 
@@ -29,11 +63,11 @@ while b not in ('local', 'remote'):
 distribution = platform.dist()[0]
 print(distribution)
 # 安装ansible
-ft.install_ansible(a, distribution)
+install_ansible(a, distribution)
 # 脚本存放路径
 directory = "/tmp/ansible"
 # 下载ansible仓库
-ft.download(url, directory)
+download(url, directory)
 
 #切换到/tmp/ansible目录
 os.chdir(directory)
@@ -41,12 +75,12 @@ os.chdir(directory)
 hosts_file = '/tmp/ansible/hosts'
 
 if b == "local":
-    ft.wirte_file_local(hosts_file)
+    wirte_file_local(hosts_file)
     os.system('ansible-playbook -i hosts ' + application + '.yml -c local')
 elif b == "remote":
     ip = input("Please input your remote server's public IP: ")
     username = input("Please input your remote server's username: ")
     password = input("Please input your remote srever's password: ")
-    ft.write_file_remote(hosts_file, ip , username, password)
+    write_file_remote(hosts_file, ip , username, password)
     os.system('ansible-playbook -i hosts ' + application + '.yml ')
 
