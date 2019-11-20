@@ -1,6 +1,5 @@
 #!/usr/bin/python env
 #coding: utf-8
-#redis : "https://github.com/Websoft9/ansible-redis.git"
 
 import os, sys, platform, shutil
 #from distutils.spawn import find_executable
