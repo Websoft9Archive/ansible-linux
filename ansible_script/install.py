@@ -3,7 +3,7 @@
 #redis : "https://github.com/Websoft9/ansible-redis.git"
 
 import os, sys, platform, shutil
-from distutils.spawn import find_executable
+#from distutils.spawn import find_executable
 
 # 安装ansible
 def install_ansible(a, distribution):
