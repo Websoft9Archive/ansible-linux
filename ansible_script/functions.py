@@ -1,5 +1,4 @@
 import os, sys, platform, shutil
-from distutils.spawn import find_executable
 
 # 安装ansible
 def install_ansible(a, distribution):
