@@ -41,8 +41,8 @@ def write_file_remote(hosts, ip, username, password):
 
 print(sys.argv)
 
-application = "redis"
-url = sys.argv[1]
+application = sys.argv[1]
+url = sys.argv[2]
 
 if os.getuid() != 0:
     print ("This program must be run as root. Aborting.")
