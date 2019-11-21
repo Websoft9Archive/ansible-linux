@@ -54,20 +54,28 @@ if os.getuid() != 0:
     sys.exit(1)
 
 # 确认是否安装ansible
-a = input("\nAre you sure to start installation?  [y/n]").lower()
+a = input("\nAre you sure to start installation?  [y/n]: ").lower()
 while a not in ('y', 'n'):
     print('\nInput error, please input "y" or "n":  ')
-    a = input("\nAre you sure to start installation?  [y/n]").lower()
+    a = input("\nAre you sure to start installation?  [y/n]: ").lower()
 
 if a in ('no', 'n'):  sys.exit()
 
 # 确认在本地还是远端安装
-b = input("Do you want install this application on local server or remote server?[local/remote]")
-while b not in ('local', 'remote'):
-    print('Input error, please input "local" or "remote".')
-    b = input("Do you want install this application on local server or remote server?[local/remote]")
+b = input("\nWhere do you want to install it? [1/2]: \n\t 1. local server \n\t 2. remote server\nPlease input a number: ")
+while b not in ('1', '2'):
+    print('\nInput error, please input "1" or "2".')
+    b = input("\nWhere do you want to install it? [1/2]: \n\t 1. local server \n\t 2. remote server\nPlease input a number: ")
 
-print("Please Wait...")
+if b == "2":
+    print('\nYou must input your remote server IP and account for installation\n')
+    ip = input("\n\tPublic or Internet IP: ")
+    username = input("\tUsername: ")
+    password = input("\tPassword: ")
+    
+    #验证输入的账号密码是否可以ssh登录，如果不可以询问用户：重新输入 or 退出？
+
+print("\nStarting pre-installation, waiting for 1-3 minutes...\n")
 
 # 判断系统发行版本,支持CentOS和Ubuntu
 distribution = platform.dist()[0]
@@ -81,16 +89,13 @@ download(url, directory)
 
 #切换到/tmp/ansible目录
 os.chdir(directory)
+
 # 创建hosts文件
 hosts_file = '/tmp/ansible/hosts'
 
-if b == "local":
+if b == "1":
     wirte_file_local(hosts_file)
     os.system('ansible-playbook -i hosts ' + application + '.yml -c local')
-elif b == "remote":
-    ip = input("Please input your remote server's public IP: ")
-    username = input("Please input your remote server's username: ")
-    password = input("Please input your remote srever's password: ")
+elif b == "2":
     write_file_remote(hosts_file, ip , username, password)
     os.system('ansible-playbook -i hosts ' + application + '.yml ')
-
