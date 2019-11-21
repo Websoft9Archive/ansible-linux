@@ -54,10 +54,10 @@ if os.getuid() != 0:
     sys.exit(1)
 
 # 确认是否安装ansible
-a = input("Are you sure to start installation? [ Y / N ] ").lower()
+a = input("\tAre you sure to start installation?  [y/n]").lower()
 while a not in ('y', 'n'):
-    print('Input error, please input " Y / N "')
-    a = input("Are you sure to start installation? [ Y / N ] ").lower()
+    print('\tInput error, please input "y" or "n":  ')
+    a = input("\tAre you sure to start installation?  [y/n]").lower()
 
 if a in ('no', 'n'):  sys.exit()
 
