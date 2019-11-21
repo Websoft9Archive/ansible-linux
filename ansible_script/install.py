@@ -54,10 +54,10 @@ if os.getuid() != 0:
     sys.exit(1)
 
 # 确认是否安装ansible
-a = input("Are you sure install ansible?[yes/no] ").lower()
-while a not in ('yes', 'no'):
-    print('Input error, please input "Y/N"')
-    a = input("Are you sure  install ansible?[Y/N] ").lower()
+a = input("Are you sure to start installation? [ Y / N ] ").lower()
+while a not in ('y', 'n'):
+    print('Input error, please input " Y / N "')
+    a = input("Are you sure to start installation? [ Y / N ] ").lower()
 # 确认在本地还是远端安装
 b = input("Do you want install this application on local server or remote server?[local/remote]")
 while b not in ('local', 'remote'):
