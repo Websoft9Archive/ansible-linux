@@ -69,7 +69,7 @@ while b not in ('1', '2'):
 
 if b == "2":
     print('\nYou must input your remote server IP and account for installation\n')
-    ip = input("\n\tPublic or Internet IP: ")
+    ip = input("\tPublic or Internet IP: ")
     username = input("\tUsername: ")
     password = input("\tPassword: ")
     
@@ -77,13 +77,15 @@ if b == "2":
 
 print("\nStarting pre-installation, waiting for 1-3 minutes...\n")
 
-# 判断系统发行版本,支持CentOS和Ubuntu
+# 判断主控端操作系统发行版本,支持CentOS和Ubuntu
 distribution = platform.dist()[0]
-# 安装ansible
+
+# 主控端安装ansible
 install_ansible(a, distribution)
 
 # 脚本存放路径
 directory = "/tmp/ansible"
+
 # 下载ansible仓库
 download(url, directory)
 
