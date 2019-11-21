@@ -58,6 +58,9 @@ a = input("Are you sure to start installation? [ Y / N ] ").lower()
 while a not in ('y', 'n'):
     print('Input error, please input " Y / N "')
     a = input("Are you sure to start installation? [ Y / N ] ").lower()
+
+if a in ('no', 'n'):  sys.exit()
+
 # 确认在本地还是远端安装
 b = input("Do you want install this application on local server or remote server?[local/remote]")
 while b not in ('local', 'remote'):
