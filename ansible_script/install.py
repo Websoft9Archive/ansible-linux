@@ -7,14 +7,15 @@ import os, sys, platform, shutil
 # 安装ansible
 def install_ansible(a, distribution):
     if a in ('yes', 'y') and distribution == 'centos':
-        os.system("yum install epel-release.noarch git ansible -y")
+        os.popen("yum install epel-release.noarch git ansible -y 2>/dev/null")
     elif a in ('yes', 'y') and distribution == 'Ubuntu':
-        os.system('apt update; apt install software-properties-common -y; apt-add-repository --yes --update ppa:ansible/ansible;\
-        apt install git ansible -y')
-    elif a.lower() == ('n' or 'no'):
+        os.popen('apt-get update 2>/dev/null; apt-get install software-properties-common -y 2>/dev/null; \
+        apt-add-repository --yes --update ppa:ansible/ansible 2>/dev/null;\
+        apt-get install git ansible -y 2>/dev/null')
+    elif a in ('no', 'n'):
         sys.exit()
     else:
-        print("Only input yes or no!")
+        print("Only input Y/N !")
 
 # 克隆ansible仓库
 def download(url, directory):
@@ -38,6 +39,11 @@ def write_file_remote(hosts, ip, username, password):
 
 ###############################################
 
+try:
+    input = raw_input
+except NameError:
+    pass
+
 print(sys.argv)
 
 application = sys.argv[1]
@@ -50,19 +56,21 @@ if os.getuid() != 0:
 # 确认是否安装ansible
 a = input("Are you sure install ansible?[yes/no] ").lower()
 while a not in ('yes', 'no'):
-    print('Input error, please input "yes" or "no"')
-    a = input("Are you sure  install ansible?[yes/no] ")
+    print('Input error, please input "Y/N"')
+    a = input("Are you sure  install ansible?[Y/N] ").lower()
 # 确认在本地还是远端安装
 b = input("Do you want install this application on local server or remote server?[local/remote]")
 while b not in ('local', 'remote'):
     print('Input error, please input "local" or "remote".')
     b = input("Do you want install this application on local server or remote server?[local/remote]")
 
+print("Please Wait...")
+
 # 判断系统发行版本,支持CentOS和Ubuntu
 distribution = platform.dist()[0]
-print(distribution)
 # 安装ansible
 install_ansible(a, distribution)
+
 # 脚本存放路径
 directory = "/tmp/ansible"
 # 下载ansible仓库
