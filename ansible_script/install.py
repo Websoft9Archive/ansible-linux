@@ -4,6 +4,11 @@
 import os, sys, platform, shutil
 #from distutils.spawn import find_executable
 
+def root_judge():
+    if os.getuid() != 0:
+        print("This program must be run as root. Aborting.")
+        sys.exit(1)
+
 # 安装ansible
 def install_ansible(a, distribution):
     if a in ('yes', 'y') and distribution == 'centos':
@@ -44,14 +49,10 @@ try:
 except NameError:
     pass
 
-print(sys.argv)
-
 application = sys.argv[1]
 url = sys.argv[2]
 
-if os.getuid() != 0:
-    print ("This program must be run as root. Aborting.")
-    sys.exit(1)
+root_judge()
 
 # 确认是否安装ansible
 a = input("\nAre you sure to start installation?  [y/n]: ").lower()
@@ -59,7 +60,8 @@ while a not in ('y', 'n'):
     print('\nInput error, please input "y" or "n":  ')
     a = input("\nAre you sure to start installation?  [y/n]: ").lower()
 
-if a in ('no', 'n'):  sys.exit()
+if a in ('no', 'n'):
+    sys.exit()
 
 # 确认在本地还是远端安装
 b = input("\nWhere do you want to install it? [1/2]: \n\t 1. local server \n\t 2. remote server\nPlease input a number: ")

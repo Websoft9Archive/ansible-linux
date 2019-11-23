@@ -32,5 +32,16 @@ def write_file_remote(hosts, ip, username, password):
         hosts.write("[remote] \n")
         hosts.write(ip + "\t ansible_ssh_user=" + username + "\t ansible_ssh_pass=" + password + "\t ansible_sudo_pass=" + password)
 
+def check_python_version():
+    if sys.version_info.major < 3:
+        try:
+            input = raw_input
+        except NameError:
+            pass
+    return
+
+def ping_module(ip, username, password):
+    os.system("ssh " + username + "@" + ip )
+
 
 
