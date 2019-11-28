@@ -29,6 +29,25 @@ yum install tigervnc-server -y
 
 ```
 
+## 如何实现自动交互应答？
+
+Linux 系统中，通过安装 expect 扩展，来实现自动交互应答
+```
+yum install expect -y
+```
+
+下面是一个 expect 使用范例：
+
+```
+#! /usr/bin/expect
+set timeout 2  # 演示2秒
+spawn /mnt/ask.sh  #开始 ask.sh 文件的交互式问答
+expect "name?" #应对包含 name? 的问题
+send "tom\r" #回答问题
+expect "old?" #应对包含 old? 的问题
+send "18\r"#回答问题
+expect eof #结束
+```
 
 ## 推荐可视化面板工具？
 
@@ -38,12 +57,6 @@ Linux命令行操作功能强大的同时，也让一些用户望而生畏。Lin
 ### Webmin
 
 Webmin是一款开源免费的Web面板，可以对Linux进行深度操作。
-
-
-
-
-
-
 
 
 登录方式：*http://公网IP地址:10000* ，登录账号为服务器账号（root/服务器密码）
