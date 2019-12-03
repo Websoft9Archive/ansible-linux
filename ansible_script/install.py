@@ -53,7 +53,6 @@ except NameError:
 application = sys.argv[1]
 url = sys.argv[2]
 init_os= sys.argv[3][5:]
-print init_os
 
 root_judge()
 
