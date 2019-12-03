@@ -49,8 +49,10 @@ try:
 except NameError:
     pass
 
+# 获取入口变量
 application = sys.argv[1]
 url = sys.argv[2]
+init_OS= sys.argv[3][4:]
 
 root_judge()
 
@@ -99,7 +101,7 @@ hosts_file = '/tmp/ansible/hosts'
 
 if b == "1":
     wirte_file_local(hosts_file)
-    os.system('ansible-playbook -i hosts ' + application + '.yml -c local')
+    os.system('ansible-playbook -i hosts ' + application + '.yml -c local'+ '-e init='+ init_os)
 elif b == "2":
     write_file_remote(hosts_file, ip , username, password)
     os.system('ansible-playbook -i hosts ' + application + '.yml ')

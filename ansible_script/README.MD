@@ -1,6 +1,7 @@
-该脚本使用 Python2 运行。
+该脚本使用 Python2 运行，Python3支持还在开发中。
 
-使用示例：
+## 使用示例
+
 CentOS/Redhat系统：
 yum install python3 -y; wget 脚本链接; python3 应用名 git仓库地址
 
@@ -11,3 +12,15 @@ apt install python3 -y; wget 脚本链接; python3 应用名 git仓库地址
 ~~~
 wget https://raw.githubusercontent.com/Websoft9/linux/master/ansible_script/install.py ; python install.py zabbix https://github.com/Websoft9/ansible-zabbix.git
 ~~~
+
+## 变量
+
+python install.py 命令之后，是可变变量：
+
+```
+#适用于制作镜像，init代表初始化操作系统
+python install.py zabbix https://github.com/Websoft9/ansible-zabbix.git init=1
+
+#适用于用户使用，无init
+python install.py zabbix https://github.com/Websoft9/ansible-zabbix.git
+```
