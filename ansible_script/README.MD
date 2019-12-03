@@ -31,7 +31,6 @@ python install.py playb=zabbix url=https://github.com/Websoft9/ansible-zabbix.gi
 python install.py playb=zabbix url=https://github.com/Websoft9/ansible-zabbix.git init=1 ansible=y
 
 
-#适用于测试使用，init=0,ansible=n
-提前将ansible项目上传到服务器，同时将install.py文件上传到项目的根目录
+#适用于测试使用，init=0,ansible=n.提前将ansible项目上传到服务器，同时将install.py文件上传到项目的根目录
 python install.py playb=zabbix url=local init=0 ansible=n
 ```
