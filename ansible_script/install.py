@@ -101,7 +101,7 @@ hosts_file = '/tmp/ansible/hosts'
 
 if b == "1":
     wirte_file_local(hosts_file)
-    os.system('ansible-playbook -i hosts ' + application + '.yml -c local'+ '-e init='+ init_os)
+    os.system('ansible-playbook -i hosts ' + application + '.yml -c local'+ '-e init=' + init_os)
 elif b == "2":
     write_file_remote(hosts_file, ip , username, password)
-    os.system('ansible-playbook -i hosts ' + application + '.yml ')
+    os.system('ansible-playbook -i hosts ' + application + '.yml ' + '-e init=' + init_os)
