@@ -49,10 +49,18 @@ try:
 except NameError:
     pass
 
-# 获取入口变量
-application = sys.argv[1]
-url = sys.argv[2]
+#-----------------start 获取入口变量--------------#
+
+#主plalybook
+application = sys.argv[1][6:]
+#项目git地址或本地已上传
+url = sys.argv[2][4:]
+#安装完成后是否初始化操作系统
 init_os= sys.argv[3][5:]
+#是否需要安装ansible
+exist_ansible=sys.argv[4][8:]
+
+#-----------------end 获取入口变量--------------#
 
 root_judge()
 
@@ -85,23 +93,25 @@ print("\nStarting pre-installation, waiting for 1-3 minutes...\n")
 distribution = platform.dist()[0]
 
 # 主控端安装ansible
-install_ansible(a, distribution)
+if exist_ansible == "y":
+   install_ansible(a, distribution)
 
 # 脚本存放路径
 directory = "/tmp/ansible"
 
-# 下载ansible仓库
-download(url, directory)
-
-#切换到/tmp/ansible目录
-os.chdir(directory)
-
-# 创建hosts文件
-hosts_file = '/tmp/ansible/hosts'
+# 克隆ansible仓库
+if url != "local":
+   download(url, directory)
+   #切换到/tmp/ansible目录
+   os.chdir(directory)
+   # 创建hosts文件
+   hosts_file = '/tmp/ansible/hosts'
+else:
+   hosts_file = 'hosts'
 
 if b == "1":
     wirte_file_local(hosts_file)
-    os.system('ansible-playbook -i hosts ' + application + '.yml -c local'+ '-e init=' + init_os)
+    os.system('ansible-playbook -i hosts ' + application + '.yml -c local'+ ' -e init=' + init_os)
 elif b == "2":
     write_file_remote(hosts_file, ip , username, password)
-    os.system('ansible-playbook -i hosts ' + application + '.yml ' + '-e init=' + init_os)
+    os.system('ansible-playbook -i hosts ' + application + '.yml ' + ' -e init=' + init_os)
