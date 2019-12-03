@@ -52,7 +52,7 @@ except NameError:
 # 获取入口变量
 application = sys.argv[1]
 url = sys.argv[2]
-init_OS= sys.argv[3][4:]
+init_os= sys.argv[3][4:]
 
 root_judge()
 
