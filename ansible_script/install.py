@@ -111,9 +111,6 @@ if url != "local":
 else:
    hosts_file = 'hosts'
 
-print(b)
-test=input("fdfd")
-
 if install_where == "1":
     write_file_local(hosts_file)
     os.system('ansible-playbook -i hosts ' + application + '.yml -c local'+ ' -e init=' + init_os)
