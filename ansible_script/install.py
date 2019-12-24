@@ -89,7 +89,7 @@ if a in ('no', 'n'):
 print("\nStarting pre-installation, waiting for 1-3 minutes...\n")
 
 #默认安装到本地
-b="1"
+install_where = '1'
 
 # 判断主控端操作系统发行版本,支持CentOS和Ubuntu
 distribution = platform.dist()[0]
@@ -114,9 +114,9 @@ else:
 print(b)
 test=input("fdfd")
 
-if b == "1":
+if install_where == "1":
     write_file_local(hosts_file)
     os.system('ansible-playbook -i hosts ' + application + '.yml -c local'+ ' -e init=' + init_os)
-elif b == "2":
+elif install_where == "2":
     write_file_remote(hosts_file, ip , username, password)
     os.system('ansible-playbook -i hosts ' + application + '.yml ' + ' -e init=' + init_os)
