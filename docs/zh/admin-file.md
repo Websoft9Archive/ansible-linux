@@ -54,10 +54,10 @@
 
     > www_user_name 为虚拟用户名  apache 为步骤1所查看 /data/wwwroot/default 为FTP上传目录
 
-    ​ 执行命令(生成用户数据):  
+     执行命令(生成用户数据):  
      `pure-pw mkdb /etc/pure-ftpd/pureftpd.pdb`
 
-5. ​开启服务 设置开机启动
+5. 开启服务 设置开机启动
     执行一下命令:
     `systemctl start  pure-ftpd.service`
     `systemctl enable pure-ftpd.service`

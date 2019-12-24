@@ -79,7 +79,7 @@ pear install net_smtp
 以CentOS上的PHP为例，php.ini路径为：/etc/php.ini
 
 ```shell
-# 修改文件大小限制
+# 修改文件大小限制，注意数字后面需要带上单位M
 post_max_size = 16M
 upload_max_filesize = 16M
 
