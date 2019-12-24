@@ -110,7 +110,10 @@ if url != "local":
    hosts_file = '/tmp/ansible/hosts'
 else:
    hosts_file = 'hosts'
+
+print(b)
 test=input("fdfd")
+
 if b == "1":
     write_file_local(hosts_file)
     os.system('ansible-playbook -i hosts ' + application + '.yml -c local'+ ' -e init=' + init_os)
