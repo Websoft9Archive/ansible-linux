@@ -77,9 +77,6 @@ exist_ansible=sys.argv[4][8:]
 
 root_judge()
 
-#默认安装到本地
-b=1
-
 # 确认是否安装ansible
 a = input("\nAre you sure to start installation?  [y/n]: ").lower()
 while a not in ('y', 'n'):
@@ -90,6 +87,9 @@ if a in ('no', 'n'):
     sys.exit()
 
 print("\nStarting pre-installation, waiting for 1-3 minutes...\n")
+
+#默认安装到本地
+b='1'
 
 # 判断主控端操作系统发行版本,支持CentOS和Ubuntu
 distribution = platform.dist()[0]
