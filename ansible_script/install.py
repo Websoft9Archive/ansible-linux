@@ -1,4 +1,5 @@
-#!/usr/bin/python env
+#!/usr/bin/env python2
+#!/usr/bin/env python3
 #coding: utf-8
 
 import os, sys, platform, shutil
