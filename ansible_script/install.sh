@@ -37,7 +37,7 @@ if [ "${Linux_version}"=="CentOS" ]; then
 fi
 
 if [ "${Linux_version}"=="DISTRIB_ID=Ubuntu" ]; then
-  apt-get update 2>/dev/null;
+  apt-get update 1>/dev/null 2>&1;
   apt-get install software-properties-common -y 1>/dev/null 2>&1;
   apt-add-repository --yes --update ppa:ansible/ansible 1>/dev/null 2>&1;
   apt-get install git python3-pip ansible -y 1>/dev/null 2>&1
