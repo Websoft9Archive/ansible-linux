@@ -15,16 +15,11 @@ Show_Help(){
     echo "Usage: $0 command ...[parameters]...
     --help, -h           Show this help message
     --version, -v        Show version info
-    --playbook,          Select a playbook
-    --init,              default: 0
-    --install-ansible,   Choose whether to install ansible[y/n]
     "
 }
 ARG_NUM=$#      #传入参数的个数
-TEMP=`getopt -o hvV --long help,version,playbook,init,install-ansible -- "$@" 2>/dev/null`
-eval set -- "${TEMP}"
 while :; do
-  [-z "$1"] && break;
+  [ -z "$1" ] && break;
   case "$1" in 
     -h|--help)
       Show_Help; exit 0
@@ -32,22 +27,22 @@ while :; do
     -v|-V|--version)
       version; exit 0
       ;;
-    --playbook)
-      playb=$1;
-      [[ -z ${playb} ]] && { echo "${CWARNING}Project_url input error! Please input a github repostory url;" exit 1; }
   esac
 done
 
 Linux_Release=`cat /etc/*-release | awk -F' ' 'NR==1{print $1}'`
 
-if [ "${Linux_version}" == 'CentOS' ]; then
-    yum install epel-release python3 ansible -y 2>/dev/null
+if [ "${Linux_version}"=="CentOS" ]; then
+  yum install epel-release git python3 ansible -y 1>/dev/null 2>&1
 fi
 
-playb=`read -e -p "which application do you want to install? Please input it's github url: " `
+if [ "${Linux_version}"=="DISTRIB_ID=Ubuntu" ]; then
+  apt-get update 2>/dev/null;
+  apt-get install software-properties-common -y 1>/dev/null 2>&1;
+  apt-add-repository --yes --update ppa:ansible/ansible 1>/dev/null 2>&1;
+  apt-get install git python3-pip ansible -y 1>/dev/null 2>&1
+fi
 
-
-
-
+wget -P /opt https://raw.githubusercontent.com/Websoft9/linux/master/ansible_script/install.py
 
 
