@@ -17,12 +17,14 @@ def py2_input():
         print('\nInput error, please input "1" or "2".')
         b = raw_input(
             "\nWhere do you want to install it? [1/2]: \n\t 1. local server \n\t 2. remote server\nPlease input a number: ")
-    if b == "2":
+    if b == "1":
+        return a, b
+    elif b == "2":
         print('\nYou must input your remote server IP and account for installation\n')
         ip = raw_input("\tPublic or Internet IP: ")
         username = raw_input("\tUsername: ")
         password = raw_input("\tPassword: ")
-    return a, b, ip, username, password
+        return a, b, ip, username, password
 
 def py3_input():
     a = input("\nAre you sure to start installation?  [y/n]: ").lower()
@@ -38,16 +40,36 @@ def py3_input():
         print('\nInput error, please input "1" or "2".')
         b = input(
             "\nWhere do you want to install it? [1/2]: \n\t 1. local server \n\t 2. remote server\nPlease input a number: ")
-    if b == "2":
+    if b == "1":
+        return a, b
+    elif b == "2":
         print('\nYou must input your remote server IP and account for installation\n')
         ip = input("\tPublic or Internet IP: ")
         username = input("\tUsername: ")
         password = input("\tPassword: ")
-    return a, b, ip, username, password
+        return a, b, ip, username, password
 
-if sys.version_info.major < 3:
-    py2_input()
-elif sys.version_info.major >=3:
-    py3_input()
+def run_input():
+    if sys.version_info.major < 3:
+        out = py2_input()
+    elif sys.version_info.major >= 3:
+        out = py3_input()
+    print(out)
+    return out
 
-print(a, b, ip, username, password)
+out = run_input()
+print(out[0])
+#
+# if out[1] == 1:
+#     a = out[0]
+#     b = out[1]
+# elif out[1] == 2:
+#     a = out[0]
+#     b = out[1]
+#     ip = out[2]
+#     username = out[3]
+#     password = out[4]
+
+# print(a,b)
+
+    

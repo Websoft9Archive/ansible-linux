@@ -1,5 +1,5 @@
+# -*- coding: UTF-8 -*-
 #!/usr/bin/python env
-#coding: utf-8
 
 import os, sys, platform, shutil
 #from distutils.spawn import find_executable
