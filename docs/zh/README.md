@@ -4,7 +4,7 @@ home: false
 
 # 关于
 
-本文档由 [Websoft9](http://www.websoft9.com/) 公司提供，是Websoft9在实践中，总结的与Linux有关的操作、命令、脚本，帮助云计算用户快速掌握Linux相关的技能
+本文档由 [Websoft9](http://www.websoft9.com/) 公司提供，是Websoft9在实践中，总结的与Linux有关的命令、脚本和主流开发语言运行环境的安装部署，帮助云计算用户快速掌握Linux相关的技能
 
 ---
 

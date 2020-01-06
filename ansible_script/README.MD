@@ -10,7 +10,7 @@ apt install python3 -y; wget 脚本链接; python3 应用名 git仓库地址 初
 
 例如,在Ubuntu上安装zabbix：
 ~~~
-wget https://raw.githubusercontent.com/Websoft9/linux/master/ansible_script/install.py ; python install.py playb=zabbix url=https://github.com/Websoft9/ansible-zabbix.git init=0 ansible=y
+wget -N https://raw.githubusercontent.com/Websoft9/linux/master/ansible_script/install.py ; python install.py playb=zabbix url=https://github.com/Websoft9/ansible-zabbix.git init=0 ansible=y
 ~~~
 
 ## 变量

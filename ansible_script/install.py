@@ -1,5 +1,6 @@
 # -*- coding: UTF-8 -*-
-#!/usr/bin/python env
+#!/usr/bin/env python2
+#!/usr/bin/env python3
 
 import os, sys, platform, shutil
 #from distutils.spawn import find_executable
@@ -30,8 +31,21 @@ def download(url, directory):
         shutil.rmtree(directory)
         os.system("git clone " + url + " /tmp/ansible")
 
+# 选择在本地还是远端安装(此函数暂时不用)
+def install_where():
+    b = input("\nWhere do you want to install it? [1/2]: \n\t 1. local server \n\t 2. remote server\nPlease input a number: ")
+    while b not in ('1', '2'):
+      print('\nInput error, please input "1" or "2".')
+      b = input("\nWhere do you want to install it? [1/2]: \n\t 1. local server \n\t 2. remote server\nPlease input a number: ")
+    if b == "2":
+      print('\nYou must input your remote server IP and account for installation\n')
+      ip = input("\tPublic or Internet IP: ")
+      username = input("\tUsername: ")
+      password = input("\tPassword: ")
+    #to do 验证输入的账号密码是否可以ssh登录，如果不可以询问用户：重新输入 or 退出？
+
 # 写入hosts文件
-def wirte_file_local(hosts):
+def write_file_local(hosts):
     with open(hosts, 'w') as hosts:
         hosts.write("[local] \n")
         hosts.write("localhost")
@@ -51,7 +65,7 @@ except NameError:
 
 #-----------------start 获取入口变量--------------#
 
-#主plalybook
+#主playbook
 application = sys.argv[1][6:]
 #项目git地址或本地已上传
 url = sys.argv[2][4:]
@@ -73,21 +87,10 @@ while a not in ('y', 'n'):
 if a in ('no', 'n'):
     sys.exit()
 
-# 确认在本地还是远端安装
-b = input("\nWhere do you want to install it? [1/2]: \n\t 1. local server \n\t 2. remote server\nPlease input a number: ")
-while b not in ('1', '2'):
-    print('\nInput error, please input "1" or "2".')
-    b = input("\nWhere do you want to install it? [1/2]: \n\t 1. local server \n\t 2. remote server\nPlease input a number: ")
-
-if b == "2":
-    print('\nYou must input your remote server IP and account for installation\n')
-    ip = input("\tPublic or Internet IP: ")
-    username = input("\tUsername: ")
-    password = input("\tPassword: ")
-    
-    #验证输入的账号密码是否可以ssh登录，如果不可以询问用户：重新输入 or 退出？
-
 print("\nStarting pre-installation, waiting for 1-3 minutes...\n")
+
+#默认安装到本地
+install_where = '1'
 
 # 判断主控端操作系统发行版本,支持CentOS和Ubuntu
 distribution = platform.dist()[0]
@@ -109,9 +112,9 @@ if url != "local":
 else:
    hosts_file = 'hosts'
 
-if b == "1":
-    wirte_file_local(hosts_file)
+if install_where == "1":
+    write_file_local(hosts_file)
     os.system('ansible-playbook -i hosts ' + application + '.yml -c local'+ ' -e init=' + init_os)
-elif b == "2":
+elif install_where == "2":
     write_file_remote(hosts_file, ip , username, password)
     os.system('ansible-playbook -i hosts ' + application + '.yml ' + ' -e init=' + init_os)
