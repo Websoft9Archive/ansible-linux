@@ -33,16 +33,17 @@ done
 Linux_Release=`cat /etc/*-release | awk -F' ' 'NR==1{print $1}'`
 
 if [ "${Linux_version}"=="CentOS" ]; then
-  yum install epel-release git python3 ansible -y 1>/dev/null 2>&1
+  yum install epel-release git python python3 ansible -y 1>/dev/null 2>&1
 fi
 
 if [ "${Linux_version}"=="DISTRIB_ID=Ubuntu" ]; then
   apt-get update 1>/dev/null 2>&1;
   apt-get install software-properties-common -y 1>/dev/null 2>&1;
   apt-add-repository --yes --update ppa:ansible/ansible 1>/dev/null 2>&1;
-  apt-get install git python3-pip ansible -y 1>/dev/null 2>&1
+  apt-get install git python-pip python3-pip ansible -y 1>/dev/null 2>&1
 fi
 
-wget -P /opt https://raw.githubusercontent.com/Websoft9/linux/master/ansible_script/install.py
+wget -P /opt https://raw.githubusercontent.com/Websoft9/linux/master/ansible_script/install.py 1>/dev/null 2>&1
+echo "Install Complete"
 
 
