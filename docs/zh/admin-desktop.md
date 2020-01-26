@@ -1,5 +1,10 @@
 # 桌面
 
+Linux系统的桌面就是指类似Windows系统的图形化管理界面，一般来说Linux默认情况下并不会安装桌面，需要用户自主安装配置才可以使用。
+
+* 主流的桌面有：GNOME，Unity  
+* 连接桌面方式：VNC，Windows远程桌面
+
 ## GNOME
 
 CentOS 7.4 64位+GNOME图形化界面。请使用本机Windows自带的远程桌面工具登录即可

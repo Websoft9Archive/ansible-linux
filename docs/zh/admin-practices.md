@@ -54,6 +54,12 @@ expect eof #结束
 
 Linux命令行操作功能强大的同时，也让一些用户望而生畏。Linux面板工具可以通过Web页面，对服务器进行可视化操作，降低Linux使用门槛。
 
+### Cockpit
+
+Cockpit 是一个基于 Web 的服务器管理工具，可用于 CentOS 和 RHEL 系统。最近发布的 CentOS 8 和 RHEL 8，其中 cockpit 是默认的服务器管理工具。
+
+![](https://libs.websoft9.com/Websoft9/DocsPicture/en/cockpit/cockpit-gui-websoft9.png)
+
 ### Webmin
 
 Webmin是一款开源免费的Web面板，可以对Linux进行深度操作。
