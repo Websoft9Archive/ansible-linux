@@ -1,5 +1,6 @@
-#!/usr/bin/python env
-#coding: utf-8
+# -*- coding: UTF-8 -*-
+#!/usr/bin/env python2
+#!/usr/bin/env python3
 
 import os, sys, platform, shutil
 #from distutils.spawn import find_executable
