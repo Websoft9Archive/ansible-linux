@@ -1,5 +1,9 @@
 # 磁盘与文件
 
+## 分区与格式
+
+## 挂载
+
 ## SFTP
 
 ## FTP
@@ -61,7 +65,3 @@
     执行一下命令:
     `systemctl start  pure-ftpd.service`
     `systemctl enable pure-ftpd.service`
-
-## 分区与格式
-
-## 挂载

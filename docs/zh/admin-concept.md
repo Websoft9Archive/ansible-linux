@@ -16,7 +16,7 @@ Linux系统的启动过程分为5个阶段：
 
 * 内核的引导：读入 /boot 目录下的内核文件
 * 运行 init：init是一个管理进程的进程，init进程的一大任务，就是去运行开机启动的程序
-* 系统初始化：这个阶段主要完成激活交换分区，检查磁盘，加载硬件模块以及其它一些需要优先执行任务。
+* 系统初始化：这个阶段主要完成激活交换分区，检查磁盘，加载硬件模块等任务。
 * 建立终端：系统打开6个终端，以便用户登录系统。在inittab中的以下6行就是定义了6个终端
 * 用户登录系统：用户登录使用Linux
 
@@ -56,10 +56,72 @@ Linux认证指获得专业Linux培训后通过考试得到的资格。国际上�
 
 ## Linux与云计算
 
-在当前的云计算领域，毫无疑问Linux系统是一切的基石。掌握了Linux就等于拿到了进入云计算行业的技术门票。
+在当前的云计算领域，毫无疑问Linux系统是最重要的基石。  
+
+掌握了Linux就等于拿到了云计算领域的入场券。
+
+## Linux命令
+
+Linux命令是对Linux系统进行管理的命令。对于Linux系统来说，无论是CPU、内存、磁盘驱动器、键盘、鼠标，还是用户等都是文件，Linux系统管理的命令是它正常运行的核心，与之前的DOS命令类似。
+
+更多命令参考：[《Linux命令大全》](https://man.linuxde.net/)
 
 ## Shell编程
 
 Shell 是一个用 C 语言编写的程序，它是用户使用 Linux 的桥梁。Shell 既是一种命令语言，又是一种程序设计语言。
 
 通俗的说：用户向Linux发送Shell命令（或多个命令组成的程序体）来控制Linux，故 Shell 也是一种应用程序，这个应用程序提供了一个界面，用户通过这个界面访问操作系统内核的服务。
+
+### 解释器
+
+Shell 编程跟 JavaScript、php 编程一样，只要有一个能编写代码的文本编辑器和一个能解释执行的脚本解释器就可以了。
+
+Linux 的 Shell 种类众多，常见的有：
+
+* Bourne Shell（/usr/bin/sh或/bin/sh）
+* Bourne Again Shell（/bin/bash）
+* Debian Almquist Shell(dash)
+* C Shell（/usr/bin/csh）
+* K Shell（/usr/bin/ksh）
+* Shell for Root（/sbin/sh）
+
+其中，bash和dash是目前广泛使用的解释器。
+
+### 语法
+
+Shell有着面向过程的程序设计常见的语法体系，包括：
+
+* 变量
+* 函数
+* 流程控制
+* 输入输出
+* 数组
+* 运算符
+
+Shell语法并不复杂，边学边用就能掌握。
+
+### 运行脚本
+
+Shell脚本可以保存为 .sh 文件后运行，也可以直接在Linux交互式命令中运行
+
+加入我们编写了一段Shell程序，内容如下
+```
+if [ $(ps -ef | grep -c "ssh") -gt 1 ]; then echo "true"; fi
+```
+将上面的代码保存为 test.sh，并 cd 到相应目录，然后选择如下的一种执行命令的方式：
+
+```
+#方式一：./ 执行脚本
+chmod +x ./test.sh  #使脚本具有执行权限
+./test.sh  #执行脚本
+
+#方式二：直接用解释器执行脚本
+/bin/sh test.sh
+
+#方式三：直接用解释器执行脚本
+bash test.sh
+
+#方式四：直接在交互式命令上中运行一段Shell程序
+if [ $(ps -ef | grep -c "ssh") -gt 1 ]; then echo "true"; fi
+
+```
