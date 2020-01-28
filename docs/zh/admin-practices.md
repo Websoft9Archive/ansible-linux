@@ -2,7 +2,13 @@
 
 ## 如何连接Linux？
 
+最常见的方式是使用SSH工具连接Linux，SSH工具包括：Putty,Xshell,WinSCP等  
+
+如果使用云服务器，云厂商一般都会提供在线的SSH工具
+
 ## 如何安装FTP？
+
+安装FTP是比较繁琐的工作，具体参考：[FTP相关章节](/zh/admin-file.md#ftp)
 
 ## 如何初始化数据磁盘？
 
@@ -12,12 +18,18 @@
 
 ## 如何安装图形化桌面
 
-### Centos/Oracle Linux
+下面针对不同Linux家族，提供安装桌面的命令
+
+### Centos/Oracle
 ```
 yum groupinstall -y "GNOME Desktop" 
 systemctl set-default graphical.target
 systemctl set-default graphical.target
+```
 
+### Ubuntu
+```
+待完善
 ```
 
 ## 如何安装VNC Server

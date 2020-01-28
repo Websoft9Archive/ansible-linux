@@ -2,6 +2,23 @@
 
 ## 防火墙
 
+与Linux防火墙有关的组件有三个，它们分别是：firewalld、iptables和nftables
+
+```
+#CentOS 安装 iptables
+yum install iptables -y
+
+#CentOS 安装 firewalld
+yum install firewalld -y
+```
+
+据说，从CentOS7开始，建议使用firewalld作为主要的防火墙管理工具。firewalld功能更全面，甚至支持图形化设置，`firewall-config &`
+
+![](https://libs.websoft9.com/Websoft9/DocsPicture/zh/linux/firewalld-gui-websoft9.png)
+
+
+> 如果使用云服务器，Linux系统的防火墙的端口管理被安全组替代，只要设置好合适的安全组规则，就能很好的控制端口的访问。
+
 ## 安全组件使用
 
 ### clamav 基本使用
