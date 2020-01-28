@@ -6,12 +6,13 @@ sidebarDepth: 3
 
 以Nginx在云服务器上最常见的应用场景为切入点，结合具体的操作，让没有基础的用户也能够快速上手。
 
-Nginx公司还有企业级的商业产品：
-NGINX Plus
-NGINX Controller
-NGINX Unit
-NGINX Amplify
-NGINX WAF
+Nginx公司还有企业级的商业产品：  
+
+NGINX Plus  
+NGINX Controller  
+NGINX Unit  
+NGINX Amplify  
+NGINX WAF  
 
 ## 安装
 

@@ -50,7 +50,11 @@ apt install python3
 
 Python是一个有良好生态的开发语言，全球数百万开发者贡献了大量优秀的软件包，Python的包管理工具就是管理和维护第三方扩展软件包的工具。
 
+pip升级软件
 
+```
+pip install --upgrade django==2.1.7
+```
 
 
 
