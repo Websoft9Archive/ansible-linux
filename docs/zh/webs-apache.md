@@ -3,7 +3,7 @@ sidebarDepth: 3
 ---
 # Apache
 
-本章出现的Apache具体指的是 Apache HTTP Sever （[官方文档](http://httpd.apache.org/docs/2.4/zh-cn/)）。Apache HTTP Server项目是为现代操作系统（包括UNIX和Windows）开发和维护开源HTTP服务器的一项工作。该项目的目标是提供一个安全，高效且可扩展的服务器，该服务器提供与当前HTTP标准同步的HTTP服务。
+本章出现的Apache具体指的是 Apache HTTP Server （[官方文档](http://httpd.apache.org/docs/2.4/zh-cn/)）。Apache HTTP Server项目是为现代操作系统（包括UNIX和Windows）开发和维护开源HTTP服务器的一项工作。该项目的目标是提供一个安全，高效且可扩展的服务器，该服务器提供与当前HTTP标准同步的HTTP服务。
 
 ## 安装
 
@@ -23,9 +23,30 @@ sudo service apache2 start
 
 ### 安装Apache模块
 
+通过 `apachectl -M` 命令可以查看已经安装的所有Apache模块。  
+
+需要注意的是，安装过的所有模块并不会全部被启用，即安装模块与启用是有区别的，只有安装之后才能被启用，被启用的模块也可以让它停止运行。接下来的小节，我们讲解如何启停模块。
+
+### 启停Apache模块
+
+下面先介绍通过修改模块配置文件实现模块启用的方案：  
+
+以CentOS为例，我们打开Apache模块配置文件：*/etc/httpd/conf.modules.d/00-base.conf*
+
+```
+...
+LoadModule version_module modules/mod_version.so
+LoadModule vhost_alias_module modules/mod_vhost_alias.so
+#LoadModule buffer_module modules/mod_buffer.so
+#LoadModule watchdog_module modules/mod_watchdog.so
+...
+```
+其中带“#”号的模块是没有启用的，如果需要启用，去掉“#”号，然后重启 Apache HTTP 服务即可。
+
+
 ## 工作模式
 
-Apache工作模式有event,prefork,worker等单重
+Apache工作模式有event,prefork,worker等多种工作模式
 
 ## 语言支持
 
