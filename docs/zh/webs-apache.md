@@ -3,6 +3,8 @@ sidebarDepth: 3
 ---
 # Apache
 
+本章出现的Apache具体指的是 Apache HTTP Sever （[官方文档](http://httpd.apache.org/docs/2.4/zh-cn/)）。Apache HTTP Server项目是为现代操作系统（包括UNIX和Windows）开发和维护开源HTTP服务器的一项工作。该项目的目标是提供一个安全，高效且可扩展的服务器，该服务器提供与当前HTTP标准同步的HTTP服务。
+
 ## 安装
 
 ### 安装Apache
@@ -231,7 +233,7 @@ UserDir disabled       #句首加上#号,就表示开启家目录
 
 3.以上配置都应该在扩展配置里面覆盖更改或增加;
 
-### 问题：关闭Apache Test Page 欢迎页面
+### 问题：关闭Apache Test Page
 
 ### 问题：关闭缺省情况目录列表可查看
 
