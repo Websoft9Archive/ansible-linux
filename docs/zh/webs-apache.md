@@ -11,8 +11,6 @@ sidebarDepth: 3
 
 这里我们只介绍比较简单的在线安装方式：
 
-### 安装Apache
-
 ```
 # Installing on Fedora/CentOS/Red Hat Enterprise Linux
 sudo yum install httpd
@@ -25,19 +23,19 @@ sudo service apache2 start
 ```
 > 安装Apache的时候默认会安装核心特性与多处理模块(MPM)，其他的扩展模块可以后续自行安装。  
 
-### 安装Apache模块
+## 模块
 
 安装模块之前，先查看当前已安装的所有模块，然后再决定是否安装，最后将已安装模块启用或停止。
 
-#### 查看
+### 查看
 
 通过 `apachectl -M` 命令可以查看已经安装的所有Apache模块。  
 
-#### 安装
+### 安装
 
 安装模块有yum/apt在线安装和源码编译安装两种方式，其中在线安装非常简单：
 
-##### 在线安装
+#### 在线安装
 
 例如：准备在CentOS上安装 `mod_ssl` 模块:
 
@@ -55,7 +53,7 @@ sudo service apache2 start
    ```
 3. 等待自动安装，直至安装完成
 
-##### 源码编译安装
+#### 源码编译安装
 
 如果在线搜索找不到所需的 Module, 就需要通过源码编译安装的方式安装新的模块。主要步骤如下：
 
@@ -81,7 +79,7 @@ sudo service apache2 start
 > 以上的源码编译安装方案来源于[此处](https://www.hugeserver.com/kb/install-enable-mod_evasive-apache-module-centos7/)
 
 
-#### 启停
+### 启停
 
 需要注意的是，安装过的所有模块并不会全部被启用，即安装模块与启用是有区别的，只有安装之后才能被启用，被启用的模块也可以让它停止运行。接下来，我们讲解如何启停模块。
 
@@ -101,6 +99,25 @@ LoadModule vhost_alias_module modules/mod_vhost_alias.so
 
 修改Apache配置文件显得繁琐，可以安装通过`a2enmod`这个模块来管理Apache扩展模块的启停
 
+## 路径
+
+不同的Linux发行版，对应的安装路径有一定的差异：
+
+### CentOS
+
+Apache 安装目录：*/etc/httpd*  
+Apache 虚拟主机配置文件：*/etc/httpd/conf.d/vhost.conf*  
+Apache 主配置文件： */etc/httpd/conf/httpd.conf*  
+Apache 日志文件： */var/log/httpd*  
+Apache 模块配置文件： */etc/httpd/conf.modules.d/00-base.conf*
+
+### Ubuntu
+
+Apache 安装目录：*/etc/apache2*  
+Apache 虚拟主机配置文件：*/etc/apache2/sites-available/000-default.conf*  
+Apache 主配置文件： */etc/apache2/apache2.conf*  
+Apache 日志文件： */var/log/apache2*  
+Apache 模块目录： */etc/apache2/mods-available*
 
 ## 多处理模块
 
@@ -596,7 +613,7 @@ Listen 443
 
 ## 运行环境
 
-Apache可以作为常见的开发语言的 Web 服务器，集成数据库、应用容器，最后形成一个完整的应用运行环境，例如：LAMP,LNMP等
+Apache可以作为常见的开发语言的 Web 服务器，集成数据库、应用容器，最后形成一个完整的应用运行环境，例如：Apache+PHP，Apache+Tomcat+Java等
 
 下面我们以常见的开发语言为例，分别介绍它们是如何与Apache一起工作的。
 
@@ -609,7 +626,11 @@ Apache被广泛用于PHP环境，Apache有两种PHP处理机制：
 
 mod_php 作为Apache的模块，没有独立的进程，无需额外设置和处理，使用起来非常简单。
 
-PHP-FPM(PHP FastCGI Process Manager)意：PHP FastCGI 进程管理器，用于管理PHP 进程池的软件，用于接受Apache HTTP Server等Web服务器的请求。PHP-FPM提供了更好的PHP进程管理方式，可以有效控制内存和进程、可以平滑重载PHP配置。
+PHP-FPM(PHP FastCGI Process Manager)意：PHP FastCGI 进程管理器，用于管理PHP 进程池的软件，用于接受Apache HTTP Server等Web服务器的请求。PHP-FPM提供了更好的PHP进程管理方式，可以有效控制内存和进程、可以平滑重载PHP配置。  
+
+下面是Apache+PHP-FPM共同工作的系统架构图，其中mod_proxy_fcgi用于Apache连接php-fpm
+
+![](https://libs.websoft9.com/Websoft9/DocsPicture/zh/linux/apache_event_php-fpm.jpg)
 
 ### Java
 
@@ -629,3 +650,51 @@ ProxyPass / http://localhost:8080/
 ```
 
 更多请参考：[《Apache HTTP Server 与 Tomcat 的三种连接方式介绍》](https://www.ibm.com/developerworks/cn/opensource/os-lo-apache-tomcat/)
+
+### Python
+
+Apache HTTP Server 也可以用于Python环境，通过扩展模块mod_proxy_uwsgi，连接Python的uWSGI服务器或Gunicorn服务器，便可以解析Python程序。
+
+这种组合的的基本配置方法如下：
+
+1. 配置为uwsgi.ini
+   ```
+   [uwsgi]
+   chdir = /home/vagrant/myweb/
+   virtualenv = /home/vagrant/env/
+   socket = 127.0.0.1:8080
+   env = DJANGO_SETTINGS_MODULE=myweb.settings
+   module =myweb.wsgi:application
+   master = true
+   processes = 4
+   vacuum = True
+   max-requests = 5000
+   daemonize = /var/log/uwsgi.log
+   pidfile = /var/log/uwsgi.pid
+   ```
+2. apache的配置文件加载mod_proxy_uwsgi.so
+3. apache的配置文件反向代理到uwsgi
+   ```
+   ProxyPass / uwsgi://127.0.0.1:8080
+   ```
+
+### Node.js
+
+Apache HTTP Server 也可以用于Node.js环境，Apache HTTP Server 与 Node.js 最常见的连接方式是http_proxy，即利用 Apache 自带的 mod_proxy 模块使用代理技术来连接 Node.js。   
+
+下面是典型的配置文件范例：
+
+```
+server {
+        listen 80 default_server;
+        server_name _;
+
+
+        location / {
+         proxy_pass http://127.0.0.1:2368;
+         proxy_set_header Host $host;
+         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        }
+
+}
+```

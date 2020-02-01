@@ -21,8 +21,8 @@ module.exports = [
     children: [
       '/zh/webs-apache',
       '/zh/webs-nginx',
-      '/zh/webs-caddy',
       '/zh/webs-tomcat',
+      '/zh/webs-caddy',
     ]
   },
 

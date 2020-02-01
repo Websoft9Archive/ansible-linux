@@ -4,48 +4,42 @@ sidebarDepth: 3
 
 # Nginx
 
-以Nginx在云服务器上最常见的应用场景为切入点，结合具体的操作，让没有基础的用户也能够快速上手。
+[Nginx](http://nginx.org/)("engine x")是一款是由俄罗斯的程序设计师Igor Sysoev所开发高性能的Web和反向代理服务器，具有优异的静态资源处理能力，同时也是一个 IMAP/POP3/SMTP 代理服务器。在高连接并发的情况下，Nginx是Apache服务器不错的替代品。  
 
-Nginx公司还有企业级的商业产品：  
+![](https://libs.websoft9.com/Websoft9/DocsPicture/zh/nginx/nginx-architecture-websoft9.png)
 
-NGINX Plus  
-NGINX Controller  
-NGINX Unit  
-NGINX Amplify  
-NGINX WAF  
+除了NGINX Open Source（即本文档所指的开源Web服务器），Nginx公司还有企业级的商业产品：  
+
+* NGINX Plus  
+* NGINX Controller  
+* NGINX Unit  
+* NGINX Amplify  
+* NGINX WAF  
 
 ## 安装
 
-安装Nginx有在线安装和源码编译安装两种方式，在线安装通常称之为yum安装，源码安装即需要下载源码然后进行编译后方可使用。
+安装Nginx有在线包安装和源码编译安装两种方式。其中在线安装通常称之为 yum/apt 安装，而源码安装即需要下载源码然后进行编译后方可使用。
 
-在线安装非常简单，下面是在线安装的范例：
+相比源码编译安装来说，在线安装非常简单，下面是在线安装的范例：
 
 ```
-# Installing on Fedora/CentOS/Red Hat Enterprise Linux
-sudo yum install httpd
-sudo systemctl enable httpd
-sudo systemctl start httpd
+# Fedora/CentOS/Red Hat
+sudo yum install nginx
+sudo systemctl enable nginx
+sudo systemctl start nginx
 
-# Installing on Ubuntu/Debian
-sudo apt install apache2
-sudo service apache2 start
+# Ubuntu/Debian
+sudo apt install nginx
+sudo service nginx start
 ```
 
 ## 模块
 
-Nginx是模块化的设计，安装模块：
+安装模块之前，先查看当前已安装的所有模块，然后再决定是否安装，最后将已安装模块启用或停止。
 
-### 安装模块
+### 查看
 
-```
-# Installing on Fedora/CentOS/Red Hat Enterprise Linux
-
-
-# Installing on Ubuntu/Debian
-
-```
-
-### 查询模块
+通过 `nginx -V` 命令可以查看已经安装的所有Nginx模块。  
 
 ```bash
 ~# nginx -V
@@ -57,29 +51,34 @@ configure arguments:
 --prefix=/usr/share/nginx --sbin-path=/usr/sbin/nginx --modules-path=/usr/lib64/nginx/modules --conf-path=/etc/nginx/nginx.conf --error-log-path=/var/log/nginx/error.log --http-log-path=/var/log/nginx/access.log --http-client-body-temp-path=/var/lib/nginx/tmp/client_body --http-proxy-temp-path=/var/lib/nginx/tmp/proxy --http-fastcgi-temp-path=/var/lib/nginx/tmp/fastcgi --http-uwsgi-temp-path=/var/lib/nginx/tmp/uwsgi --http-scgi-temp-path=/var/lib/nginx/tmp/scgi --pid-path=/run/nginx.pid --lock-path=/run/lock/subsys/nginx --user=nginx --group=nginx --with-file-aio --with-ipv6 --with-http_auth_request_module --with-http_ssl_module --with-http_v2_module --with-http_realip_module --with-http_addition_module --with-http_xslt_module=dynamic --with-http_image_filter_module=dynamic --with-http_geoip_module=dynamic --with-http_sub_module --with-http_dav_module --with-http_flv_module --with-http_mp4_module --with-http_gunzip_module --with-http_gzip_static_module --with-http_random_index_module --with-http_secure_link_module --with-http_degradation_module --with-http_slice_module --with-http_stub_status_module --with-http_perl_module=dynamic --with-mail=dynamic --with-mail_ssl_module --with-pcre --with-pcre-jit --with-stream=dynamic --with-stream_ssl_module --with-google_perftools_module --with-debug --with-cc-opt='-O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong --param=ssp-buffer-size=4 -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -m64 -mtune=generic' --with-ld-opt='-Wl,-z,relro -specs=/usr/lib/rpm/redhat/redhat-hardened-ld -Wl,-E'
 ```
 
+### 安装
+
+### 启停
+
+
+## 路径
+
+不同的Linux发行版，对应的安装路径有一定的差异：
+
+### CentOS
+
+Nginx 虚拟主机配置文件：*/etc/nginx/conf.d/default.conf*  
+Nginx 主配置文件： */etc/nginx/nginx.conf*  
+Nginx 日志文件： */var/log/nginx*  
+Nginx 伪静态规则目录： */etc/nginx/conf.d/rewrite*
+
+### Ubuntu
+
+Nginx 虚拟主机配置文件：*/etc/nginx/sites-available/default*  
+Nginx 主配置文件：*/etc/nginx/nginx.conf*  
+Nginx 日志文件：*/var/log/nginx/*
+
+
 ## 更新
 
 ## 请求处理机制
 
 Nginx有三种可选的并行处理机制：多进程方式、多线程方式和异步方式
-
-## 语言支持
-
-### PHP
-
-Nginx默认不支持PHP，需要搭配php-fmp使用
-
-### Java
-
-Nginx需要搭配Tomcat来运行Java程序
-
-### Python
-
-### Node.js
-
-### Go
-
-### Ruby
 
 ## 伪静态
 
@@ -227,3 +226,93 @@ systemctl status apache2
 ## 日志
 
 ## 缓存
+
+## 运行环境
+
+Apache可以作为常见的开发语言的 Web 服务器，集成数据库、应用容器，最后形成一个完整的应用运行环境，例如：Apache+PHP，Apache+Tomcat+Java等
+
+下面我们以常见的开发语言为例，分别介绍它们是如何与Apache一起工作的。
+
+### PHP
+
+Apache被广泛用于PHP环境，Apache有两种PHP处理机制：
+
+- php-fpm：PHP内核中用来处理PHP文件的解释器和进程管理器
+- mod_php：Apache的PHP处理模块
+
+mod_php 作为Apache的模块，没有独立的进程，无需额外设置和处理，使用起来非常简单。
+
+PHP-FPM(PHP FastCGI Process Manager)意：PHP FastCGI 进程管理器，用于管理PHP 进程池的软件，用于接受Apache HTTP Server等Web服务器的请求。PHP-FPM提供了更好的PHP进程管理方式，可以有效控制内存和进程、可以平滑重载PHP配置。  
+
+下面是Apache+PHP-FPM共同工作的系统架构图，其中mod_proxy_fcgi用于Apache连接php-fpm
+
+![](https://libs.websoft9.com/Websoft9/DocsPicture/zh/linux/apache_event_php-fpm.jpg)
+
+### Java
+
+Apache HTTP Server 无法直接运行Java程序，而是与Tomcat一起组合去部署Java程序。
+
+这种组合下，Apache处理静态资源，JSP等动态程序需转发给Tomcat处理，然后返回给用户。
+
+Apache HTTP Server 与 Tomcat 最常见的连接方式是http_proxy，即利用 Apache 自带的 mod_proxy 模块使用代理技术来连接 Tomcat。 
+
+http_proxy 模式是基于 HTTP 协议的代理，因此它要求 Tomcat 必须提供 HTTP 服务，也就是说必须启用 Tomcat 的 HTTP Connector。一个最简单的配置如下：
+
+```
+ProxyPass /images !
+ProxyPass /css !
+ProxyPass /js !
+ProxyPass / http://localhost:8080/
+```
+
+更多请参考：[《Apache HTTP Server 与 Tomcat 的三种连接方式介绍》](https://www.ibm.com/developerworks/cn/opensource/os-lo-apache-tomcat/)
+
+### Python
+
+Apache HTTP Server 也可以用于Python环境，通过扩展模块mod_proxy_uwsgi，连接Python的uWSGI服务器或Gunicorn服务器，便可以解析Python程序。
+
+这种组合的的基本配置方法如下：
+
+1. 配置为uwsgi.ini
+   ```
+   [uwsgi]
+   chdir = /home/vagrant/myweb/
+   virtualenv = /home/vagrant/env/
+   socket = 127.0.0.1:8080
+   env = DJANGO_SETTINGS_MODULE=myweb.settings
+   module =myweb.wsgi:application
+   master = true
+   processes = 4
+   vacuum = True
+   max-requests = 5000
+   daemonize = /var/log/uwsgi.log
+   pidfile = /var/log/uwsgi.pid
+   ```
+2. apache的配置文件加载mod_proxy_uwsgi.so
+3. apache的配置文件反向代理到uwsgi
+   ```
+   ProxyPass / uwsgi://127.0.0.1:8080
+   ```
+
+### Node.js
+
+Apache HTTP Server 也可以用于Node.js环境，Apache HTTP Server 与 Node.js 最常见的连接方式是http_proxy，即利用 Apache 自带的 mod_proxy 模块使用代理技术来连接 Node.js。   
+
+下面是典型的配置文件范例：
+
+```
+server {
+        listen 80 default_server;
+        server_name _;
+
+
+        location / {
+         proxy_pass http://127.0.0.1:2368;
+         proxy_set_header Host $host;
+         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        }
+
+}
+```
+
+### Ruby
