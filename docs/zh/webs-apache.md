@@ -327,7 +327,7 @@ ErrorDocument 404 /404.txt
 
 ## 虚拟主机
 
-Apahce中的虚拟主机是通过VirtualHost进行配置的。
+Apache中的虚拟主机是通过VirtualHost进行配置的。
 
 VirtualHost 改动务必准确无误，任何错误的修改都会导致服务器上所有的网站不可访问
 
