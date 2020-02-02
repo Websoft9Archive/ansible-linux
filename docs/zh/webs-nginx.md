@@ -8,7 +8,9 @@ sidebarDepth: 3
 
 ![](https://libs.websoft9.com/Websoft9/DocsPicture/zh/nginx/nginx-architecture-websoft9.png)
 
-除了NGINX Open Source（即本文档所指的开源Web服务器），Nginx公司还有企业级的商业产品：  
+本章所提及的Nginx，具体是指NGINX Open Source（即Nginx开源Web服务器）。实际上：
+
+Nginx公司还有企业级的商业产品：  
 
 * NGINX Plus  
 * NGINX Controller  
@@ -16,7 +18,7 @@ sidebarDepth: 3
 * NGINX Amplify  
 * NGINX WAF  
 
-基于Nginx的著名开源项目：
+同时基于Nginx的著名开源项目包括：
 
 * Tengine：由淘宝网发起的Web服务器项目。它在Nginx的基础上，针对大访问量网站的需求，添加了很多高级功能和特性。
 * OpenResty：一个基于 Nginx 与 Lua 的高性能 Web 平台，其内部集成了大量精良的 Lua 库、第三方模块以及大多数的依赖项。用于方便地搭建能够处理超高并发、扩展性极高的动态 Web 应用、Web 服务和动态网关。
@@ -39,6 +41,16 @@ sudo service nginx start
 ```
 
 ## 模块
+
+Nginx 采用模块化设计机制，各个模块协作共同完成处理任务。主要模块分类：
+
+* 核心模块：核心模块是指Nginx服务器正常运行时必不可少的模块，它们提供了Nginx最基本最核心的服务，如进程管理、权限控制、错误日志记录等
+* 标准HTTP模块：编译Nginx后包含的模块，其支持Nginx服务器的标准HTTP功能。
+* 可选HTTP模块：主要用于扩展标准的HTTP功能，使其能够处理一些特殊的HTTP请求。在编译Nginx时，如果不指定这些模块，默认是不会安装的。
+* 邮件模块：主要用于支持Ningx的邮件服务。
+* 第三方模块：由第三方机构或者个人开发的模块，用于实现某种特殊功能。
+
+![](https://libs.websoft9.com/Websoft9/DocsPicture/zh/nginx/nginx-modules-websoft9.png)
 
 安装模块之前，先查看当前已安装的所有模块，然后再决定是否安装，最后将已安装模块启用或停止。
 
@@ -79,9 +91,24 @@ Nginx 主配置文件：*/etc/nginx/nginx.conf*
 Nginx 日志文件：*/var/log/nginx/*
 
 
-## 更新
+## 性能管理
 
-## 请求处理机制
+### 进程模型
+
+NGINX有一个主进程（master process）（执行特权操作，如读取配置、绑定端口）和一系列工作进程（worker process）和辅助进程（helper process）。
+![](https://libs.websoft9.com/Websoft9/DocsPicture/zh/nginx/nginx-processes-websoft9.png)
+
+Nginx运行工作进程个数一般设置CPU的核心或者核心数x2。下面是一台2核CPU服务器的Nginx相关进程查看，有1个主进程，2个子进程，还有一个辅助进程。
+
+```
+[root@nginx]# ps -ef --forest | grep nginx
+root       747     1  0 11:48 ?        00:00:00 nginx: master process /usr/sbin/nginx
+nginx      752   747  0 11:48 ?        00:00:00  \_ nginx: worker process
+nginx      753   747  0 11:48 ?        00:00:00  \_ nginx: worker process
+root      1756  1708  0 17:04 pts/0    00:00:00          \_ grep --color=auto nginx
+```
+
+### 并行处理机制
 
 Nginx有三种可选的并行处理机制：多进程方式、多线程方式和异步方式
 
