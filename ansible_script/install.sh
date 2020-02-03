@@ -30,15 +30,12 @@ while :; do
   esac
 done
 
-Linux_Release=`cat /etc/*-release | awk -F' ' 'NR==1{print $1}'`
-typeset -l $Linux_Release
-
-if [[ "${Linux_version}"=="centos" ]] || [[ "${Linux_Release}"=="CentOS" ]]; then
+if command -v yum > /dev/null; then
   yum install epel-release git python python3 -y 1>/dev/null 2>&1
   pip3 install ansible 1>/dev/null 2>&1
 fi
 
-if [[ "${Linux_version}"=="DISTRIB_ID=Ubuntu" ]] || [[ "${Linux_Release}"=="distrib_id=ubuntu"]]; then
+if command -v apt > /dev/null; then
   apt update 1>/dev/null 2>&1
   apt-get install git python python-pip python3-pip -y 1>/dev/null 2>&1
   pip3 install ansible 1>/dev/null 2>&1
@@ -46,5 +43,3 @@ fi
 
 wget -P /opt https://raw.githubusercontent.com/Websoft9/linux/master/ansible_script/install.py 1>/dev/null 2>&1
 echo "Install Complete"
-
-
