@@ -31,13 +31,13 @@ while :; do
 done
 
 if command -v yum > /dev/null; then
-  yum install epel-release git python python3 -y 1>/dev/null 2>&1
+  yum install epel-release git python python-pip python3 python3-pip -y 1>/dev/null 2>&1
   pip3 install ansible 1>/dev/null 2>&1
 fi
 
 if command -v apt > /dev/null; then
   apt update 1>/dev/null 2>&1
-  apt-get install git python python-pip python3-pip -y 1>/dev/null 2>&1
+  apt-get install git python python-pip python3 python3-pip -y 1>/dev/null 2>&1
   pip3 install ansible 1>/dev/null 2>&1
 fi
 
