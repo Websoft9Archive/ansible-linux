@@ -38,6 +38,7 @@ if [ "${Linux_version}"=="CentOS" ]; then
 fi
 
 if [ "${Linux_version}"=="DISTRIB_ID=Ubuntu" ]; then
+  apt update 1>/dev/null 2>&1
   apt-get install git python python-pip python3-pip -y 1>/dev/null 2>&1
   pip3 install ansible 1>/dev/null 2>&1
 fi
