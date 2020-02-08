@@ -56,6 +56,18 @@ pip升级软件
 pip install --upgrade django==2.1.7
 ```
 
+pip自身的升级
+
+```
+#Python2
+python -m pip install --upgrade pip  
+
+#Python3
+python3 -m pip install --upgrade pip
+
+#？
+pip install --upgrade pip
+```
 
 
 ## Web 服务
