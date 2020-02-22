@@ -31,7 +31,7 @@ while :; do
 done
 
 if command -v yum > /dev/null; then
-  yum install epel-release git python python-pip python3 python3-pip -y 1>/dev/null 2>&1
+  yum install libselinux-python epel-release git python python-pip python3 python3-pip -y 1>/dev/null 2>&1
   pip3 install ansible 1>/dev/null 2>&1
 fi
 
