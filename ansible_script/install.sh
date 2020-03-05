@@ -32,13 +32,13 @@ done
 
 if command -v yum > /dev/null; then
   yum install libselinux-python epel-release git python python-pip python3 python3-pip -y 1>/dev/null 2>&1
-  pip3 install ansible 1>/dev/null 2>&1
+  pip install -U --force-reinstall  ansible requests docker 1>/dev/null 2>&1
 fi
 
 if command -v apt > /dev/null; then
   apt update 1>/dev/null 2>&1
   apt-get install git python python-pip python3 python3-pip -y 1>/dev/null 2>&1
-  pip3 install ansible 1>/dev/null 2>&1
+  pip3 install -U --force-reinstall ansible requests docker 1>/dev/null 2>&1
 fi
 
 python -m pip install -U --force-reinstall pip
