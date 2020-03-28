@@ -70,12 +70,29 @@ Cron是一个Linux下的定时执行工具，可以在无需人工干预的情�
 
 下面针对不同Linux家族，提供安装桌面的命令
 
-### Centos/Oracle
+### CentOS/Oracle
 ```
 yum groupinstall -y "GNOME Desktop" 
 systemctl set-default graphical.target
 systemctl set-default graphical.target
 ```
+
+### OracleLinux
+
+1. 安装,使用root用户执行
+
+   ```bash
+   yum groupinstall -y 'Server with GUI'  # 如果这一步骤有错误,先执行 yum update 更新系统
+   yum install -y tigervnc-server tigervnc-server-module
+   ```
+
+2. 配置桌面
+
+   ```
+   systemctl set-default graphical.target
+   systemctl isolate graphical.target
+   systemctl get-default
+   ```
 
 ### Ubuntu
 ```
@@ -86,9 +103,40 @@ systemctl set-default graphical.target
 
 ### Centos/Oracle Linux
 
-```
-yum install tigervnc-server -y
-```
+1. 安装VNC
+
+   ```bash
+   yum install -y tigervnc-server tigervnc-server-module
+   ```
+
+2. 配置桌面
+
+   ```
+   # vnc 设置密码
+   vncserver 
+   
+   # 配置文件
+   cat > /etc/systemd/system/vncserver@:1.service << EOF
+   [Unit]
+   Description=Remote desktop service (VNC)
+   After=syslog.target network.target
+   
+   [Service]
+   Type=forking
+   
+   ExecStartPre=/bin/sh -c '/usr/bin/vncserver -kill %i > /dev/null 2>&1 || :'
+   ExecStart=/usr/sbin/runuser -l root -c "/usr/bin/vncserver %i"
+   PIDFile=/root/.vnc/%H%i.pid
+   ExecStop=/bin/sh -c '/usr/bin/vncserver -kill %i > /dev/null 2>&1 || :'
+   
+   [Install]
+   WantedBy=multi-user.target
+   EOF
+   
+   # 启动VNC
+   systemctl enable vncserver@:1.service
+   systemctl start vncserver@:1.service
+   ```
 
 ## 如何实现自动交互应答？
 
