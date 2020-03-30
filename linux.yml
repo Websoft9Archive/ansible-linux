@@ -13,7 +13,7 @@
       1: GNOME(for RedHat7 family, includes OracleLinux, AmazonLinux)\n
       2: KDE(unavailable)\n"
       private: no
-      default: 3
+      default: 1
 
     - name: 'cloud_selection'
       prompt: "\nPlease choose Cloud you want to install [ 1/2/3/4] \n\n
