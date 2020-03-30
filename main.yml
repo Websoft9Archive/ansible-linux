@@ -1,0 +1,16 @@
+# 核心任务
+- name: main
+  hosts: all
+  become: yes
+  become_method: sudo
+  vars_files:
+    - vars/main.yml
+
+
+  roles:
+    - role: role_common
+    - role: role_cloud
+
+
+    
+    - role: role_end
