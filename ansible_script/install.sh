@@ -30,6 +30,9 @@ while :; do
   esac
 done
 
+# install pip for Oracle which yum have not pip
+q_str=$(lsb_release -a);s_str="Oracle"; if [[ $q_str == *$s_str* ]];then curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py;sudo python get-pip.py;fi
+
 if command -v yum > /dev/null; then
   yum install libselinux-python epel-release git python python-pip python3 python3-pip -y 1>/dev/null 2>&1
   pip install -U --force-reinstall  ansible requests docker 1>/dev/null 2>&1
