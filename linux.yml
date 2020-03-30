@@ -11,9 +11,7 @@
     - name: 'gui_selection'
       prompt: "\nPlease choose the GUI you want to install [ 1/2/3/4] \n\n
       1: GNOME(for RedHat7 family, includes OracleLinux, AmazonLinux)\n
-      2: KDE(unavailable)\n
-      3: MySQL5.7\n
-      4: MySQL8.0\n"
+      2: KDE(unavailable)\n"
       private: no
       default: 3
 
