@@ -4,8 +4,11 @@
 - src: http://github.com/websoft9dev/role_cloud
   version: master
 
-# 根据需求添加相对应的role
+- src: http://github.com/websoft9dev/role_os
+  version: master
 
+- src: http://github.com/websoft9dev/role_preend
+  version: master
 
 - src: http://github.com/websoft9dev/role_end
   version: master

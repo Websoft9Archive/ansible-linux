@@ -1,0 +1,53 @@
+---
+- name: Linux
+  hosts: all
+  become: yes
+  become_method: sudo
+
+  vars_files:
+    - vars/main.yml
+
+  vars_prompt:
+    - name: 'gui_selection'
+      prompt: "\nPlease choose the GUI you want to install [ 1/2/3/4] \n\n
+      1: GNOME(only for CentOS7.x, AmazonLinux)\n
+      2: KDE(unavailable)\n
+      3: MySQL5.7\n
+      4: MySQL8.0\n"
+      private: no
+      default: 3
+
+    - name: 'cloud_selection'
+      prompt: "\nPlease choose Cloud you want to install [ 1/2/3/4] \n\n
+      1: Azure\n
+      2: AWS\n
+      3: 阿里云\n
+      4: 腾讯云\n
+      5: 华为云\n
+      6: AlibabaCloud\n
+      7: HuaweiCloud\n"
+      private: no
+      default: 3
+
+  vars:
+    gui_select:
+      '1': 'gnome'
+      '2': 'kde'
+    os_gui: "{{gui_select[gui_selection]}}" 
+
+    cloud_select:
+      '1': 'azure'
+      '2': 'aws'
+      '3': 'aliyun'
+      '4': 'qcloud'
+      '5': 'huawei'
+      '5': 'alibabacloud'
+      '6': 'huaweicloud'
+    os_cloud_agent: "{{cloud_select[cloud_selection]}}" 
+
+  roles:
+  - { role: role_common , tags: "role_common"} 
+  - { role: role_cloud , tags: "role_cloud"} 
+  - { role: role_os , tags: "role_os"}
+  - { role: role_preend , tags: "role_preend"} 
+  - { role: role_end , tags: "role_end"} 
