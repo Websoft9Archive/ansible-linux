@@ -11,7 +11,8 @@
     - name: 'gui_selection'
       prompt: "\nPlease choose the GUI you want to install [ 1/2/3/4] \n\n
       1: GNOME(for RedHat7 family, includes OracleLinux, AmazonLinux)\n
-      2: KDE(unavailable)\n"
+      2: KDE(unavailable)\n
+      3: Don't install any GUI\n"
       private: no
       default: 1
 
@@ -31,6 +32,7 @@
     gui_select:
       '1': 'gnome'
       '2': 'kde'
+      '3': 'nothing'
     os_gui: "{{gui_select[gui_selection]}}" 
 
     cloud_select:
@@ -46,6 +48,6 @@
   roles:
   - { role: role_common , tags: "role_common"} 
   - { role: role_cloud , tags: "role_cloud"} 
-  - { role: role_os , tags: "role_os"}
+  - { role: role_os , tags: "role_os", when: os_gui !="nothing"}
   - { role: role_preend , tags: "role_preend"} 
   - { role: role_end , tags: "role_end"} 
