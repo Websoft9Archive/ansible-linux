@@ -28,6 +28,7 @@ do
         exit 1;;
     esac
 done
+echo $repo_name
 
 ARG_NUM=$#      #传入参数的个数
 while :; do
