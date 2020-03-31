@@ -46,4 +46,25 @@ fi
 
 python -m pip install -U --force-reinstall pip
 wget -P /opt https://raw.githubusercontent.com/Websoft9/linux/master/ansible_script/install.py 1>/dev/null 2>&1
-echo "Install Complete"
+echo "Pre-Install Complete"
+
+while getopts ":r:" opt
+do
+    case $opt in
+        r)
+        repo_name=$OPTARG
+        ;;
+        ?)
+        echo "参数无值"
+        exit 1;;
+    esac
+done
+
+if [[ $repo_name != "" ]]
+then
+rm -rf  /tmp/ansible-$repo_name
+cd /tmp; git clone https://github.com/Websoft9/ansible-$repo_name.git;
+echo "localhost" > /tmp/ansible-$repo_name/hosts
+cd ansible-$repo_name;ansible-galaxy install -r requirements.yml -f
+ansible-playbook -i hosts $repo_name.yml -c local  -e init=0
+fi
