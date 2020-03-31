@@ -47,7 +47,6 @@ if command -v apt > /dev/null; then
 fi
 
 python -m pip install -U --force-reinstall pip
-wget -P /opt https://raw.githubusercontent.com/Websoft9/linux/master/ansible_script/install.py 1>/dev/null 2>&1
 echo "Pre-Install Complete"
 
 if [[ $repo_name != "" ]]
