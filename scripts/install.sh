@@ -53,7 +53,7 @@ if [[ $repo_name != "" ]]
 then
 rm -rf  ansible-$repo_name
 git clone https://github.com/Websoft9/ansible-$repo_name.git;
-echo "localhost" > /tmp/ansible-$repo_name/hosts
+echo "localhost" > ansible-$repo_name/hosts
 cd ansible-$repo_name;ansible-galaxy install -r requirements.yml -f
 ansible-playbook -i hosts $repo_name.yml -c local  -e init=0
 fi
