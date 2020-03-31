@@ -30,6 +30,8 @@ while :; do
   esac
 done
 
+echo "Pre-installation starting, please wait for 1-3  "
+
 # install pip for Oracle which yum have not pip
 q_str=$(lsb_release -a);s_str="Oracle"; if [[ $q_str == *$s_str* ]];then curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py;sudo python get-pip.py;fi
 
