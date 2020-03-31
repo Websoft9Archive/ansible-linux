@@ -16,6 +16,19 @@ Show_Help(){
     --version, -v        Show version info
     "
 }
+
+while getopts ":r:" opt
+do
+    case $opt in
+        r)
+        repo_name=$OPTARG
+        ;;
+        ?)
+        echo "参数无值"
+        exit 1;;
+    esac
+done
+
 ARG_NUM=$#      #传入参数的个数
 while :; do
   [ -z "$1" ] && break;
@@ -48,18 +61,6 @@ fi
 python -m pip install -U --force-reinstall pip
 wget -P /opt https://raw.githubusercontent.com/Websoft9/linux/master/ansible_script/install.py 1>/dev/null 2>&1
 echo "Pre-Install Complete"
-
-while getopts ":r:" opt
-do
-    case $opt in
-        r)
-        repo_name=$OPTARG
-        ;;
-        ?)
-        echo "参数无值"
-        exit 1;;
-    esac
-done
 
 if [[ $repo_name != "" ]]
 then
