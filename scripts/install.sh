@@ -30,7 +30,7 @@ do
 done
 echo $repo_name
 
-echo "Pre-installation starting, please wait for 1-3 minutes..."
+echo "Pre-installation is starting, please wait for 1-3 minutes..."
 
 # install pip for Oracle which yum have not pip
 q_str=$(lsb_release -a);s_str="Oracle"; if [[ $q_str == *$s_str* ]];then curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py;sudo python get-pip.py;fi
@@ -47,7 +47,7 @@ if command -v apt > /dev/null; then
 fi
 
 python -m pip install -U --force-reinstall pip
-echo "Pre-Install Complete"
+echo "Pre-installation has beend completed"
 
 if [[ $repo_name != "" ]]
 then
