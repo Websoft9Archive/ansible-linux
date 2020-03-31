@@ -30,19 +30,6 @@ do
 done
 echo $repo_name
 
-ARG_NUM=$#      #传入参数的个数
-while :; do
-  [ -z "$1" ] && break;
-  case "$1" in 
-    -h|--help)
-      Show_Help; exit 0
-      ;;
-    -v|-V|--version)
-      version; exit 0
-      ;;
-  esac
-done
-
 echo "Pre-installation starting, please wait for 1-3 minutes..."
 
 # install pip for Oracle which yum have not pip
