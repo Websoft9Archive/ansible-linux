@@ -15,7 +15,7 @@ Linux系统的桌面就是指类似Windows系统的图形化管理界面，一�
 
 1. 使用SSH登录服务器，设置你的VNC访问密码
     ```
-    rm -rf /root/.vnc/passwd;vncserver
+    rm -rf /root/.vnc/passwd;vncpasswd
     ```
 2. 安装 [VNC viewer](https://www.realvnc.com/download/viewer/)
 
