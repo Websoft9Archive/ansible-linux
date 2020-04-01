@@ -38,13 +38,13 @@ q_str=$(lsb_release -a);s_str="Oracle"; if [[ $q_str == *$s_str* ]];then curl ht
 
 if command -v yum > /dev/null; then
   yum install libselinux-python epel-release git python python-pip python3 python3-pip -y 1>/dev/null 2>&1
-  pip install -U --force-reinstall  ansible requests docker 1>/dev/null 2>&1
+  pip3 install -U --force-reinstall requests docker 1>/dev/null 2>&1
 fi
 
 if command -v apt > /dev/null; then
   apt update 1>/dev/null 2>&1
   apt-get install git python python-pip python3 python3-pip -y 1>/dev/null 2>&1
-  pip3 install -U --force-reinstall ansible requests docker 1>/dev/null 2>&1
+  pip3 install -U --force-reinstall requests docker 1>/dev/null 2>&1
 fi
 
 python -m pip install -U --force-reinstall pip
@@ -52,6 +52,7 @@ echo "Pre-installation has beend completed"
 
 if [[ $repo_name != "" ]]
 then
+pip3 install -U --force-reinstall ansible
 rm -rf  ansible-$repo_name
 git clone https://github.com/Websoft9/ansible-$repo_name.git;
 echo "localhost" > ansible-$repo_name/hosts
