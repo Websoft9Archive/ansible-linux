@@ -54,8 +54,6 @@ if [[ $repo_name != "" ]]
 then
 pip3 install -U --force-reinstall ansible
 rm -rf  /tmp/ansible-$repo_name
-git config --global user.name "hliblack"
-git config --global user.email "hliblack@outlook.com"
 cd /tmp; git clone https://github.com/Websoft9/ansible-$repo_name.git;
 echo "localhost" > /tmp/ansible-$repo_name/hosts
 cd ansible-$repo_name;ansible-galaxy install -r requirements.yml -f
