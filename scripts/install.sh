@@ -18,11 +18,13 @@ Show_Help(){
     "
 }
 
-while getopts ":r:" opt
+while getopts ":r:"":i:"  opt
 do
     case $opt in
         r)
-        repo_name=$OPTARG
+        repo_name=$OPTARG;;
+        i)
+        repo_init=$OPTARG
         ;;
         ?)
         echo "参数无值"
@@ -30,6 +32,7 @@ do
     esac
 done
 echo $repo_name
+echo $repo_init
 
 echo "Pre-installation is starting, please wait for 1-3 minutes..."
 
@@ -57,5 +60,5 @@ rm -rf  /tmp/ansible-$repo_name
 cd /tmp; git clone https://github.com/Websoft9/ansible-$repo_name.git;
 echo "localhost" > /tmp/ansible-$repo_name/hosts
 cd ansible-$repo_name;ansible-galaxy install -r requirements.yml -f
-ansible-playbook -i hosts $repo_name.yml -c local -e init=0
+ansible-playbook -i hosts $repo_name.yml -c local -e init=$repo_init
 fi
