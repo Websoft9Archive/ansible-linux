@@ -58,7 +58,9 @@ then
 pip3 install -U --force-reinstall ansible
 rm -rf  /tmp/ansible-$repo_name
 cd /tmp; git clone https://github.com/Websoft9/ansible-$repo_name.git;
-echo "localhost" > /tmp/ansible-$repo_name/hosts
-cd ansible-$repo_name;ansible-galaxy install -r requirements.yml -f
-ansible-playbook -i hosts $repo_name.yml -c local -e init=$repo_init
+#echo "localhost" > /tmp/ansible-$repo_name/hosts
+cd /tmp/ansible-$repo_name;ansible-galaxy install -r requirements.yml -f
+touch  /tmp/ansible-$repo_name/hosts
+echo "localhost" > /tmp/ansible-$repo_name/hosts
+ansible-playbook -i hosts $repo_name.yml -c local -e init=$i
 fi
