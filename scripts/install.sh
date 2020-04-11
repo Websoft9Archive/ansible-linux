@@ -40,27 +40,26 @@ echo "Pre-installation is starting, please wait for 1-3 minutes..."
 q_str=$(lsb_release -a);s_str="Oracle"; if [[ $q_str == *$s_str* ]];then curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py;sudo python get-pip.py;fi
 
 if command -v yum > /dev/null; then
-  yum install libselinux-python epel-release git python python-pip python3 python3-pip -y 1>/dev/null 2>&1
-  pip3 install -U --force-reinstall requests docker 1>/dev/null 2>&1
+  sudo yum install libselinux-python epel-release git python python-pip python3 python3-pip -y 1>/dev/null 2>&1
+  sudo pip3 install -U --force-reinstall requests docker 1>/dev/null 2>&1
 fi
 
 if command -v apt > /dev/null; then
-  apt update 1>/dev/null 2>&1
-  apt-get install git python python-pip python3 python3-pip -y 1>/dev/null 2>&1
-  pip3 install -U --force-reinstall requests docker 1>/dev/null 2>&1
+  sudo apt update 1>/dev/null 2>&1
+  sudo apt-get install git python python-pip python3 python3-pip -y 1>/dev/null 2>&1
+  sudo pip3 install -U --force-reinstall requests docker 1>/dev/null 2>&1
 fi
 
-python -m pip install -U --force-reinstall pip
-echo "Pre-installation has beend completed"
+sudo python -m pip install -U --force-reinstall pip
+sudo echo "Pre-installation has beend completed"
 
 if [[ $repo_name != "" ]]
 then
-pip3 install -U --force-reinstall ansible
-rm -rf  /tmp/ansible-$repo_name
-cd /tmp; git clone https://github.com/Websoft9/ansible-$repo_name.git;
-#echo "localhost" > /tmp/ansible-$repo_name/hosts
-cd /tmp/ansible-$repo_name;ansible-galaxy install -r requirements.yml -f
-touch  /tmp/ansible-$repo_name/hosts
-echo "localhost" > /tmp/ansible-$repo_name/hosts
-ansible-playbook -i hosts $repo_name.yml -c local -e init=$i
+sudo pip3 install -U --force-reinstall ansible
+sudo rm -rf  /tmp/ansible-$repo_name
+sudo cd /tmp; sudo git clone https://github.com/Websoft9/ansible-$repo_name.git;
+sudo cd /tmp/ansible-$repo_name;sudo ansible-galaxy install -r requirements.yml -f
+sudo touch  /tmp/ansible-$repo_name/hosts
+sudo echo "localhost" > /tmp/ansible-$repo_name/hosts
+sudo ansible-playbook -i hosts $repo_name.yml -c local -e init=$i
 fi
