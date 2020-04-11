@@ -62,4 +62,5 @@ sudo cd /tmp/ansible-$repo_name;sudo ansible-galaxy install -r requirements.yml 
 sudo touch  /tmp/ansible-$repo_name/hosts
 sudo echo "localhost" > /tmp/ansible-$repo_name/hosts
 sudo ansible-playbook -i hosts $repo_name.yml -c local -e init=$i
+sudo shutdown -r -t 3 "System will restart in 3s, then installation completed"
 fi
