@@ -2,13 +2,24 @@
 sidebarDepth: 3
 ---
 
-# 包管理
+# 包和仓库
 
-Linux 操作系统都提供了一个集中的软件包管理机制，即搜索、安装和管理软件包。 Linux 软件包的基本组成部分通常有：共享库、应用程序、服务和文档。从另外一个角度看，包文件通常包含编译好的二进制文件和其它资源组成的：软件、安装脚本、元数据及其所需的依赖列表。
+Linux生态中的软件包资源非常丰富，从某种程度上看，用户是否熟练的下载安装以及更新这些包，决定了能够为所在的企业创作的价值的大小。
+
+除了传统的下载源码在编译的软件包安装方案之外，Linux 操作系统都提供了一个集中的软件包管理机制，即搜索、安装和管理软件包。 Linux 软件包的基本组成部分通常有：共享库、应用程序（二进制）、服务和文档。从另外一个角度看，包文件通常包含编译好的二进制文件和其它资源组成的：软件、安装脚本、元数据及其所需的依赖列表。
 
 ![](https://libs.websoft9.com/Websoft9/DocsPicture/zh/linux/linux-rpms-websoft9.png)
 
 包管理通常不仅限于软件的一次性安装，还包括了对已安装软件包进行升级的工具。
+
+* 包：被安装到本地服务器的软件安装包，例如Apache安装包
+* 包缓存：安装软件时在本地保存的临时文件，通常存储在 */var/cache/yum* 目录下
+* 仓库：存放多个软件包的一个远端服务器
+* 仓库地址：用于访问仓库的网址
+* 本地安装包缓存：本地已经下载的软件缓存，通常存储在 */var/lib/rpm* 目录下，可以通过 `rpm -`
+* 本地存储的软件清单：从仓库下载所有的软件清单并存在在本地，可以通过`yum list`检索
+
+本章主要讨论和研究Linux系统的包管理机制、实践方案。
 
 ## 仓库
 
@@ -18,7 +29,101 @@ Linux 操作系统都提供了一个集中的软件包管理机制，即搜索�
 
 互联网上有大量的源，比如Redhat官方的源，也有云厂家提供的源。在配置 Linux 服务器或开发环境时，通常都不仅限于使用官方源。相较于现如今软件版本快速更新迭代而言，系统管理员和开发人员掌握常见 Linux 包管理基本操作还是一项必备的常用技能。
 
-本节内容主要来源[此处](https://www.sysgeek.cn/linux-package-management/)
+以上内容主要来源[此处](https://www.sysgeek.cn/linux-package-management/)
+
+### 仓库源
+
+下面我们列出全球比较流行的仓库：
+
+|  名称  | 地址 |             概要              |
+| :----: | :--: | :---------------------------: |
+| RPM Fusion | https://rpmfusion.org/ | RPM Fusion provides software that the Fedora Project or Red Hat doesn't want to ship. That software is provided as precompiled RPMs for all current Fedora versions and current Red Hat Enterprise Linux or clones versions;  |
+| EPEL | https://fedoraproject.org/wiki/EPEL | EPEL (Extra Packages for Enterprise Linux), 是由 Fedora Special Interest Group 维护的 Enterprise Linux（RHEL、CentOS）中经常用到的包。 |
+| RepoForge | http://repoforge.org/ |Repoforge 是 RHEL 系统下的软件仓库，拥有 10000 多个软件包，被认为是最安全、最稳定的一个软件仓库。|
+| Remi | https://www.remi.com |Remi repository 是包含最新版本 PHP 和 MySQL 包的 Linux 源，由 Remi 提供维护。|
+| PackMan | http://packman.links2linux.org/ | Packman 是 OpenSUSE 最大的第三方软件源，主要为 OpenSUSE 提供额外的软件包，包括音视频解码器、多媒体应用、游戏等。 |
+| Dotdeb | http://www.debian.org/ | Dotdeb is an extra repository providing up-to-date packages for your Debian 8 “Jessie” servers .|
+| Gentoo portage | https://www.gentoo.org | Gentoo Portage 软件源 |
+| Fedora altarch | https://archives.fedoraproject.org/pub/ | Fedora altarch 是 Fedora Linux 额外平台的安装镜像和官方软件包仓库。 |
+| Ubuntu Ports | http://ports.ubuntu.com | Ubuntu Ports 是 Arm64，Armhf 等平台的 Ubuntu 软件仓库 |
+| Centos altarch | http://mirror.centos.org/altarch/ | CentOS 额外平台的安装镜像和官方软件包仓库 |
+| IUS | https://ius.io/ | IUS（Inline with Upstream Stable）是一个社区项目，它旨在为 Linux 企业发行版提供可选软件的最新版 RPM 软件包。 |
+
+以上是"大卖场"式的仓库源，实际上很多知名的开源软件，例如：MySQL,Apache等还提供自建的仓库，供用户使用。
+
+* [MySQL repo](https://dev.mysql.com/downloads/repo/yum/)
+* [Nginx repo](http://nginx.org/en/linux_packages.html#RHEL-CentOS)
+
+下图是MySQL官方的仓库文件下载页面，*mysql80-community-release-el8-1.noarch.rpm*这种文件就是用户安装仓库地址的rpm包。
+
+![repo mysql](https://libs.websoft9.com/Websoft9/DocsPicture/zh/linux/repo-mysql-websoft9.png)
+
+### 安装仓库
+
+安装仓库通俗的讲，就是将仓库的网址（地址）信息写入到服务器的指定文件夹（文件）中。类似我们为了方便自己购物，将不同的购物网站的网站收藏到浏览器是一个道理。
+
+* CentOS仓库网址存放地：/etc/yum.repos.d
+* Ubuntu仓库网址存放地：/etc/apt/sources.list
+
+以CentOS仓库为例，查看 */etc/yum.repos.d* 目录，我们会发现下面有几个以 repo 结尾的文件
+
+![](https://libs.websoft9.com/Websoft9/DocsPicture/zh/linux/repo-list-websoft9.png)
+
+打开每个.repo文件，你会看到其中的主要信息就是网址
+
+那这些.repo文件是如何被安装的呢？主要有如下几种方式：
+
+```
+#1 yum 安装
+yum install epel-release
+
+#2 下载 RPM包安装
+
+wget -O /etc/yum.repos.d/epel.repo https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+rpm -i epel-release-latest-7.noarch.rpm
+
+#3 直接在 /etc/yum.repos.d 新增一个.repo文件，内容如下
+
+[rpmfusion-free]
+name=RPM Fusion for Fedora $releasever - Free
+baseurl=https://mirrors.tuna.tsinghua.edu.cn/rpmfusion/free/fedora/releases/$releasever/Everything/$basearch/os/
+mirrorlist=http://mirrors.rpmfusion.org/mirrorlist?repo=free-fedora-$releasever&arch=$basearch
+enabled=1
+metadata_expire=7d
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-rpmfusion-free-fedora-$releasever-$basearch
+
+[rpmfusion-free-debuginfo]
+name=RPM Fusion for Fedora $releasever - Free - Debug
+mirrorlist=http://mirrors.rpmfusion.org/mirrorlist?repo=free-fedora-debug-$releasever&arch=$basearch
+enabled=0
+metadata_expire=7d
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-rpmfusion-free-fedora-$releasever-$basearch
+
+[rpmfusion-free-source]
+name=RPM Fusion for Fedora $releasever - Free - Source
+baseurl=https://mirrors.tuna.tsinghua.edu.cn/rpmfusion/free/fedora/releases/$releasever/Everything/source/SRPMS/
+mirrorlist=http://mirrors.rpmfusion.org/mirrorlist?repo=free-fedora-source-$releasever&arch=$basearch
+enabled=0
+metadata_expire=7d
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-rpmfusion-free-fedora-$releasever-$basearch
+```
+
+我们知道仓库网址上有一个特殊的**数据库**文件（软件列表），这个文件记录这个网址所提供的所有安装包，有的仓库只有少数几个安装包，有的仓库提供成千上万个安装包。
+
+同时本地也有一个**数据库**文件（RPM 数据库 ），它记录本地已经安装的软件包名称、版本、来源等信息。当用户使用yum安装软件的时候，本地就会到仓库中下载软件列表，通过与本地的RPM数据库做对比，然后决定是否安装或提示已经存在无需安装。
+
+![](https://libs.websoft9.com/Websoft9/DocsPicture/zh/linux/installwithyum-websoft9.jpg)
+
+
+### 自建仓库
+
+在安装MySQL的时候，我们就发现，MySQL官方提供了自己的仓库以供用户使用。也就意味着，仓库是可以自行建设的。
+
+参考：[《配置本地Yum仓库》](https://www.runoob.com/linux/linux-yum.html)
+
 
 ## 管理包
 
@@ -40,7 +145,6 @@ Debian 及其衍生产品如：Ubuntu、Linux Mint 和 Raspbian 的包格式为.
 CentOS、Fedora 及 Red Hat 系列 Linux 使用RPM包文件，并使用yum命令管理包文件及与软件库交互。
 
 在最新的 Fedora 版本中，yum命令已被dnf取代进行包管理。
-
 
 
 ### 更新本地包数据
@@ -88,6 +192,46 @@ CentOS、Fedora 及 Red Hat 系列 Linux 使用RPM包文件，并使用yum命令
 |                 |       yum deplist 包名       |         列出包的以来         |
 |     Fedora      |        dnf info 包名         |                              |
 |                 | dnf repoquery –requires 包名 |         列出包的以来         |
+
+
+```
+[root@iZ8vb7it5p19lxxol367u0Z rpm]# rpm -qi rabbitmq-server
+Name        : rabbitmq-server
+Version     : 3.8.3
+Release     : 1.el7
+Architecture: noarch
+Install Date: Sat 11 Apr 2020 03:16:18 PM CST
+Group       : Development/Libraries
+Size        : 14010653
+License     : MPLv1.1 and MIT and ASL 2.0 and BSD
+Signature   : RSA/SHA256, Mon 09 Mar 2020 11:24:36 PM CST, Key ID 6b73a36e6026dfca
+Source RPM  : rabbitmq-server-3.8.3-1.el7.src.rpm
+Build Date  : Mon 09 Mar 2020 11:24:34 PM CST
+Build Host  : b0cb34e7-576c-46ec-669f-7b518b2352e1
+Relocations : (not relocatable)
+URL         : https://www.rabbitmq.com/
+Summary     : The RabbitMQ server
+Description :
+RabbitMQ is an open source multi-protocol messaging broker.
+
+
+
+[root@iZ8vb7it5p19lxxol367u0Z rpm]# yum info rabbitmq-server
+Loaded plugins: fastestmirror
+Loading mirror speeds from cached hostfile
+Installed Packages
+Name        : rabbitmq-server
+Arch        : noarch
+Version     : 3.8.3
+Release     : 1.el7
+Size        : 13 M
+Repo        : installed
+From repo   : rabbitmq_rabbitmq-server
+Summary     : The RabbitMQ server
+URL         : https://www.rabbitmq.com/
+License     : MPLv1.1 and MIT and ASL 2.0 and BSD
+Description : RabbitMQ is an open source multi-protocol messaging broker.
+```
 
 ### 从软件仓库安装包
 
@@ -161,4 +305,60 @@ yum versionlock gcc-*
 
 可以，这是很常见的场景
 
-#### rpm和yum安装命令有什么区别？
+#### rpm -t ×××.rpm 和yum install ×××.rpm 安装命令有什么区别？
+
+rpm 安装只针对单个rpm文件安装，不会安装相关的依赖；yum install 安装会安装rpm包以及所需的依赖
+
+#### .noarch.rpm 和 .x64_64.rpm 包有什么区别？
+
+.noarch 是通用的rpm包，其中没有二进制文件和库文件，就是说与服务器硬件和操作系统版没有太大的关系，通常用于安装一个脚本或仓库地址  
+.x64_64 是包含二进制等文件的安装包，与服务器CPU类型有关，通常用于安装某个软件  
+
+#### 在两个仓库中存在通一个软件包，yum/apt如何处理其中的优先级关系？
+
+Linux 发行版比较多，同时还有很多个人或组织维护了某些特定用途的安装/升级源。Yum Priorities 插件可以用来强制保护源。它通过给各个源设定不同的优先级，使得系统管理员可以将某些源（比如 Linux 发行版的官方源）设定为最高优先级，从而保证系统的稳定性（同时也可能无法更新到其它源上提供的软件最新版本）。
+
+1. 安装优先级插件
+    ```
+    rpm -q yum-priorities
+    ```
+2. 编辑 /etc/yum.repos.d/目录下的*.repo 文件来设置优先级
+    ```
+    [base]
+    name=CentOS-$releasever – Base
+    baseurl=http://mirror.centos.org/centos/$releasever/os/$basearch/
+    gpgcheck=0
+    priority=1
+    ```
+
+#### 本地的rpm/deb数据库中是否包含已安装的软件的仓库来源地址？
+
+#### 如何查看软件所需的依赖？
+
+以RabbitMQ为例，命令以及结果如下：
+```
+[root@iZ8vb7it5p19lxxol367u0Z rpm]# yum deplist rabbitmq-server
+Loaded plugins: fastestmirror
+Loading mirror speeds from cached hostfile
+package: rabbitmq-server.noarch 3.8.3-1.el7
+  dependency: /bin/sh
+   provider: bash.x86_64 4.2.46-33.el7
+  dependency: /usr/bin/env
+   provider: coreutils.x86_64 8.22-24.el7
+  dependency: config(rabbitmq-server) = 3.8.3-1.el7
+   provider: rabbitmq-server.noarch 3.8.3-1.el7
+  dependency: erlang >= 21.3
+   provider: erlang.x86_64 22.3.2-1.el7
+  dependency: logrotate
+   provider: logrotate.x86_64 3.8.6-17.el7
+  dependency: socat
+   provider: socat.x86_64 1.7.3.2-2.el7
+  dependency: systemd
+   provider: systemd.x86_64 219-67.el7_7.4
+```
+
+> yum deplist 命令与被查询的软件包是否安装没有关系，即没有被安装的软件包也可以查询其依赖
+
+
+#### yum list 获取是软件清单是实时的还是缓存？
+
