@@ -20,14 +20,14 @@
 
 ## 如何写一个系统服务？
 
-服务(service) 本质就是进程，但是是运行在后台的，通常都会监听某个端口，等待其它程序的请求，比如(mysql , sshd 防火墙等)，因此我们又称为守护进程，是 Linux 中非常重要的知识点。
+服务(service) 本质就是进程，运行在后台，通常都会监听某个端口，等待其它程序的请求，比如(mysql , sshd 防火墙等)，因此我们又称为守护进程，是 Linux 中非常重要的知识点。
 
 一般通过下面的格式来管理服务：
 ```
 systemctl    服务名 [start | stop | restart | reload | status]
 ```
 
-那服务是如何创建的呢？以Websoft9提供的Redmine自动化项目为例，下面描述完整的服务创建过程：
+那服务是如何创建的呢？以 Websoft9 提供的 Redmine 自动化项目为例，下面描述完整的服务创建过程：
 
 1. 编辑好[redmine.service](https://github.com/Websoft9/ansible-redmine/blob/master/roles/redmine/files/redmine.service)文件
    ```
