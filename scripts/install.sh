@@ -57,7 +57,7 @@ if command -v apt > /dev/null; then
   sudo python3 -m pip install -U --force-reinstall requests docker 1>/dev/null 2>&1
 fi
 
-sudo python -m pip install -U --force-reinstall pip
+sudo python2 -m pip install -U --force-reinstall pip
 sudo echo "Pre-installation has beend completed"
 
 if [[ $repo_name != "" ]]
