@@ -71,3 +71,7 @@ rm -rf /root/.vnc/passwd;vncserver
 3. 在右边的策略中，找到“系统加密：将FIPS算法用于加密 、哈希和签名”点击右键属性；
 4. 将“本地安全设置”设置为“已禁用”，在单击“应用”，后”确定”，即可远程控制  
    ![image.png](https://libs.websoft9.com/Websoft9/DocsPicture/zh/windows/windows-remoteanquan-websoft9.png)
+
+#### Gnome的开机Logo是否可以修改？
+
+可以，甚至可以修改整套主题，具体参考[此处](https://www.dazhuanlan.com/2020/03/01/5e5ab2a1bd7d8/)
