@@ -41,7 +41,9 @@ echo "Pre-installation is starting, please wait for 1-3 minutes..."
 # q_str=$(lsb_release -a);s_str="Oracle"; if [[ $q_str == *$s_str* ]];then curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py;sudo python get-pip.py;fi
 
 if command -v yum > /dev/null; then
-  sudo yum install yum-utils libselinux-python epel-release git python python2-pip python3 python3-pip -y 1>/dev/null 2>&1
+  sudo yum update -y 1>/dev/null 2>&1
+  sudo yum install -y epel-release 1>/dev/null 2>&1
+  sudo yum install yum-utils libselinux-python git python python2-pip python3 python3-pip -y 1>/dev/null 2>&1
   sudo pip3 install -U --force-reinstall requests docker 1>/dev/null 2>&1
 fi
 
