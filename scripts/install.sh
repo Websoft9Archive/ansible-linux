@@ -48,7 +48,7 @@ if command -v yum > /dev/null; then
 fi
 
 if command -v apt > /dev/null; then
-  sudo apt update 1>/dev/null 2>&1
+  sudo apt-get update 1>/dev/null 2>&1
   sudo apt-get install git python python2-pip python3 python3-pip -y 1>/dev/null 2>&1
   sudo pip3 install -U --force-reinstall requests docker 1>/dev/null 2>&1
 fi
