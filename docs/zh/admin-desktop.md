@@ -58,7 +58,7 @@ CentOS 7.4 64位+GNOME图形化界面。请使用本机Windows自带的远程桌
 输入如下的命令重置密码即可
 
 ```
-rm -rf /root/.vnc/passwd;vncserver
+rm -rf /root/.vnc/passwd;vncpasswd
 ```
 
 #### 远程连接出现 "由于安全设置错误, 客户端无法连接到远程计算机.."  

@@ -177,3 +177,18 @@ Webmin是一款开源免费的Web面板，可以对Linux进行深度操作。
 登录方式：*http://公网IP地址:10000* ，登录账号为服务器账号（root/服务器密码）
 
 更多参考[详细文档](https://libs.websoft9.com/Websoft9/documents/zh/webmin/index.html)
+
+## 本地电脑访问服务器上的Firefox
+
+1. 本地电脑下载[MobaXterm](https://mobaxterm.mobatek.net/)
+2. 使用SSH登录到服务器后，分别安装如下组件
+   ```
+   yum groupinstall "X Window System" -y
+   yum install dbus-x11 -y
+   yum install firefox -y
+   ```
+3. 开启一个与 SSH客户端配套的 X11 Windows 客户端
+4. 在SSH中输入命令 `firefox`
+   ![](https://libs.websoft9.com/Websoft9/DocsPicture/zh/linux/linux-xwindows-websoft9.JPG)
+5. 此时Firefox的图形化界面就被传输到本地
+   ![](https://libs.websoft9.com/Websoft9/DocsPicture/zh/linux/linux-xwindowsfirefox-websoft9.JPG)

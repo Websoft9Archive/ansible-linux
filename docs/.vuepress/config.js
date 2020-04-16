@@ -30,6 +30,7 @@ themeConfig: {
   activeHeaderLinks: true, // 默认值：true
   displayAllHeaders: false, // 默认值：false
   sidebar: 'auto', // 默认值：false
+  sidebarDepth: 2,
 
   //Github 
   repo: 'Websoft9/linux',
