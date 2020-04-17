@@ -53,7 +53,7 @@ fi
 
 if command -v apt > /dev/null; then
   sudo apt-get update 1>/dev/null 2>&1
-  sudo apt-get install git python python2-pip python3 python3-pip -y 1>/dev/null 2>&1
+  sudo apt-get install git python python-pip python2-pip python3 python3-pip -y 1>/dev/null 2>&1
   sudo python3 -m pip install -U --force-reinstall requests docker 1>/dev/null 2>&1
 fi
 
