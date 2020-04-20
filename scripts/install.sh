@@ -38,23 +38,27 @@ echo "Pre-installation is starting, please wait for 1-3 minutes..."
 
 # python2 -m pip == pip2
 # python3 -m pip == pip3
+# pip is already installed if you are using Python 2 >=2.7.9 or Python 3 >=3.4
 
 if command -v yum > /dev/null; then
   sudo yum clean all 1>/dev/null 2>&1
   sudo yum makecache 1>/dev/null 2>&1
   sudo yum install -y epel-release 1>/dev/null 2>&1
   sudo yum install yum-utils libselinux-python git python python3 -y 1>/dev/null 2>&1
+  sudo yum install python-pip 1>/dev/null 2>&1
+  sudo yum install python2-pip 1>/dev/null 2>&1
   sudo python3 -m pip install -U --force-reinstall requests docker 1>/dev/null 2>&1
 fi
 
 if command -v apt > /dev/null; then
   sudo apt-get update 1>/dev/null 2>&1
   sudo apt-get install git python python3 -y 1>/dev/null 2>&1
+  sudo apt-get install python-pip -y 1>/dev/null 2>&1
+  sudo apt-get install python2-pip -y 1>/dev/null 2>&1
   sudo python3 -m pip install -U --force-reinstall requests docker 1>/dev/null 2>&1
 fi
-
-#pip is already installed if you are using Python 2 >=2.7.9 or Python 3 >=3.4
-sudo curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py;sudo python get-pip.py
+sudo python2 -m pip -V
+sudo python3 -m pip -V
 sudo echo "Pre-installation has beend completed"
 
 if [[ $repo_name != "" ]]
