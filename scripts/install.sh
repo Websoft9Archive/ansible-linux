@@ -36,10 +36,6 @@ echo $repo_init
 
 echo "Pre-installation is starting, please wait for 1-3 minutes..."
 
-# install pip for Oracle which yum have not pip
-# to do: this command can not run in Azure, lsb_release not found
-# q_str=$(lsb_release -a);s_str="Oracle"; if [[ $q_str == *$s_str* ]];then curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py;sudo python get-pip.py;fi
-
 # python2 -m pip == pip2
 # python3 -m pip == pip3
 
@@ -47,17 +43,18 @@ if command -v yum > /dev/null; then
   sudo yum clean all 1>/dev/null 2>&1
   sudo yum makecache 1>/dev/null 2>&1
   sudo yum install -y epel-release 1>/dev/null 2>&1
-  sudo yum install yum-utils libselinux-python git python python2-pip python3 python3-pip -y 1>/dev/null 2>&1
+  sudo yum install yum-utils libselinux-python git python python3 -y 1>/dev/null 2>&1
   sudo python3 -m pip install -U --force-reinstall requests docker 1>/dev/null 2>&1
 fi
 
 if command -v apt > /dev/null; then
   sudo apt-get update 1>/dev/null 2>&1
-  sudo apt-get install git python python-pip python2-pip python3 python3-pip -y 1>/dev/null 2>&1
+  sudo apt-get install git python python3 -y 1>/dev/null 2>&1
   sudo python3 -m pip install -U --force-reinstall requests docker 1>/dev/null 2>&1
 fi
 
-sudo python2 -m pip install -U --force-reinstall pip
+#pip is already installed if you are using Python 2 >=2.7.9 or Python 3 >=3.4
+sudo curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py;sudo python get-pip.py
 sudo echo "Pre-installation has beend completed"
 
 if [[ $repo_name != "" ]]
