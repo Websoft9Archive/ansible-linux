@@ -18,7 +18,8 @@
       default: 1
 
     - name: 'cloud_selection'
-      prompt: "\nPlease choose Cloud you want to install [ 1/2/3/4] \n\n
+      prompt: "\nPlease choose Cloud Agent you want to install [ 1/2/3/4] \n\n
+      0: Don't install any Agent \n
       1: Azure\n
       2: AWS\n
       3: 阿里云\n
@@ -38,6 +39,7 @@
     os_gui: "{{gui_select[gui_selection]}}" 
 
     cloud_select:
+      '0': False
       '1': 'azure'
       '2': 'aws'
       '3': 'aliyun'
