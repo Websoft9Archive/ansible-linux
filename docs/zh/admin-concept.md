@@ -1,4 +1,6 @@
-# 概念
+# 要点
+
+Linux系统博大精深，学习Linux的资料浩瀚如大海。本文档不打算再做重复造轮子的事情，我们尽量根据实践中很常见的**技术要点**进行讲解，同时列出一些操作范例：
 
 ## 安装
 
@@ -12,6 +14,8 @@
 
 ## 启动
 
+### 开机启动
+
 Linux系统的启动过程分为5个阶段：
 
 * 内核的引导：读入 /boot 目录下的内核文件
@@ -19,6 +23,11 @@ Linux系统的启动过程分为5个阶段：
 * 系统初始化：这个阶段主要完成激活交换分区，检查磁盘，加载硬件模块等任务。
 * 建立终端：系统打开6个终端，以便用户登录系统。在inittab中的以下6行就是定义了6个终端
 * 用户登录系统：用户登录使用Linux
+
+### 启动脚本
+
+上面介绍了Linux系统开机的启动的宏观过程。下面再针对于Linux内核加载后，系统脚本的启动情况。
+
 
 ## 目录结构
 
@@ -123,6 +132,170 @@ yum groupinstall "fonts"
 Linux命令是对Linux系统进行管理的命令。对于Linux系统来说，无论是CPU、内存、磁盘驱动器、键盘、鼠标，还是用户等都是文件，Linux系统管理的命令是它正常运行的核心，与之前的DOS命令类似。
 
 更多命令参考：[《Linux命令大全》](https://man.linuxde.net/)
+
+## 软（硬）连接
+
+Linux中的软连接和硬连接很常用，下面分别介绍。
+
+### 软连接
+
+软连接是指向另外一个文件的文件，类似Windows中的快捷方式文件。  
+
+如何才能知道哪些文件是软连接文件呢？
+
+#### 查询软连接
+
+我们先进入etc目录，然后列出文件（以re关键词作为结果筛选）
+
+```
+root@test:/etc# ls -l | grep re
+-rw-r--r-- 1 root root     367 Jan 27  2016 bindresvport.blacklist
+drwxr-xr-x 2 root root    4096 Apr  9 06:04 firefox
+lrwxrwxrwx 1 root root      33 Dec 25 16:13 localtime -> /usr/share/zoneinfo/Asia/Shanghai
+-rw-r--r-- 1 root root     105 Jan 30 20:28 lsb-release
+lrwxrwxrwx 1 root root      21 Jan 30 20:28 os-release -> ../usr/lib/os-release
+drwxr-xr-x 4 root root    4096 Dec 25 16:13 resolvconf
+lrwxrwxrwx 1 root root      29 Dec 25 16:13 resolv.conf -> ../run/resolvconf/resolv.conf
+-rw-r--r-- 1 root root    3663 Jun  9  2015 screenrc
+-rw-r--r-- 1 root root    4141 Jan 25  2018 securetty
+-rw-r--r-- 1 root root    1656 Jul 25  2019 tmpreaper.conf
+
+root@test:/etc# ls -l | grep ^l
+lrwxrwxrwx 1 root root      33 Dec 25 16:13 localtime -> /usr/share/zoneinfo/Asia/Shanghai
+lrwxrwxrwx 1 root root      19 Dec 26 00:11 mtab -> ../proc/self/mounts
+lrwxrwxrwx 1 root root      21 Jan 30 20:28 os-release -> ../usr/lib/os-release
+lrwxrwxrwx 1 root root      29 Dec 25 16:13 resolv.conf -> ../run/resolvconf/resolv.conf
+lrwxrwxrwx 1 root root      23 Dec 25 16:08 vtrgb -> /etc/alternatives/vtrgb
+
+```
+
+上面的例子中，我们运行了 `ls -l` 命令，显示了几种不同类型的文件：
+
+* lrwxrwxrwx: 这种以l开头的就是软连接文件
+* drwxr-xr-x：这种以d开头的就是目录
+* -rw-r--r--：这种以-开头的就是文件
+
+了解了什么是软连接之后，我们就可以自己动手进行软连接的相关操作：
+
+#### 创建软连接
+
+```
+cd /root
+ln -s /usr/share/zoneinfo/Asia/Shanghai2 mysoftlink
+file mysoftlink
+```
+
+#### 删除软连接
+
+```
+rm -rf mysoftlink
+```
+
+注意事项：  
+
+1. 被连接的文件名（路径）建议采用绝对路径
+2. 错误的软连接（又名断开）使用 `ls -l` 的时候显示的是红色
+3. 软连接是一个文件，其在硬盘中是存在数据块的
+4. 软连接文件的数据库中存储的是路径信息，而非真正的数据
+5. 软连接可能是多级嵌套的，例如：B连接A，C连接B，D连接C
+
+### 硬连接
+
+硬连接相对于软连接来说，理解会困难一点点。硬连接是把不同的文件名对应到同一个存储块节点上。  
+
+例如：在服务器硬盘中有一个数据块存在的是一段小视频，这个小视频的文件名称为：/data/mymedia.mp4。  
+
+创建一个硬连接，只需使用`ln`命令即可
+
+```
+cd /data
+ln /data/mymedia.mp4  mymedia2.mp4
+```
+
+注意事项：  
+
+1. 被连接的文件名（路径）建议采用绝对路径
+2. 如果一个文件增加了对应的硬连接，那么删除文件的时候不会删除数据
+3. 硬连接文件存储的是真实数据块位置
+4. 只能对文件建立硬连接，而不能对一个目录建立硬连接
+
+
+> 硬链接与域名管理中的同一个网站，用A记录配置上两个域名是同类原理。  
+软连接与域名管理中的cname解析是同类原理。
+
+## 环境变量
+
+环境变量即操作系统的变量。环境变量非常灵活，在实际使用过程中需要深刻理解几个关键要点：环境变量作用域、环境变量存放处以及存储环境变量的文件的开机启动顺序。
+
+```
+# 列出所有变量
+set
+
+# 列出所有环境变量
+env
+
+# 列出和设置环境变量
+export 
+export varname
+
+# 列出所有别名
+alias
+```
+
+## Systemd
+
+Systemd 是 Linux 系统中最新的初始化系统（init），它主要的设计目标是克服 sysvinit 固有的缺点，提高系统的启动速度。  
+
+监控和控制 Systemd 主要使用的指令是`systemctl`。主要是从来看系统状态、服务状态，以及管理系统和服务。
+
+所有可用的单元都在 /etc/systemd/system/(优先度高) 和 /usr/lib/systemd/system/(优先度低)。
+
+### 维护命令
+
+```
+# 通过ssh连接远程控制其他主机
+systemctl -H <username>@<URL>
+
+# 显示系统状态
+ystemctl status
+
+# 输出激活的单元列表
+systemctl 或 systemctl list-units
+
+# 输出运行失败的单元
+systemctl —failed
+
+# 查看所有已安装的服务 
+systemctl list-unit-files
+```
+
+### 配置单元
+
+一个单元配置文件可以描述如下内容之一：系统服务（.service）、挂载点（.mount）、sockets（.sockets） 、系统设备（.device）、交换分区（.swap）、文件路径（.path）、启动目标（.target）、由 systemd 管理的计时器（.timer）。
+
+我们通常在用systemctl调用单元的时候一般要单元文件的全名。也就是带上述后缀的那些。
+如果不带扩展名的话systemctl会默认成是.service文件，所以为了不发生意外一般还是推荐把名字打全了。
+挂载点和设备会自动转化为对应的后缀单元，比如/home就等价于home.mount, /dev/sda等价于dev-sda.device。
+
+systemctl在enable、disable、mask子命令里面增加了--now选项，可以激活同时启动服务，激活同时停止服务等。
+```
+立刻激活单元：$ systemctl start <unit>
+立刻停止单元：$ systemctl stop <unit>
+重启单元：$ systemctl restart <unit>
+重新加载配置：$ systemctl reload <unit>
+输出单元运行的状态：$ systemctl status <unit>
+检测单元是否为自动启动：$ systemctl is-enabled <unit>
+设置为开机自动激活单元：$ systemctl enable <unit>
+设置为开机自动激活单元并现在立刻启动：$ systemctl enable --now <unit>
+取消开机自动激活单元：$ systemctl disable <unit>
+禁用一个单元：$ systemctl mask <unit>
+取消禁用一个单元：$ systemctl unmask <unit>
+显示单元的手册页（前提是由unit提供）：$ systemctl help <unit>
+重新载入整个systemd的系统配置并扫描unit文件的变动：$ systemctl daemon-reload
+```
+
+上述内容来源于：https://www.jianshu.com/p/c498327f39d4
+
 
 ## Shell编程
 

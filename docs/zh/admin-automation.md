@@ -54,7 +54,7 @@ ansible myhost --become -m raw -a "yum install -y python2"
 
 #### Ansible有全局变量的概念吗？
 
-没有，但我们可以将：ansible命令带入的变量 | cfg配置文件的变量 | 主项目的var变量 视为全局变量
+没有，但我们可以将：ansible命令带入的变量 | cfg配置文件的变量 | 主项目的var变量 视为全局变量。但特别需要注意的是：Ansible项目中即使有同名变量，它们不会共享一个内存区域，而是各自独占内存（区别于Java等语言变量指针的概念）。
 
 #### Ansible 如何实现模块化？
 
@@ -101,3 +101,7 @@ AWS上非常容易出错，建议在脚本中预处理
 #### dnf 模块现在可以用吗？
 
 现在不建议使用dnf模块
+
+#### 一个Ansible项目中，主入口文件中 *vars_files* 与 *vars* 哪个变量优先级高？
+
+vars_files的优先级更高。需要注意的是Ansible的变量是无法覆盖的，即同名变量在内存中都有单独的存储区域，而Ansible只是通过优先级的方式使用。

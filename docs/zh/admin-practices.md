@@ -27,7 +27,9 @@
 systemctl    服务名 [start | stop | restart | reload | status]
 ```
 
-那服务是如何创建的呢？以 Websoft9 提供的 Redmine 自动化项目为例，下面描述完整的服务创建过程：
+那服务是如何创建的呢？在Linux技术里面编写这种服务也被称之为编写Systemd 的 Unit 文件  
+
+以 Websoft9 提供的 Redmine 自动化项目为例，下面描述完整的服务创建过程：
 
 1. 编辑好[redmine.service](https://github.com/Websoft9/ansible-redmine/blob/master/roles/redmine/files/redmine.service)文件
    ```

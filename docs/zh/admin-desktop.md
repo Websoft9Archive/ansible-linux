@@ -13,11 +13,13 @@ Linux系统的桌面就是指类似Windows系统的图形化管理界面，一�
 
 ### VNC
 
+VNC（Virtual Network Computing）是一种远程显示系统，使用VNC，您可以在远程计算机上运行图形应用程序，并且仅将显示内容从这些应用程序发送到本地计算机。VNC与平台无关，并且作为服务器和客户端都支持多种操作系统和体系结构。Websoft9 提供的图形化Linux系统镜像默认预装了 VNC Server 端，你只需按照下面的步骤使用即可：
+
 1. 使用SSH登录服务器，设置你的VNC访问密码
     ```
     rm -rf /root/.vnc/passwd;vncpasswd
     ```
-2. 安装 [VNC viewer](https://www.realvnc.com/download/viewer/)
+2. 本地电脑安装 [VNC viewer](https://www.realvnc.com/download/viewer/)
 
 3. 登录云控制台，为你的云服务器所在的安全组中开启 **5901** 端口
 
@@ -75,3 +77,7 @@ rm -rf /root/.vnc/passwd;vncpasswd
 #### Gnome的开机Logo是否可以修改？
 
 可以，甚至可以修改整套主题，具体参考[此处](https://www.dazhuanlan.com/2020/03/01/5e5ab2a1bd7d8/)
+
+#### 预装的是哪个 VNC Server？
+
+[TigerVNC](https://github.com/TigerVNC/tigervnc)

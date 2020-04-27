@@ -34,6 +34,9 @@ module.exports = [
       '/zh/lang-java',
       '/zh/lang-python',
       '/zh/lang-nodejs',
+	  '/zh/lang-erlang',
+	  '/zh/lang-go',
+	  '/zh/lang-ruby',
     ]
   },
 

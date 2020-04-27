@@ -19,7 +19,21 @@ yum install firewalld -y
 
 > 如果使用云服务器，Linux系统的防火墙的端口管理被安全组替代，只要设置好合适的安全组规则，就能很好的控制端口的访问。
 
-## 安全组件使用
+## 端口
+
+```
+# 显示 tcp，udp 的端口和进程等相关情况。
+netstat -tunlp
+netstat -tunlp | grep 端口号
+
+# 查看服务器 22 端口的占用情况
+lsof -i:22
+
+# kill 端口对应的进程
+kill -9 PID
+```
+
+## 安全组件
 
 ### clamav 基本使用
 1.更新病毒库 命令 : freshclam 2\. 扫描: 2.1 扫描所有用户的主目录就使用 clamscan -r /home 2.2 扫描您计算机上的所有文件并且显示所有的文件的扫描结果，就使用 clamscan -r / 2.3 扫描您计算机上的所有文件并且显示有问题的文件的扫描结果， 就使用 clamscan -r –bell -i /
