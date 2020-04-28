@@ -13,7 +13,27 @@ Linux系统的桌面就是指类似Windows系统的图形化管理界面，一�
 
 ### VNC
 
-VNC（Virtual Network Computing）是一种远程显示系统，使用VNC，您可以在远程计算机上运行图形应用程序，并且仅将显示内容从这些应用程序发送到本地计算机。VNC与平台无关，并且作为服务器和客户端都支持多种操作系统和体系结构。Websoft9 提供的图形化Linux系统镜像默认预装了 VNC Server 端，你只需按照下面的步骤使用即可：
+VNC（Virtual Network Computing）是一种远程显示系统，使用VNC，您可以在远程计算机上运行图形应用程序，并且仅将显示内容从这些应用程序发送到本地计算机。VNC与平台无关，并且作为服务器和客户端都支持多种操作系统和体系结构。
+
+[Websoft9](https://www.websoft9.com) 提供的图形化系统镜像，默认预装了 [TigerVNC](https://tigervnc.org)，且已设置开机自启的 vncserver 服务。
+
+如下的命令可能会对你有帮助：
+
+```
+# 查看已经运行的桌面编号
+vncserver -list
+
+# 终止2号桌面进程
+kill -9 :1
+
+# 管理桌面服务
+systemctl start vncserver@:1.service
+systemctl stop vncserver@:1.service
+systemctl status vncserver@:1.service
+systemctl restart vncserver@:1.service
+```
+
+接下来，我们介绍如何通过本地电脑的VNC连接桌面：
 
 1. 使用SSH登录服务器，设置你的VNC访问密码
     ```
@@ -63,7 +83,19 @@ CentOS 7.4 64位+GNOME图形化界面。请使用本机Windows自带的远程桌
 rm -rf /root/.vnc/passwd;vncpasswd
 ```
 
-#### 远程连接出现 "由于安全设置错误, 客户端无法连接到远程计算机.."  
+#### 图形化界面锁定状态是否支持秘钥解锁？
+
+不支持
+
+#### Gnome的开机Logo是否可以修改？
+
+可以，甚至可以修改整套主题，具体参考[此处](https://www.dazhuanlan.com/2020/03/01/5e5ab2a1bd7d8/)
+
+#### 预装的是哪个 VNC Server？
+
+[TigerVNC](https://github.com/TigerVNC/tigervnc)
+
+#### 采用远程桌面连接出现 "由于安全设置错误, 客户端无法连接到远程计算机.."  
 ![image.png](https://libs.websoft9.com/Websoft9/DocsPicture/zh/linux/linux-errorsafe-websoft9.png)
 
 解决办法：
@@ -73,11 +105,3 @@ rm -rf /root/.vnc/passwd;vncpasswd
 3. 在右边的策略中，找到“系统加密：将FIPS算法用于加密 、哈希和签名”点击右键属性；
 4. 将“本地安全设置”设置为“已禁用”，在单击“应用”，后”确定”，即可远程控制  
    ![image.png](https://libs.websoft9.com/Websoft9/DocsPicture/zh/windows/windows-remoteanquan-websoft9.png)
-
-#### Gnome的开机Logo是否可以修改？
-
-可以，甚至可以修改整套主题，具体参考[此处](https://www.dazhuanlan.com/2020/03/01/5e5ab2a1bd7d8/)
-
-#### 预装的是哪个 VNC Server？
-
-[TigerVNC](https://github.com/TigerVNC/tigervnc)

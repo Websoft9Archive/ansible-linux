@@ -45,13 +45,28 @@ systemctl    服务名 [start | stop | restart | reload | status]
    [Install]
    WantedBy=multi-user.target
    ```
+   
 2. 将服务文件放入路径：*/etc/systemd/system* 下
+
 3. 启动并设置开机启动
+
 4. 测试服务的可用性
    ···
    systemctl restart redmine
    systemctl stop redmine
    ···
+
+附：通配符含义
+
+| 替换符 | 含义                                                         |
+| ------ | ------------------------------------------------------------ |
+| "`%b`" | 系统的"Boot ID"字符串。参见 [random(4)](http://man7.org/linux/man-pages/man4/random.4.html) 手册。 |
+| "`%H`" | 系统的主机名(hostname)                                       |
+| "`%m`" | 系统的"Machine ID"字符串。参见 [machine-id(5)](http://www.jinbuguo.com/systemd/machine-id.html#) 手册。 |
+| "`%T`" | 临时文件目录。也就是 `/tmp` 或 "`$TMPDIR`", "`$TEMP`", "`$TMP`" 之一(若已设置) |
+| "`%v`" | 内核版本(**uname -r** 的输出)                                |
+| "`%V`" | 存放大体积临时文件以及持久临时文件的目录。也就是 `/var/tmp` 或 "`$TMPDIR`", "`$TEMP`", "`$TMP`" 之一(若已设置) |
+| "`%%`" | 百分号自身(%)。使用"%%"表示一个真正的"%"字符。               |
 
 ## 如何设置计划任务？
 

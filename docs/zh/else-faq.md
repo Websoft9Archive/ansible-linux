@@ -8,3 +8,19 @@ PHP Package是一种源码包，用户的项目若要用到源码包，需要通
 
 #### 字符编码问题
 Ubuntu参考：https://help.ubuntu.com/community/Locale
+
+#### Systemd 是可以用于处理开机一次性运行脚本？
+
+可以，将 Tpye=oneshot 即可
+
+```
+[Unit]
+Description=Switch-off Touchpad
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/touchpad-off
+
+[Install]
+WantedBy=multi-user.target
+```
