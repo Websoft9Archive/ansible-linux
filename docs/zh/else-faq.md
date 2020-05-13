@@ -24,3 +24,8 @@ ExecStart=/usr/bin/touchpad-off
 [Install]
 WantedBy=multi-user.target
 ```
+
+#### 如何查询当前服务器的连接数？
+```
+ps aux | grep httpd | wc -l
+```
