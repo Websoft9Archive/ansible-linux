@@ -65,10 +65,12 @@ if [[ $repo_name != "" ]]
 then
 sudo python3 -m pip install -U --force-reinstall ansible
 sudo rm -rf  /tmp/ansible-$repo_name
-cd /tmp; sudo git clone https://github.com/Websoft9/ansible-$repo_name.git;
-cd /tmp/ansible-$repo_name;sudo ansible-galaxy install -r requirements.yml -f
+cd /tmp 
+sudo git clone https://github.com/Websoft9/ansible-$repo_name.git
+cd /tmp/ansible-$repo_name
+ansible-galaxy install -r requirements.yml -f
 sudo touch  /tmp/ansible-$repo_name/hosts
 sudo echo "localhost" > /tmp/ansible-$repo_name/hosts
-sudo ansible-playbook -i hosts $repo_name.yml -c local -e init=$i
+ansible-playbook -i hosts $repo_name.yml -c local -e init=$i
 sudo shutdown -r -t 3 "System will restart in 3s, then installation completed"
 fi
