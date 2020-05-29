@@ -27,7 +27,7 @@ do
         repo_init=$OPTARG
         ;;
         ?)
-        echo "参数无值"
+        echo "no repository"
         exit 1;;
     esac
 done
