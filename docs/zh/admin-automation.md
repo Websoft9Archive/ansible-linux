@@ -105,3 +105,27 @@ AWS上非常容易出错，建议在脚本中预处理
 #### 一个Ansible项目中，主入口文件中 *vars_files* 与 *vars* 哪个变量优先级高？
 
 vars_files的优先级更高。需要注意的是Ansible的变量是无法覆盖的，即同名变量在内存中都有单独的存储区域，而Ansible只是通过优先级的方式使用。
+
+##### 如何从一个裸机快速运行Ansible项目？
+
+下面以CentOS为例列出运行Ansible项目的步骤：
+
+```
+yum install ansible git -y
+git clone https://github.com/Websoft9/ansible-activemq.git
+cd ansible-activemq
+ansible-galaxy install -r requirements.yml -f
+ansible-playbook activemq.yml -c local
+```
+
+#### 条件判断中变量 none,null.undefined 有什么区别？
+
+* undefined 代表变量未定义，即变量不存在
+* null 即空字符，varA="" 就代表定义个 null 变量 varA
+* none 空值是Python里一个特殊的值，varA=None 就代表定义了一个 None 的变量 varA。None不能理解为0，因为0是有意义的，而None是一个特殊的空值。
+
+#### jinja2 模板中如何判断一个变量 varA 是否未定义，为空或 false:
+
+使用 {% if varA %} 即可，等同于{% if varA is defined and varA is not none %}
+
+
