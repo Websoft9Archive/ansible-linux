@@ -29,3 +29,7 @@ WantedBy=multi-user.target
 ```
 ps aux | grep httpd | wc -l
 ```
+
+#### 如何设置 /tmp, /var/tmp 目录的清理策略？
+
+以CentOS为例，修改 */usr/lib/tmpfiles.d/tmp.conf* 即可
