@@ -57,6 +57,7 @@ if command -v apt > /dev/null; then
   sudo apt-get install python2-pip -y 1>/dev/null 2>&1
   sudo python3 -m pip install -U --force-reinstall requests docker 1>/dev/null 2>&1
 fi
+sudo python3 -m pip install --upgrade pip
 sudo python2 -m pip -V
 sudo python3 -m pip -V
 sudo echo "Pre-installation has beend completed"
