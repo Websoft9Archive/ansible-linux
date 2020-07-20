@@ -47,6 +47,7 @@ if command -v yum > /dev/null; then
   sudo yum install yum-utils libselinux-python git python python3 -y 1>/dev/null 2>&1
   sudo yum install python-pip -y 1>/dev/null 2>&1
   sudo yum install python2-pip -y 1>/dev/null 2>&1
+  sudo yum install python3-pip -y 1>/dev/null 2>&1
   sudo python3 -m pip install -U --force-reinstall requests docker 1>/dev/null 2>&1
 fi
 
@@ -55,6 +56,7 @@ if command -v apt > /dev/null; then
   sudo apt-get install git python python3 -y 1>/dev/null 2>&1
   sudo apt-get install python-pip -y 1>/dev/null 2>&1
   sudo apt-get install python2-pip -y 1>/dev/null 2>&1
+  sudo apt-get install python3-pip -y 1>/dev/null 2>&1
   sudo python3 -m pip install -U --force-reinstall requests docker 1>/dev/null 2>&1
 fi
 sudo python3 -m pip install --upgrade pip
