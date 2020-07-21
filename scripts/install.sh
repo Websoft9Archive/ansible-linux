@@ -66,7 +66,7 @@ sudo echo "Pre-installation has beend completed"
 
 if [[ $repo_name != "" ]]
 then
-sudo python3 -m pip install -U --force-reinstall ansible
+sudo python3 -m pip install -U ansible
 sudo rm -rf  /tmp/ansible-$repo_name
 cd /tmp 
 sudo git clone https://github.com/Websoft9/ansible-$repo_name.git
