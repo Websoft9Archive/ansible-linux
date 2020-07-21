@@ -49,6 +49,7 @@ if command -v yum > /dev/null; then
   sudo yum install python2-pip -y 1>/dev/null 2>&1
   sudo yum install python3-pip -y 1>/dev/null 2>&1
   sudo python3 -m pip install -U --force-reinstall requests docker 1>/dev/null 2>&1
+  sudo yum install ansible -y
 fi
 
 if command -v apt > /dev/null; then
@@ -58,6 +59,8 @@ if command -v apt > /dev/null; then
   sudo apt-get install python2-pip -y 1>/dev/null 2>&1
   sudo apt-get install python3-pip -y 1>/dev/null 2>&1
   sudo python3 -m pip install -U --force-reinstall requests docker 1>/dev/null 2>&1
+  sudo apt-add-repository --yes --update ppa:ansible/ansible
+  sudo apt install ansible -y
 fi
 sudo python3 -m pip install --upgrade pip
 sudo python2 -m pip -V
@@ -66,7 +69,6 @@ sudo echo "Pre-installation has beend completed"
 
 if [[ $repo_name != "" ]]
 then
-sudo python3 -m pip install -U --force-reinstall ansible
 sudo rm -rf  /tmp/ansible-$repo_name
 cd /tmp 
 sudo git clone https://github.com/Websoft9/ansible-$repo_name.git
