@@ -8,7 +8,7 @@
     - vars/main.yml
 
   vars_prompt:
-    - name: 'gui_selection'
+    - name: 'linux_gui_selection'
       prompt: "\nPlease choose the GUI you want to install [ 1/2/3/4] \n\n
       0: Don't install any GUI\n
       1: GNOME \n
@@ -16,8 +16,15 @@
       3: Unity(unavailable)\n"
       private: no
       default: 1
+      
+    - name: 'linux_webgui_selection'
+      prompt: "\nPlease choose the Web GUI you want to install [ 1/2/3/4] \n\n
+      0: Don't install any Web GUI\n
+      1: cockpit \n"
+      private: no
+      default: 1
 
-    - name: 'cloud_selection'
+    - name: 'linux_cloud_selection'
       prompt: "\nDon you want to install Cloud Agent? [ 0/1] \n\n
       0: No, don't install it \n
       1: Yes, install it\n"
@@ -25,23 +32,29 @@
       default: 0
 
   vars:
-    gui_select:
+    linux_gui_select:
       '0': 'nothing'
       '1': 'gnome'
       '2': 'kde'
       '3': 'unity'
-    os_gui: "{{gui_select[gui_selection]}}" 
-
-    cloud_select:
+      
+    linux_webgui_select:
+      '0': 'nothing'
+      '1': 'cockpit'
+      
+    linux_cloud_select:
       '0': False
       'n': False
       '1': True
       'y': True
-    cloud_agent: "{{cloud_select[cloud_selection]}}" 
+    
+    os_gui: "{{linux_gui_select[linux_gui_selection]}}" 
+    os_webgui: "{{linux_webgui_select[linux_webgui_selection]}}" 
+    cloud_agent: "{{linux_cloud_select[linux_cloud_selection]}}" 
 
   roles:
-   - { role: role_common , tags: "role_common"} 
-   - { role: role_cloud , tags: "role_cloud"} 
-   - { role: role_os , tags: "role_os", when: os_gui !="nothing"}
-   - { role: role_preend , tags: "role_preend"} 
-   - { role: role_end , tags: "role_end"} 
+   - { role: role_common, tags: "role_common"} 
+   - { role: role_cloud, tags: "role_cloud"} 
+   - { role: role_os, tags: "role_os", when: os_gui !="nothing"}
+   - { role: role_preend, tags: "role_preend"} 
+   - { role: role_end, tags: "role_end"} 
