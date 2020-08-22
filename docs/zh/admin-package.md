@@ -299,11 +299,91 @@ yum versionlock gcc-*
 * packagecloud.io: 提供包管理托管的网站，范例参考：[RabbitMQ on packagecloud](https://packagecloud.io/rabbitmq/rabbitmq-server/)
 * https://bintray.com/
 
+## 按发行版
+
+下面总结主流 Linux 发行版上的包管理相关的独特性
+
+### CentOS
+
+### Ubuntu
+
+### OracleLinux
+
+[OracleLinux](http://yum.oracle.com/) 是 RedHat 家族的分支，与 CentOS 非常类似。  
+
+OracleLinux 非常注重打造自己的生态，官方提供了大量在线安装包，并用心维护，基本能够方便用户快速的安装主流软件。
+
+运行命令 `yum list *release-el7` 查看所有可用的源：
+
+```
+mysql-release-el7.x86_64                                           1.0-3.el7                          ol7_latest
+oracle-ceph-release-el7.x86_64                                     1.0-2.el7                          ol7_latest
+oracle-epel-release-el7.x86_64                                     1.0-3.el7                          ol7_latest
+oracle-gluster-release-el7.x86_64                                  1.0-6.el7                          ol7_latest
+oracle-golang-release-el7.x86_64                                   1.0-6.el7                          ol7_latest
+oracle-nodejs-release-el7.x86_64                                   1.0-5.el7                          ol7_latest
+oracle-olcne-release-el7.x86_64                                    1.0-5.el7                          ol7_latest
+oracle-openstack-release-el7.x86_64                                1.0-2.el7                          ol7_latest
+oracle-ovirt-release-el7.x86_64                                    1.0-1.el7                          ol7_latest
+oracle-php-release-el7.x86_64                                      1.0-4.el7                          ol7_latest
+oracle-release-el7.x86_64                                          1.0-3.el7                          ol7_latest
+oracle-softwarecollection-release-el7.x86_64                       1.0-3.el7                          ol7_latest
+oracle-spacewalk-client-release-el7.x86_64                         1.0-4.el7                          ol7_latest
+oracle-spacewalk-server-release-el7.x86_64                         1.0-4.el7                          ol7_latest
+oraclelinux-developer-release-el7.x86_64                           1.0-5.el7                          ol7_latest
+oraclelinux-release-el7.x86_64                                     1.0-12.1.el7                       ol7_latest
+```
+
+### AmazonLinux
+
+AmazonLinux 官方对其发行版的性质描述非常少，似乎刻意回避。实际上，AmazonLinux 也是 RedHat 家族的分支，非常类似 CentOS。  
+
+经过实践探索，CentOS 相关的仓库（例如：CentOS-base.repo）也是可以在 AmazonLinux 上使用的。  
+
+值得注意的是，AmazonLinux 默认的源会设置优先级（priority=10），导致 yum 无法自主灵活的选择其他仓库的安装包。  
+
+* amzn2-extras.repo
+* amzn2-core.repo
+
+所以，建议删除以上两个官方默认仓库的优先级设置，把安装的自主权交还给 yum。
+
+
 ## 常见问题
 
 #### 下载的RPM包中可否包含其他RPM包的依赖地址？
 
 可以，这是很常见的场景
+
+#### 仓库文件(例如：/etc/yum.repos.d/docker-ce.repo) 是仓库的最小单元吗？
+
+不是，最小单元是文件中的每个[]维护的信息：
+
+```
+[docker-ce-stable]
+name=Docker CE Stable - $basearch
+baseurl=https://download.docker.com/linux/centos/7/$basearch/stable
+enabled=1
+gpgcheck=1
+gpgkey=https://download.docker.com/linux/centos/gpg
+```
+
+实际上，我们可以把 /etc/yum.repos.d 下所有的文件合并成一个文件
+
+#### yum install 如何排除某个仓库？
+
+运行如下的命令，参数 --disablerepo 的值是 repo 文件中仓库单元的名称，不是 repo 文件的名称。
+
+```
+yum install docker --disablerep="docker-ce-stable"
+```
+
+#### yum 安装时 priority=* 的逻辑？
+
+优先级设置是双刃剑：
+
+* priority=10 优先级低于 priority=9，即数字越小优先级高
+* 依赖会从优先级较高的仓库中寻找：如果找到的版本不匹配，系统就会报错；如果找不到所需的软件，系统会从优先级较低的仓库中继续寻找
+* 优先级设置会导致依赖的安装难以匹配最佳
 
 #### rpm -t ×××.rpm 和yum install ×××.rpm 安装命令有什么区别？
 

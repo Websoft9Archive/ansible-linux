@@ -645,7 +645,23 @@ systemctl enable contaner@mysql.service
 
 可以，其类似于程序设计里面的类与对象的关系
 
+### 范例
 
+#### 自动关机
+
+需求：每天晚上20:00服务器自动关机
+
+```
+[Unit]
+Description=shutdown linux service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/sbin/shutdown -h 20:00
+
+[Install]
+WantedBy=multi-user.target
+```
 
 ## Shell编程
 
