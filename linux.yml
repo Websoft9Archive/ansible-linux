@@ -25,13 +25,6 @@
       private: no
       default: 1
 
-    - name: 'linux_cloudagent_selection'
-      prompt: "\nDon you want to install Cloud Agent? [ 0/1] \n\n
-      0: No, don't install it \n
-      1: Yes, install it\n"
-      private: no
-      default: 0
-
   vars:
     linux_desktop_select:
       '0': ''
@@ -43,15 +36,10 @@
       '0': ''
       '1': 'cockpit'
       
-    linux_cloudagent_select:
-      '0': False
-      'n': False
-      '1': True
-      'y': True
     
-    os_desktop: "{{linux_desktop_select[linux_desktop_selection]}}"
+    os_desktop: 
+      - "{{linux_desktop_select[linux_desktop_selection]}}"
     common_install_tools: [{{linux_webgui_select[linux_webgui_selection]}}]
-    cloud_agent: "{{linux_cloudagent_select[linux_cloudagent_selection]}}"
 
   roles:
    - { role: role_common, tags: "role_common"} 
