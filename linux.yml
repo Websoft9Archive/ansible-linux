@@ -37,9 +37,9 @@
       '1': 'cockpit'
       
     
-    os_desktop: 
-      - "{{linux_desktop_select[linux_desktop_selection]}}"
-    common_install_tools: [{{linux_webgui_select[linux_webgui_selection]}}]
+    os_desktop: "{{linux_desktop_select[linux_desktop_selection]}}"
+    common_install_tools: 
+      - "{{linux_webgui_select[linux_webgui_selection]}}"
 
   roles:
    - { role: role_common, tags: "role_common"} 
