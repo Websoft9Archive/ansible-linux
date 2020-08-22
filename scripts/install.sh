@@ -44,6 +44,7 @@ if command -v yum > /dev/null; then
   sudo yum clean all 1>/dev/null 2>&1
   sudo yum makecache 1>/dev/null 2>&1
   sudo yum install -y epel-release 1>/dev/null 2>&1
+  if [ $(ls /etc/yum.repos.d  | grep "oracle") ]; then yum install -y oraclelinux-developer-release-e* oracle-nodejs-release-e* oracle-epel-release-e*; fi
   sudo yum install yum-utils libselinux-python git python python3 -y 1>/dev/null 2>&1
   sudo yum install python-pip -y 1>/dev/null 2>&1
   sudo yum install python2-pip -y 1>/dev/null 2>&1
