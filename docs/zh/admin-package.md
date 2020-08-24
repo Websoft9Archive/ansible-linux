@@ -303,13 +303,27 @@ yum versionlock gcc-*
 
 下面总结主流 Linux 发行版上的包管理相关的独特性
 
+### RedHat
+
+RedHat 系统免费，但是仓库需要订阅。  
+
+下面重点介绍 RedHat 如何使用 CentOS-base 仓库的方案
+
 ### CentOS
+
+CentOS 是 RedHat 的同步办法，完全免费。
 
 ### Ubuntu
 
 ### OracleLinux
 
-[OracleLinux](http://yum.oracle.com/) 是 RedHat 家族的分支，与 CentOS 非常类似。  
+[OracleLinux](http://yum.oracle.com/) 是 RedHat 家族的分支，与 CentOS 非常类似，但完全基于 RedHat 内核。  
+
+```
+[root@iZj6c6izdnwbwt5jb0i2r0Z ~]# cat /proc/version
+Linux version 4.14.35-1902.305.4.el7uek.x86_64 (mockbuild@jenkins-10-147-72-125-9cc530f8-159f-444e-98e9-d1e5d2b5e4e2) (gcc version 4.8.5 20150623 (Red Hat 4.8.5-16.0.3) (GCC)) #2 SMP Tue Aug 4 14:17:05 PDT 2020
+
+```
 
 OracleLinux 非常注重打造自己的生态，官方提供了大量在线安装包，并用心维护，基本能够方便用户快速的安装主流软件。
 
