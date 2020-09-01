@@ -3,6 +3,7 @@
   hosts: all
   become: yes
   become_method: sudo
+  ansible_python_interpreter: auto
 
   vars_files:
     - vars/main.yml
