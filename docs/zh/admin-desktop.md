@@ -80,7 +80,8 @@ CentOS 7.4 64位+GNOME图形化界面。请使用本机Windows自带的远程桌
 输入如下的命令重置密码即可
 
 ```
-rm -rf /root/.vnc/passwd;vncpasswd
+vncpasswd
+systemctl restart vnc
 ```
 
 #### 图形化界面锁定状态是否支持秘钥解锁？
