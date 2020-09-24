@@ -1,8 +1,8 @@
 This program is released under LGPL-3.0 and with the additional Terms: 
 It is not allowed to publish free or paid image based on this program in any Cloud platform's Marketplace.            
 
-                   GNU LESSER GENERAL PUBLIC LICENSE
-                       Version 3, 29 June 2007
+                             GNU LESSER GENERAL PUBLIC LICENSE
+                                  Version 3, 29 June 2007
 
  Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>
  Everyone is permitted to copy and distribute verbatim copies
