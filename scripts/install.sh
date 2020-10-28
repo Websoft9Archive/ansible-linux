@@ -18,6 +18,7 @@ Show_Help(){
     "
 }
 
+# r:repository; i:init
 while getopts ":r:"":i:"  opt
 do
     case $opt in
