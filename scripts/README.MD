@@ -4,11 +4,12 @@ install.sh 是我们提供的一键安装脚本，用于部署基于Ansible的�
 
 ```
 #安装项目，初始化
-wget -N https://raw.githubusercontent.com/Websoft9/ansible-linux/master/scripts/install.sh; bash install.sh -r magento
+wget -N https://raw.githubusercontent.com/Websoft9/ansible-linux/master/scripts/install.sh; bash install.sh -r magento -i 1
 
 
 #安装项目，不初始化
-wget -N https://raw.githubusercontent.com/Websoft9/ansible-linux/master/scripts/install.sh; bash install.sh -r magento -i 0
+wget -N https://raw.githubusercontent.com/Websoft9/ansible-linux/master/scripts/install.sh; bash install.sh -r magento -i 0 或
+wget -N https://raw.githubusercontent.com/Websoft9/ansible-linux/master/scripts/install.sh; bash install.sh -r magento
 ```
 install.sh 支持两个参数：
 
