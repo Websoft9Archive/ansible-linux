@@ -12,12 +12,8 @@
 
 ### Bug Fixes
 
-* 2020-02-14  redis-version版本输出
-
-* 2020-02-13  redis-version版本输出
+* 2020-10-28  modify ansible-playbook i to repo_init
 
 ### Features
 
-* 2020-02-14  增加GUI工具
-
-* 2020-02-13  增加2.8版本
+* 2020-02-14  
