@@ -191,8 +191,10 @@ Cockpit 是一个基于 Web 的服务器管理工具，可用于 CentOS 和 RHEL
 Webmin是一款开源免费的Web面板，可以对Linux进行深度操作。
 登录方式：*http://公网IP地址:10000* ，登录账号为服务器账号（root/服务器密码）
 
-出现如下错误，解决办法;
+出现如下错误，解决办法:
+
 ![](https://libs.websoft9.com/Websoft9/DocsPicture/zh/webmin/webmin-is-running-in-SSL-mode-websoft9.png)
+
 安装Webmin后，在浏览器中访问Webmin控制面板时看到上述错误。错误显示您已经访问了Webmin控制面板URL，而前面没有https。
 - Web服务器以SSL模式运行，因此您必须尝试使用https而不是http。尝试使用URL“ https：// IP：10000”或“ https：// serverIP：10000”，并检查是否遇到相同的错误。
 - 如果问题还在，进行如下操作：
