@@ -32,8 +32,10 @@ mod_evasive是Apache防御攻击的模块，有助于防止DoS、DDoS以及对Ap
 - 暂时列入黑名单时提出任何要求
 如果满足上述任何条件，则发送403响应并记录IP地址。
 ```
-# 查看Apache配置的模块清单是否有evasive20_model
+# 查看Apache模块清单
 apachectl -M
-# 在conf.d目录下找到mod_evasive.conf配置，进行修改（根据网站安全实际需求来）
+```
+
+在conf.d目录下找到mod_evasive.conf配置，进行配置（根据网站安全实际需求来）
 ![](https://libs.websoft9.com/Websoft9/blog/zh/2020/12/Apache-403-mod_evasive-conf-websoft9.png)
 
