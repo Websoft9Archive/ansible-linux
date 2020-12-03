@@ -23,3 +23,17 @@ du -h –max-depth=0 *
 #### 服务启动失败怎么办？
 
 当linux服务启动失败的时候，系统会提示我们使用 `journalctl -xe` 命令来查询详细信息，定位服务不能启动的原因。
+
+
+#### 同一IP反复刷新页面导致服务器403错误处理
+mod_evasive是Apache防御攻击的模块，有助于防止DoS、DDoS以及对Apache服务器的暴力攻击。它可以在攻击期间提供规避行动，并通过电子邮件和系统日志工具报告滥用行为。该模块的工作原理是创建一个IP地址和URI的内部动态表，并拒绝以下任何一个IP地址：
+- 每秒请求同一页多次
+- 每秒对同一个孩子发出50多个并发请求
+- 暂时列入黑名单时提出任何要求
+如果满足上述任何条件，则发送403响应并记录IP地址。
+```
+# 查看Apache配置的模块清单是否有evasive20_model
+apachectl -M
+# 在conf.d目录下找到mod_evasive.conf配置，进行修改（根据网站安全实际需求来）
+![](https://libs.websoft9.com/Websoft9/blog/zh/2020/12/Apache-403-mod_evasive-conf-websoft9.png)
+
