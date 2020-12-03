@@ -38,6 +38,5 @@ apachectl -M
 ```
 ##### 修改配置项
 在conf.d目录下找到mod_evasive.conf文件，进行配置（根据网站安全实际需求来）
-
 ![](https://libs.websoft9.com/Websoft9/blog/zh/2020/12/Apache-403-mod_evasive-conf-websoft9.png)
 
