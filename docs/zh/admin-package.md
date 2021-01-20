@@ -195,7 +195,8 @@ CentOS、Fedora 及 Red Hat 系列 Linux 使用RPM包文件，并使用yum命令
 
 
 ```
-[root@iZ8vb7it5p19lxxol367u0Z rpm]# rpm -qi rabbitmq-server
+# 通过 rpm 命令查看已安装软件包的信息
+$ rpm -qi rabbitmq-server
 Name        : rabbitmq-server
 Version     : 3.8.3
 Release     : 1.el7
@@ -214,9 +215,11 @@ Summary     : The RabbitMQ server
 Description :
 RabbitMQ is an open source multi-protocol messaging broker.
 
+# 通过 rpm 查看未安装的软件包的信息
+$ rpm -qpi rabbitmq-server
 
-
-[root@iZ8vb7it5p19lxxol367u0Z rpm]# yum info rabbitmq-server
+# 通过 yum 查看软件包信息
+$ yum info rabbitmq-server
 Loaded plugins: fastestmirror
 Loading mirror speeds from cached hostfile
 Installed Packages
@@ -290,14 +293,107 @@ yum versionlock gcc-*
 
 ## 制作包
 
-包文件是如何制作并发布到包仓库的呢？
+我们知道 rpm/deb 包都是存储在仓库中的可以运行的包，使得我们安装软件非常的简单和方便。  
+
+如果我们需要安装的软件，在互联网上找不到对应的包，怎么办？通常的做法是下载源码编译安装。
+
+编译安装可以解决我们自身安装软件的问题，但我们无法给他人共享我们的安装成功，因此我们如果可以自己制作 rpm/deb 包，然后发布到互联网上，一定有很多人下载，这样分享自己的创作成果毫无疑问会得到极大的收获和鼓舞。
+
+下面我们以 RPM 包为例，详细介绍制作过程（[参考来源](https://rpm-packaging-guide.github.io/)）。
+
+### 知识
+
+**安装颗粒度**
+
+与安装相关的技术知识颗粒度由小到大分别为：Make 编译 > RPM 包制作 > 包仓库建设。  
+颗粒度越大，受惠的人群越广。  
+
+**spec 文件**
+
+Spec 文件是 RPM 包的编排文件，简单理解为制作脚本，它是制作 RPM 包最核心的内容。  
+
+下面是一个简单的 Spec 文件（假设名称为 hello.spec）：
+
+```
+Name:       hello-world
+Version:    1
+Release:    1
+Summary:    Most simple RPM package
+License:    FIXME
+
+%description
+This is my first RPM package, which does nothing.
+
+%prep
+# we have no source, so nothing here
+
+%build
+cat > hello-world.sh <<EOF
+#!/usr/bin/bash
+echo Hello world
+EOF
+
+%install
+mkdir -p %{buildroot}/usr/bin/
+install -m 755 hello-world.sh %{buildroot}/usr/bin/hello-world.sh
+
+%files
+/usr/bin/hello-world.sh
+
+%changelog
+# let's skip this for now
+```
+
+将以上文件的内容保存到 Spec 文件后，运行如下的命令，便完成一个 RPM 包的制作。
+```
+rpmdev-setuptree
+rpmbuild -ba hello.spec
+```
+
+通过 `tree` 命令查询安装结果：
+```
+$ tree rpmbuild
+rpmbuild
+|-- BUILD
+|   `-- hello-world.sh
+|-- BUILDROOT
+|-- RPMS
+|   `-- x86_64
+|       `-- hello-world-1-1.x86_64.rpm
+|-- SOURCES
+|-- SPECS
+`-- SRPMS
+    `-- hello-world-1-1.src.rpm
+
+7 directories, 3 files
+
+```
+
+从以上的范例，可以直接得出几个坚定的结论：
+
+* RPM 包制作中的 Build 不一定是编译，它也可以是其他动作，例如：拷贝一个文件
+* RPM 包名称会根据描述信息自动名词，非常规范，可读性也很好
+* 生成 RPM 包的同时，也会生成一个 SRPM 包
+* Spec 语法基本就是 Shell 语法
+* 依赖组件不是必须的
+
+**Makefile**
+
+Makefile 顾名思义是 `make` 时所需的一个编排文件，如果用不着 `make`，那么 Makefile 也就不需要。
+
+> 关于 Make 命令，参考官方文档：[GNU Make](https://www.gnu.org/software/make/)
+
+**交叉编译**
+
 
 ## 工具
 
 在云计算发展的今天，包管理丰富多彩。在实践中，有一些非常好用好玩的工具：
 
 * packagecloud.io: 提供包管理托管的网站，范例参考：[RabbitMQ on packagecloud](https://packagecloud.io/rabbitmq/rabbitmq-server/)
-* https://bintray.com/
+* 软件分发即服务：https://bintray.com/
+* C/C++编译工具: https://conan.io/
+* 包检索工具：https://pkgs.org/
 
 ## 按发行版
 
