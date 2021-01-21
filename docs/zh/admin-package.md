@@ -248,6 +248,8 @@ Description : RabbitMQ is an open source multi-protocol messaging broker.
 |     CentOS      |     sudo yum install 包名      |                  |
 |                 |   sudo yum install 包1 包2 …   | 安装所有列出的包 |
 |                 |    sudo yum install -y 包名    | 无需提示直接安装 |
+|                 |    yum install yum-plugin-downloadonly  包名    | 只下载包而不安装 |
+|                 |    sudo yumdownloader 包名    | 下载包到当前目录 |
 |     Fedora      |     sudo dnf install 包名      |                  |
 |                 |   sudo dnf install 包1 包2 …   | 安装所有列出的包 |
 |                 |    sudo dnf install -y 包名    | 无需提示直接安装 |
@@ -495,7 +497,7 @@ yum install docker --disablerep="docker-ce-stable"
 * 依赖会从优先级较高的仓库中寻找：如果找到的版本不匹配，系统就会报错；如果找不到所需的软件，系统会从优先级较低的仓库中继续寻找
 * 优先级设置会导致依赖的安装难以匹配最佳
 
-#### rpm -t ×××.rpm 和yum install ×××.rpm 安装命令有什么区别？
+#### rpm -ivh ×××.rpm 和yum install ×××.rpm 安装命令有什么区别？
 
 rpm 安装只针对单个rpm文件安装，不会安装相关的依赖；yum install 安装会安装rpm包以及所需的依赖
 
@@ -551,4 +553,8 @@ package: rabbitmq-server.noarch 3.8.3-1.el7
 
 
 #### yum list 获取是软件清单是实时的还是缓存？
+
+#### 如何解压 rpm 包？
+
+
 
