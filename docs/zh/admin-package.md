@@ -27,9 +27,21 @@ Linux生态中的软件包资源非常丰富，从某种程度上看，用户是
 
 仓库的网址，称之为仓库地址，专业术语叫”源”。
 
-互联网上有大量的源，比如Redhat官方的源，也有云厂家提供的源。在配置 Linux 服务器或开发环境时，通常都不仅限于使用官方源。相较于现如今软件版本快速更新迭代而言，系统管理员和开发人员掌握常见 Linux 包管理基本操作还是一项必备的常用技能。
+互联网上有大量的源，比如 Redhat 官方的源，也有云厂家提供的源。在配置 Linux 服务器或开发环境时，通常都不仅限于使用官方源。相较于现如今软件版本快速更新迭代而言，系统管理员和开发人员掌握常见 Linux 包管理基本操作还是一项必备的常用技能。
 
-以上内容主要来源[此处](https://www.sysgeek.cn/linux-package-management/)
+每个操作系统发行版厂家从商业战略的角度，会直接维护或间接维护多个仓库，以实现其分级服务和规避责任的目的。
+
+例如：CentOS 可用的几个仓库有：
+
+* 官方仓库
+* SCL仓库
+* IUS仓库
+
+官方仓库中的软件包理论上最稳定可靠，其他仓库作为辅助。  
+
+与此同时，官方为了吸引用户贡献包，也会提供最简单的工具（[copr 项目](https://copr.fedorainfracloud.org/)），让用户专注于包配置（sepc文件）方面的工作，而构建编译和托管由平台负责，就可以充分利用社区力量，让仓库的软件变得异常丰富。
+
+仓库越来越多，自然就诞生了跨仓库的搜索引擎，类似 [pkgs](https://pkgs.org/) 便可以检索主流的仓库的包，节省了用户寻找的时间。
 
 ### 仓库源
 
@@ -555,6 +567,19 @@ package: rabbitmq-server.noarch 3.8.3-1.el7
 #### yum list 获取是软件清单是实时的还是缓存？
 
 #### 如何解压 rpm 包？
+
+#### 什么是 SCL 源？
+
+SoftwareCollections.org 是为 Red Hat Enterprise Linux，Fedora，CentOS 和 Scientific Linux 创建软件集合（SCL）的项目的所在地。您可以在此处创建和托管软件集合，以及与管理 SCL 的开发者建立联系。SCL 是在保证不与原有软件冲突的情况下运行的，也就意味着用户默认 Bash 是无法调用 ，如果想开机自动调用 SCL， 需要设置好环境变量。
+
+#### 什么是 IUS 源？
+
+IUS is a community project that provides RPM packages for newer versions of select software for Enterprise Linux distributions.IUS只为RHEL和CentOS这两个发行版提供较新版本的rpm包。如果在os或epel找不到某个软件的新版rpm，软件官方又只提供源代码包的时候，可以来ius源中找，几乎都能找到。
+
+#### 什么是 https://buildlogs.centos.org/？
+
+This server contains a mix of raw/unsigned packages and/or build logs
+It should be used mainly for testing purposes
 
 
 
