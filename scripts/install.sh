@@ -53,6 +53,7 @@ if command -v yum > /dev/null; then
   sudo yum install python3-pip -y 1>/dev/null 2>&1
   sudo python3 -m pip install -U --force-reinstall requests docker 1>/dev/null 2>&1
   sudo yum install ansible sshpass -y
+  command -v amazon-linux-extras && sudo amazon-linux-extras install ansible2
 fi
 
 if command -v apt > /dev/null; then
