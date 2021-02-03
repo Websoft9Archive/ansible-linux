@@ -53,7 +53,7 @@ if command -v yum > /dev/null; then
   sudo yum install python3-pip -y 1>/dev/null 2>&1
   sudo python3 -m pip install -U --force-reinstall requests docker 1>/dev/null 2>&1
   sudo yum install ansible sshpass -y
-  command -v amazon-linux-extras && sudo amazon-linux-extras install ansible2
+  command -v amazon-linux-extras && sudo amazon-linux-extras install ansible2 1>/dev/null 2>&1
 fi
 
 if command -v apt > /dev/null; then
@@ -64,8 +64,12 @@ if command -v apt > /dev/null; then
   sudo apt-get install python3-pip -y 1>/dev/null 2>&1
   sudo python3 -m pip install -U --force-reinstall requests docker 1>/dev/null 2>&1
   sudo apt-get update 1>/dev/null 2>&1
-  sudo apt install software-properties-common -y
-  [[ $(cat /etc/os-release |grep VERSION_CODENAME |cut -d= -f2) == focal ]] || sudo apt-add-repository --yes --update ppa:ansible/ansible
+  sudo apt install software-properties-common -y 1>/dev/null 2>&1
+  if [[ $(cat /etc/os-release |grep VERSION_CODENAME |cut -d= -f2) == focal ]];then
+        curl https://bootstrap.pypa.io/2.7/get-pip.py -o /tmp/get-pip.py 1>/dev/null 2>&1
+        python2 /tmp/get-pip.py 1>/dev/null 2>&1
+  fi
+  sudo apt-add-repository --yes --update ppa:ansible/ansible
   sudo apt install ansible sshpass -y
 fi
 sudo python3 -m pip install --upgrade pip
