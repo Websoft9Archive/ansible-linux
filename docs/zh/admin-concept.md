@@ -106,11 +106,26 @@ en_US.UTF-8 是 UTF-8 的子集，也就是说en_US.UTF-8也是支持中文字�
 
 ### 修改编码
 
-如果想切换操作系统的默认显示的语言，就必须修改默认的编码。
+如果想切换操作系统的默认显示的语言，就必须修改默认的编码。  
+
+登录 Zabbix 所在的服务器，运行下面的命令之一
+```
+##方案一
+locale-gen zh_CN.UTF-8
+
+##方案二
+dpkg-reconfigure locales
+```
+
+如果运行**方案二**，请参考下图选择 **zh_CN.UTF-8 UTF-8** 编码规则（键盘空格键选定，Tab键切换位置）
+
+![](https://libs.websoft9.com/Websoft9/DocsPicture/zh/linux/linux-localescn-websoft9.png)
+![](https://libs.websoft9.com/Websoft9/DocsPicture/zh/linux/linux-localescndef-websoft9.png)
 
 ### 字体
 
 我们在实际操作中发现即使当前是en_US.UTF-8编码，如果安装下面的命令后，操作系统便可以正常显示中文。
+
 ```
 yum groupinstall "fonts"
 ```
