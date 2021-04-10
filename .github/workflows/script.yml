@@ -1,0 +1,21 @@
+name: install.sh Build and Upload
+
+on: 
+  push:
+    paths: scripts/install.sh
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    
+    # upload to azure blob
+    - name: debug
+      run: ls
+    - uses: bacongobbler/azure-blob-storage-upload@v1.1.1
+      with:
+        source_dir: script/install.sh
+        container_name: $web
+        connection_string: ${{ secrets.Azure_blob_download }}
+        extra_args: '--destination-path ansible'
