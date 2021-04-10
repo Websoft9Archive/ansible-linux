@@ -40,7 +40,7 @@ echo "Pre-installation is starting, please wait for 1-3 minutes..."
 # python2 -m pip == pip2
 # python3 -m pip == pip3
 # pip is already installed if you are using Python 2 >=2.7.9 or Python 3 >=3.4
-# OracleLinux need install oaclelinux-developer-release-e* oracle-nodejs-release-e* oracle-epel-release-e* in image before this script
+# OracleLinux need install oaclelinux-developer-release-e* oracle-nodejs-release-e* oracle-epel-release-e* in Image before this script
 
 if command -v yum > /dev/null; then
   sudo yum clean all 1>/dev/null 2>&1
