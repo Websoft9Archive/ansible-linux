@@ -62,6 +62,9 @@ if command -v apt > /dev/null; then
   sudo apt-get install python-pip -y 1>/dev/null 2>&1
   sudo apt-get install python2-pip -y 1>/dev/null 2>&1
   sudo apt-get install python3-pip -y 1>/dev/null 2>&1
+  if [[ $(cat /etc/os-release |grep VERSION_CODENAME |cut -d= -f2) == xenial ]];then
+        curl -fsSL -o- https://bootstrap.pypa.io/pip/3.5/get-pip.py | python3.5
+  fi 
   sudo python3 -m pip install -U --force-reinstall requests docker 1>/dev/null 2>&1
   sudo apt-get update 1>/dev/null 2>&1
   sudo apt install software-properties-common -y 1>/dev/null 2>&1
@@ -86,7 +89,7 @@ sudo git clone https://github.com/Websoft9/ansible-$repo_name.git
 cd /tmp/ansible-$repo_name
 ansible-galaxy install -r requirements.yml -f
 sudo touch  /tmp/ansible-$repo_name/hosts
-sudo echo "localhost" > /tmp/ansible-$repo_name/hosts
+sudo echo "localhost" > /tmp/ansible-$repo_name/hosts
 ansible-playbook -i hosts $repo_name.yml -c local -e init=$repo_init
 sudo shutdown -r -t 3 "System will restart in 3s, then installation completed"
 fi
