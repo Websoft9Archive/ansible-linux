@@ -60,6 +60,7 @@ Linux生态中的软件包资源非常丰富，从某种程度上看，用户是
 | Ubuntu Ports | http://ports.ubuntu.com | Ubuntu Ports 是 Arm64，Armhf 等平台的 Ubuntu 软件仓库 |
 | Centos altarch | http://mirror.centos.org/altarch/ | CentOS 额外平台的安装镜像和官方软件包仓库 |
 | IUS | https://ius.io/ | IUS（Inline with Upstream Stable）是一个社区项目，它旨在为 Linux 企业发行版提供可选软件的最新版 RPM 软件包。 |
+| ATOMIC | http://www.atomicorp.com/channels/atomic/ | Atomic源支持Fedora，RHEL和CentOS的YUM包管理。 |
 
 以上是"大卖场"式的仓库源，实际上很多知名的开源软件，例如：MySQL,Apache等还提供自建的仓库，供用户使用。
 
