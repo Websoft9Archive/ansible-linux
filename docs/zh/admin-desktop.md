@@ -37,7 +37,9 @@ systemctl restart vncserver@:1.service
 
 1. 使用SSH登录服务器，设置你的VNC访问密码
     ```
-    rm -rf /root/.vnc/passwd;vncpasswd
+    sudo su
+    rm -rf /root/.vnc/passwd
+    vncpasswd
     ```
 2. 本地电脑安装 [VNC viewer](https://www.realvnc.com/download/viewer/)
 
