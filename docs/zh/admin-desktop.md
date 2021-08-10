@@ -67,12 +67,16 @@ CentOS 7.4 64位+GNOME图形化界面。请使用本机Windows自带的远程桌
 
 1. 打开本地电脑Windows的远程桌面工具，输入服务器公网IP开始连接
   ![image.png](https://libs.websoft9.com/Websoft9/DocsPicture/zh/linux/linux-remoteip-websoft9.png)
+  
 2. 确认继续连接  
   ![image.png](https://libs.websoft9.com/Websoft9/DocsPicture/zh/linux/linux-remotereminder-websoft9.png)
-3. 根据提示，输入服务器root账号和密码
+  
+3. 根据提示，输入服务器root账号和密码（官方不建议使用 root 登录桌面）
   ![enter image description here](https://libs.websoft9.com/Websoft9/DocsPicture/zh/gnome/gnome-login-websoft9.png)
+ 
 4. 成功登录
-4. 修改语言（范例：中文），进入Setting->Region&Lanuage->Language,选择中文，根据系统提示重启后生效
+
+6. 修改语言（范例：中文），进入Setting->Region&Lanuage->Language,选择中文，根据系统提示重启后生效
   ![enter image description here](https://libs.websoft9.com/Websoft9/DocsPicture/zh/gnome/gnome-changelanguage-websoft9.png)
 
 ## 常见问题
@@ -116,4 +120,3 @@ systemctl restart vnc
    passwd
    ```
 2. 登录到桌面后，打开：【Privacy】>【Screen Lock】，将【Automatic Screen Lock】设置为 off，关闭锁屏功能。
-
