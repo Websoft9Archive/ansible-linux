@@ -108,3 +108,12 @@ systemctl restart vnc
 3. 在右边的策略中，找到“系统加密：将FIPS算法用于加密 、哈希和签名”点击右键属性；
 4. 将“本地安全设置”设置为“已禁用”，在单击“应用”，后”确定”，即可远程控制  
    ![image.png](https://libs.websoft9.com/Websoft9/DocsPicture/zh/windows/windows-remoteanquan-websoft9.png)
+
+#### 使用秘钥对的服务器如何使用远程桌面？
+
+1. 使用 SSH 登录服务器后，为 root 用户设置登录密码
+   ```
+   passwd
+   ```
+2. 登录到桌面后，打开：【Privacy】>【Screen Lock】，将【Automatic Screen Lock】设置为 off，关闭锁屏功能。
+
