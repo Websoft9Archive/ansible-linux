@@ -120,3 +120,8 @@ systemctl restart vnc
    passwd
    ```
 2. 登录到桌面后，打开：【Privacy】>【Screen Lock】，将【Automatic Screen Lock】设置为 off，关闭锁屏功能。
+
+#### 以 root 身份登录后，不小心锁屏了怎么办？
+
+登录密码无法解锁，只能重启服务器后再登录
+
