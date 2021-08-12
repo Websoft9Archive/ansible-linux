@@ -409,6 +409,8 @@ Makefile 顾名思义是 `make` 时所需的一个编排文件，如果用不着
 * 软件分发即服务：https://bintray.com/
 * C/C++编译工具: https://conan.io/
 * 包检索工具：https://pkgs.org/
+* Snap包:https://snapcraft.io/
+* Flatpak包：https://www.flatpak.org/
 
 ## 按发行版
 
@@ -581,6 +583,3 @@ IUS is a community project that provides RPM packages for newer versions of sele
 
 This server contains a mix of raw/unsigned packages and/or build logs
 It should be used mainly for testing purposes
-
-
-
