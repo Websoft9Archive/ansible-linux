@@ -177,7 +177,9 @@ expect eof #结束
 
 ### 弹出可视化界面如何实现自动交互应答？
 
-在ubuntu系统下，通过追加`DEBIAN_FRONTEND=noninteractive`实现，下面是一个 kde-plasma-desktop 使用范例：
+![](https://libs.websoft9.com/Websoft9/DocsPicture/en/linux/linux-installinteract-websoft9.png)
+
+expect 自动交互应答方案在字符交互中非常有效，但在弹出可视化界面交互中不能很好的发挥作用。这种情况下，可以通过追加`DEBIAN_FRONTEND=noninteractive`实现，下面是一个在ubuntu系统安装 kde-plasma-desktop 使用范例：
 
 ```
   - name: Install KDE Desktop
