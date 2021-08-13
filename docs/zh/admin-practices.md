@@ -175,6 +175,20 @@ send "18\r"#回答问题
 expect eof #结束
 ```
 
+### 弹出可视化界面的如何实现自动交互应答？
+
+在ubuntu系统下，通过追加`DEBIAN_FRONTEND=noninteractive`实现，下面是一个 kde-plasma-desktop 使用范例：
+
+```
+  - name: Install KDE Desktop
+    shell: |
+      sudo DEBIAN_FRONTEND=noninteractive apt install kde-plasma-desktop -y
+      sduo apt remove gdm3 -y
+      sudo apt remove lightdm -y
+      sudo dpkg-reconfigure sddm
+    when: os_desktop=="kde"
+```
+
 ## 推荐可视化面板工具？
 
 
