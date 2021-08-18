@@ -37,7 +37,9 @@ systemctl restart vncserver@:1.service
 
 1. 使用SSH登录服务器，设置你的VNC访问密码
     ```
-    rm -rf /root/.vnc/passwd;vncpasswd
+    sudo su
+    rm -rf /root/.vnc/passwd
+    vncpasswd
     ```
 2. 本地电脑安装 [VNC viewer](https://www.realvnc.com/download/viewer/)
 
@@ -65,12 +67,16 @@ CentOS 7.4 64位+GNOME图形化界面。请使用本机Windows自带的远程桌
 
 1. 打开本地电脑Windows的远程桌面工具，输入服务器公网IP开始连接
   ![image.png](https://libs.websoft9.com/Websoft9/DocsPicture/zh/linux/linux-remoteip-websoft9.png)
+  
 2. 确认继续连接  
   ![image.png](https://libs.websoft9.com/Websoft9/DocsPicture/zh/linux/linux-remotereminder-websoft9.png)
-3. 根据提示，输入服务器root账号和密码
+  
+3. 根据提示，输入服务器root账号和密码（官方不建议使用 root 登录桌面）
   ![enter image description here](https://libs.websoft9.com/Websoft9/DocsPicture/zh/gnome/gnome-login-websoft9.png)
+ 
 4. 成功登录
-4. 修改语言（范例：中文），进入Setting->Region&Lanuage->Language,选择中文，根据系统提示重启后生效
+
+6. 修改语言（范例：中文），进入Setting->Region&Lanuage->Language,选择中文，根据系统提示重启后生效
   ![enter image description here](https://libs.websoft9.com/Websoft9/DocsPicture/zh/gnome/gnome-changelanguage-websoft9.png)
 
 ## 常见问题
@@ -106,3 +112,16 @@ systemctl restart vnc
 3. 在右边的策略中，找到“系统加密：将FIPS算法用于加密 、哈希和签名”点击右键属性；
 4. 将“本地安全设置”设置为“已禁用”，在单击“应用”，后”确定”，即可远程控制  
    ![image.png](https://libs.websoft9.com/Websoft9/DocsPicture/zh/windows/windows-remoteanquan-websoft9.png)
+
+#### 使用秘钥对的服务器如何使用远程桌面？
+
+1. 使用 SSH 登录服务器后，为 root 用户设置登录密码
+   ```
+   passwd
+   ```
+2. 登录到桌面后，打开：【Privacy】>【Screen Lock】，将【Automatic Screen Lock】设置为 off，关闭锁屏功能。
+
+#### 以 root 身份登录后，不小心锁屏了怎么办？
+
+登录密码无法解锁，只能重启服务器后再登录
+

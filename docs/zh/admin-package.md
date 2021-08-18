@@ -33,11 +33,11 @@ Linux生态中的软件包资源非常丰富，从某种程度上看，用户是
 
 例如：CentOS 可用的几个仓库有：
 
-* 官方仓库
+* 官方仓库：[Ubuntu Packages](https://packages.ubuntu.com/)
 * SCL仓库
 * IUS仓库
 
-官方仓库中的软件包理论上最稳定可靠，其他仓库作为辅助。  
+官方仓库中的软件包理论上最稳定可靠，其他仓库作为辅助。另外，像 Ubuntu 官方仓库网站提供了非常便捷的包检索页面，用户寻找包的效率远超过 apt search 的方式。
 
 与此同时，官方为了吸引用户贡献包，也会提供最简单的工具（[copr 项目](https://copr.fedorainfracloud.org/)），让用户专注于包配置（sepc文件）方面的工作，而构建编译和托管由平台负责，就可以充分利用社区力量，让仓库的软件变得异常丰富。
 
@@ -60,6 +60,7 @@ Linux生态中的软件包资源非常丰富，从某种程度上看，用户是
 | Ubuntu Ports | http://ports.ubuntu.com | Ubuntu Ports 是 Arm64，Armhf 等平台的 Ubuntu 软件仓库 |
 | Centos altarch | http://mirror.centos.org/altarch/ | CentOS 额外平台的安装镜像和官方软件包仓库 |
 | IUS | https://ius.io/ | IUS（Inline with Upstream Stable）是一个社区项目，它旨在为 Linux 企业发行版提供可选软件的最新版 RPM 软件包。 |
+| ATOMIC | http://www.atomicorp.com/channels/atomic/ | Atomic源支持Fedora，RHEL和CentOS的YUM包管理。 |
 
 以上是"大卖场"式的仓库源，实际上很多知名的开源软件，例如：MySQL,Apache等还提供自建的仓库，供用户使用。
 
@@ -408,6 +409,8 @@ Makefile 顾名思义是 `make` 时所需的一个编排文件，如果用不着
 * 软件分发即服务：https://bintray.com/
 * C/C++编译工具: https://conan.io/
 * 包检索工具：https://pkgs.org/
+* Snap包:https://snapcraft.io/
+* Flatpak包：https://www.flatpak.org/
 
 ## 按发行版
 
@@ -580,6 +583,3 @@ IUS is a community project that provides RPM packages for newer versions of sele
 
 This server contains a mix of raw/unsigned packages and/or build logs
 It should be used mainly for testing purposes
-
-
-

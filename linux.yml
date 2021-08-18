@@ -13,8 +13,8 @@
       0: Don't install any GUI\n
       1: GNOME \n
       2: KDE \n
-      3: Xfce(unavailable) \n
-      4: Unity(unavailable)\n"
+      3: Xfce\n
+      4: Mate\n"
       private: no
       default: 1
       
@@ -30,7 +30,8 @@
       '0': ''
       '1': 'gnome'
       '2': 'kde'
-      '3': 'unity'
+      '3': 'xfce'
+      '4': 'mate'
       
     linux_webgui_select:
       '0': ''
