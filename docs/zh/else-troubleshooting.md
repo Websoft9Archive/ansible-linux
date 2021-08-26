@@ -3,6 +3,23 @@
 #### 如何判断端口是否放通？
 除了检查本机防火墙和云控制台安全组之外，可以通过 **telnet** 去连接
 
+#### root账户修改文件权限， 报错 "Operation not permitted"，不允许操作
+使用root修改文件权限，如下。查看文件属性也不是 i 属性导致。
+
+```
+[root@iZ2ze3eh720u9x5c1hdhwyZ yanbian]# chmod 750 index.php
+chmod: changing permissions of ‘index.php’: Operation not permitted
+[root@iZ2ze3eh720u9x5c1hdhwyZ yanbian]# lsattr index.php
+-------------e-- index.php
+
+```
+
+出现这种情况有可能是云平台的安全防护导致。
+如 阿里云的云安全中心有【网页防篡改】保护，如果为文件/目录添加了该保护，在系统中修改文件/目录 权限就会被禁止。
+
+![](https://libs.websoft9.com/Websoft9/blog/zh/2020/12/linux-safe-websoft9.png)
+
+
 #### 磁盘满了如何查询哪些文件比较大？
 
 ```
