@@ -5,7 +5,7 @@ Linux desktop environments are the graphical interfaces used to interact with th
 * The main Linux Desktop Environments: GNOME, KDE, Xfce, Mate 
 * The main connection methods: ：Windows remote desktop, VNC
 
-![ubuntu界面](https://libs.websoft9.com/Websoft9/DocsPicture/zh/linux/linux-ubuntuui-websoft9.png)
+![ubuntu desktop](https://libs.websoft9.com/Websoft9/DocsPicture/zh/linux/linux-ubuntuui-websoft9.png)
 
 ## Connect Desktop
 
@@ -40,7 +40,7 @@ Connect Linux desktop is the same with connect Windows Server
    ![Gnome Desktop](https://libs.websoft9.com/Websoft9/DocsPicture/en/linux/linux-desktop-kde-websoft9.jpg)
 
    * **Mate Desktop**
-   ![Gnome Desktop](https://libs.websoft9.com/Websoft9/DocsPicture/en/linux/linux-desktop-mate-websoft9.jpg)
+   ![Gnome Desktop](https://libs.websoft9.com/Websoft9/DocsPicture/en/linux/linux-desktop-mate-websoft9.png)
 
    * **Xfce Desktop**
    ![Gnome Desktop](https://libs.websoft9.com/Websoft9/DocsPicture/en/linux/linux-desktop-xfce-websoft9.png)
