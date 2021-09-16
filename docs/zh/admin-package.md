@@ -71,6 +71,16 @@ Linux生态中的软件包资源非常丰富，从某种程度上看，用户是
 
 ![repo mysql](https://libs.websoft9.com/Websoft9/DocsPicture/zh/linux/repo-mysql-websoft9.png)
 
+Linux 提供方便的仓库管理命令：  
+
+```
+# 安装仓库管理套件
+yum -y install yum-utils
+
+# 范例：启用某个仓库
+yum-config-manager --enable remi-php70
+```
+
 ### 安装仓库
 
 安装仓库通俗的讲，就是将仓库的网址（地址）信息写入到服务器的指定文件夹（文件）中。类似我们为了方便自己购物，将不同的购物网站的网站收藏到浏览器是一个道理。
