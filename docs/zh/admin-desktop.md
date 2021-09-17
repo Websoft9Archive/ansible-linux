@@ -13,7 +13,7 @@ Linux 系统的桌面就是指类似 Windows 系统的图形化管理界面，�
    ![Gnome Desktop](https://libs.websoft9.com/Websoft9/DocsPicture/en/linux/linux-desktop-kde-websoft9.jpg)
 
    * **Mate Desktop**
-   ![Gnome Desktop](https://libs.websoft9.com/Websoft9/DocsPicture/en/linux/linux-desktop-mate-websoft9.jpg)
+   ![Gnome Desktop](https://libs.websoft9.com/Websoft9/DocsPicture/en/linux/linux-desktop-mate-websoft9.png)
 
    * **Xfce Desktop**
    ![Gnome Desktop](https://libs.websoft9.com/Websoft9/DocsPicture/en/linux/linux-desktop-xfce-websoft9.png)
@@ -31,6 +31,8 @@ XRDP 连接方式简单可靠，由于 Windows 系统自带的远程桌面支持
 
 1. 打开本地电脑 Windows 的远程桌面工具，输入 **服务器公网IP** 开始连接
    ![image.png](https://libs.websoft9.com/Websoft9/DocsPicture/zh/linux/linux-remoteip-websoft9.png)
+   
+   > 确保云控制台中服务器安全组 3389 端口是开启状态
   
 2. 如果出现下面的提示，点击【是】继续  
    ![image.png](https://libs.websoft9.com/Websoft9/DocsPicture/zh/linux/linux-remotereminder-websoft9.png)
