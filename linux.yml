@@ -8,6 +8,12 @@
     - vars/main.yml
 
   vars_prompt:
+    - name: 'transfer_image_selection'
+      prompt: "\nChoose the flow you want to install [ 1/2] \n\n
+      0: Transfer Image\n
+      1: other \n
+      default: 1
+      
     - name: 'linux_desktop_selection'
       prompt: "\nChoose the Desktop you want to install [ 1/2/3/4] \n\n
       0: Don't install any GUI\n
@@ -37,7 +43,11 @@
       '0': ''
       '1': 'cockpit'
       
+    transfer_image_select: 
+      '0': 'transfer_image'
+      '1': ''
     
+    os_image: "{{transfer_image_select[transfer_image_selection]}}"
     os_desktop: "{{linux_desktop_select[linux_desktop_selection]}}"
     common_install_tools: 
       - "{{linux_webgui_select[linux_webgui_selection]}}"
