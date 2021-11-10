@@ -12,6 +12,7 @@
       prompt: "\nChoose the flow you want to install [ 1/2] \n\n
       0: Transfer Image\n
       1: other\n"
+      private: no
       default: 1
       
     - name: 'linux_desktop_selection'
