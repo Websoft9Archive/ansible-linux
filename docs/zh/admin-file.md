@@ -145,7 +145,18 @@ $ lvdisplay
 下面是对案例的简述：
 
 1. 云控制台通过购买，新增20G系统盘空间
-2. 运行 `lvdisplay` 查看是否存在 LVM 的分区
+2. 对根目录所在分区进行扩容操作
+   ```
+   #1 安装分区扩容软件 growpart
+   yum install -y cloud-utils-growpart
+
+   #2 分区扩容操作
+   growpart /dev/vda 2
+
+   #3 增大或收缩 ext2/ext3/ext4 文件系统
+   resize2fs /dev/vda2 
+   ```
+3. 运行 `lvdisplay` 查看是否存在 LVM 的分区
    ```
       --- Logical volume ---
    LV Path                /dev/rootvg/crashlv
@@ -164,21 +175,21 @@ $ lvdisplay
    - currently set to     8192
    Block device           252:1
    ```
-3. 先扩容 PV
+4. 先扩容 PV
    ```
    pvdisplay
    pvresize <pvname>
    pvs
    ```
 
-4. 扩容 LV （最终所需的分区）
+5. 扩容 LV （最终所需的分区）
    ```
-   lvextend -L +80G <LV's Path>
+   lvextend -l +100%FREE <LV's Path>
    lvdispaly
    lvs
    ```
 
-5. 修正文件系统
+6. 修正文件系统
    ```
    # ext4 文件系统
    resize2fs <LV's Path>
