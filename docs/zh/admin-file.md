@@ -185,7 +185,7 @@ $ lvdisplay
 5. 扩容 LV （最终所需的分区）
    ```
    lvextend -l +100%FREE <LV's Path>
-   lvdispaly
+   lvdisplay
    lvs
    ```
 
