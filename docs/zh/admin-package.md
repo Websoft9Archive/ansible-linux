@@ -199,7 +199,8 @@ CentOS、Fedora 及 Red Hat 系列 Linux 使用RPM包文件，并使用yum命令
 | :-------------: | :-----------------------: | :------------------------: |
 | Debian / Ubuntu | apt-cache search 搜索内容 |                            |
 |     CentOS      |    yum search 搜索内容    |                            |
-|                 |  yum search all 搜索内容  | 搜索所有内容，包括包描述。 |
+|                 |  yum search all 搜索内容  yum --showduplicates list gitlab-ee
+  | 搜索所有内容，包括包描述。 |
 |     Fedora      |    dnf search 搜索内容    |                            |
 |                 |  dnf search all 搜索内容  | 搜索所有内容，包括包描述。 |
 
