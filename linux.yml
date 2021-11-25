@@ -8,15 +8,6 @@
     - vars/main.yml
 
   vars_prompt:
-    - name: 'transfer_image_selection'
-      prompt: "\nChoose the flow you want to install [ 1/2] \n\n
-      0: Transfer to aliyun\n
-      1: Transfer to qcloud\n
-      2: Transfer to huaweicloud\n
-      3: other\n"
-      private: no
-      default: 3
-      
     - name: 'linux_desktop_selection'
       prompt: "\nChoose the Desktop you want to install [ 1/2/3/4] \n\n
       0: Don't install any GUI\n
@@ -46,13 +37,6 @@
       '0': ''
       '1': 'cockpit'
       
-    transfer_image_select: 
-      '0': 'aliyun'
-      '1': 'qcloud'
-      '2': 'huaweicloud'
-      '3': ''
-      
-    os_image: "{{transfer_image_select[transfer_image_selection]}}"
     os_desktop: "{{linux_desktop_select[linux_desktop_selection]}}"
     common_install_tools: 
       - "{{linux_webgui_select[linux_webgui_selection]}}"
