@@ -23,7 +23,7 @@
       '2': 'huaweicloud'
       '3': ''
       
-    os_image: "{{transfer_image_select[transfer_image_selection]}}"
+    os_cloudplatform: "{{transfer_image_select[transfer_image_selection]}}"
 
   roles:
    - { role: role_common, tags: "role_common"} 
