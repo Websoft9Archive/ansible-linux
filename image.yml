@@ -10,16 +10,16 @@
   vars_prompt:
     - name: 'transfer_image_selection'
       prompt: "\nChoose the flow you want to install [ 1/2] \n\n
-      0: Transfer to aliyun\n
-      1: Transfer to qcloud\n
+      0: Transfer to alibabacloud\n
+      1: Transfer to tencentcloud\n
       2: Transfer to huaweicloud\n
       3: other\n"
       private: no
       default: 3
       
     transfer_image_select: 
-      '0': 'aliyun'
-      '1': 'qcloud'
+      '0': 'alibabacloud'
+      '1': 'tencentcloud'
       '2': 'huaweicloud'
       '3': ''
       
