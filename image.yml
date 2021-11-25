@@ -16,7 +16,8 @@
       3: other\n"
       private: no
       default: 3
-      
+
+  vars:
     transfer_image_select: 
       '0': 'alibabacloud'
       '1': 'tencentcloud'
