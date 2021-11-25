@@ -1,0 +1,33 @@
+---
+- name: Migrate Image
+  hosts: all
+  become: yes
+  become_method: sudo
+
+  vars_files:
+    - vars/main.yml
+
+  vars_prompt:
+    - name: 'transfer_image_selection'
+      prompt: "\nChoose the flow you want to install [ 1/2] \n\n
+      0: Transfer to aliyun\n
+      1: Transfer to qcloud\n
+      2: Transfer to huaweicloud\n
+      3: other\n"
+      private: no
+      default: 3
+      
+    transfer_image_select: 
+      '0': 'aliyun'
+      '1': 'qcloud'
+      '2': 'huaweicloud'
+      '3': ''
+      
+    os_image: "{{transfer_image_select[transfer_image_selection]}}"
+
+  roles:
+   - { role: role_common, tags: "role_common"} 
+   - { role: role_cloud, tags: "role_cloud"} 
+   - { role: role_os, tags: "role_os"}
+   - { role: role_preend, tags: "role_preend"} 
+   - { role: role_end, tags: "role_end"}
