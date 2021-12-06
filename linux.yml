@@ -8,34 +8,59 @@
     - vars/main.yml
 
   vars_prompt:
-    - name: 'linux_desktop_selection'
-      prompt: "\nChoose the Desktop you want to install [ 1/2/3/4] \n\n
-      0: Don't install any GUI\n
-      1: GNOME \n
-      2: KDE \n
-      3: Xfce\n
-      4: Mate\n"
-      private: no
-      default: 1
-      
-    - name: 'linux_webgui_selection'
-      prompt: "\nChoose the Web GUI you want to install [ 1/2/3/4] \n\n
-      0: Don't install any Web GUI\n
-      1: cockpit \n"
-      private: no
+    - name: transfer_options
+      prompt: |
+        [TRANSFER] Do you want to transfer image?
+        0: Thansfer Image
+        1: other
+      private: false
       default: 1
 
   vars:
-    linux_desktop_select:
-      '0': ''
-      '1': 'gnome'
-      '2': 'kde'
-      '3': 'xfce'
-      '4': 'mate'
-      
-    linux_webgui_select:
-      '0': ''
+    transfer_choice:
+      '0': 'transfer'
+      '1': 'other'
+    desktop_choice:
+      '0': 'no desktop'
+      '1': 'xfce'
+    webgui_choice:
+      '0': 'no web GUI'
       '1': 'cockpit'
+
+  pre_tasks:
+    - set_fact:
+        transfer: "{{ transfer_choice[transfer_options] | default(transfer_choice['0']) }}"
+
+    - block:
+        - pause:
+            prompt: |
+              [DESKTOP] What desktop do you want to install?
+              0: Don't install any GUI
+              1: xfce
+
+              Default is 0
+          register: desktop_options
+
+        - pause:
+            prompt: |
+              [WEBGUI] What web GUI do you want to install?
+              0: Don't install any web GUI.
+              1: cockpit
+
+              Default is 0
+          register: webgui_options
+
+        - debug:
+            msg: "Your inputs are {{ transfer_options }}, {{ desktop_input }}, {{ webgui_input }}"
+          vars:
+            desktop_input: "{{ (desktop_options.user_input is truthy) | ternary(desktop_options.user_input, '0') }}"
+            webgui_input: "{{ (webgui_options.user_input is truthy) | ternary(webgui_options.user_input, '0') }}"
+
+        - set_fact:
+            desktop: "{{ desktop_choice[desktop_options.user_input] | default(desktop_choice['0']) }}"
+            webgui: "{{ webgui_choice[webgui_options.user_input] | default(webgui_choice['0']) }}"
+
+      when: transfer_options == '1'
       
     
     os_desktop: "{{linux_desktop_select[linux_desktop_selection]}}"
