@@ -33,3 +33,24 @@ ps aux | grep httpd | wc -l
 #### 如何设置 /tmp, /var/tmp 目录的清理策略？
 
 以CentOS为例，修改 */usr/lib/tmpfiles.d/tmp.conf* 即可
+
+#### Linux 系统有哪些时间？
+
+```
+$ timedatectl status
+Local time: Tue 2021-11-23 10:08:06 CST
+Universal time: Tue 2021-11-23 02:08:06 UTC
+RTC time: Tue 2021-11-23 10:08:04
+    Time zone: Asia/Shanghai (CST, +0800)
+    NTP enabled: yes
+    NTP synchronized: yes
+    RTC in local TZ: yes
+    DST active: n/a
+```
+
+* Local time: 你自己手表上的时间
+* Universal time：世界统一时间
+* Real Time Clock：RTC, CMOS or BIOS clock
+* System clock：系统时间，开机的时候读取 RTC 时间
+
+NTP 是指网络时间服务，用于校对时间。 

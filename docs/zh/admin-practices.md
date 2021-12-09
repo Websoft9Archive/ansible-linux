@@ -235,3 +235,26 @@ Webmin是一款开源免费的Web面板，可以对Linux进行深度操作。
    ![](https://libs.websoft9.com/Websoft9/DocsPicture/zh/linux/linux-xwindows-websoft9.JPG)
 5. 此时Firefox的图形化界面就被传输到本地
    ![](https://libs.websoft9.com/Websoft9/DocsPicture/zh/linux/linux-xwindowsfirefox-websoft9.JPG)
+
+## 如何分析日志？
+
+日志是诊断故障的关键，大部分的问题都会在日志中留下“蛛丝马迹”。所以，学会分析日志是运维中最重要的技能之一。  
+
+先来一个热身，运行如下几个命令，感受日志系统的强大：  
+
+```
+# 查看 systemd 的错误日志，-p 支持 emerg alert err crit warning notice info debug 等值
+journalctl -p err
+
+# 查看指定服务的日志
+journalctl -u httpd
+
+# 查看内核日志
+journalctl -k
+
+# 查看脚本的日志
+journalctl /usr/bin/bash
+
+# 查看指定用户的日志
+journalctl UID=33 --since today
+```
