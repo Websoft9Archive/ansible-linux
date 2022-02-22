@@ -76,7 +76,7 @@ if command -v apt > /dev/null; then
   if [[ $(cat /etc/os-release |grep VERSION_CODENAME |cut -d= -f2) == focal ]];then
         curl https://bootstrap.pypa.io/2.7/get-pip.py -o /tmp/get-pip.py 1>/dev/null 2>&1
         python2 /tmp/get-pip.py 1>/dev/null 2>&1
-  elif [[ $(cat /etc/os-release |grep VERSION_CODENAME |cut -d= -f2) != focal ]];then
+  elif [[ $(cat /etc/os-release |grep VERSION_CODENAME |cut -d= -f2) != focal && $(cat /etc/os-release |grep VERSION_CODENAME |cut -d= -f2) != bullseye]];then
         sudo apt-add-repository --yes --update ppa:ansible/ansible
   fi
   sudo apt install ansible sshpass -y
