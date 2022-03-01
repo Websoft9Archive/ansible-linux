@@ -23,7 +23,7 @@
       0: Don't install any Web GUI\n
       1: cockpit \n"
       private: no
-      default: 1
+      default: 0
 
   vars:
     linux_desktop_select:
