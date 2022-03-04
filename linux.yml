@@ -10,7 +10,7 @@
   vars_prompt:
     - name: 'linux_desktop_selection'
       prompt: "\nChoose the Desktop you want to install [ 1/2/3/4] \n\n
-      0: Don't install any GUI\n
+      0: Don't install any Desktop\n
       1: GNOME \n
       2: KDE \n
       3: Xfce\n
