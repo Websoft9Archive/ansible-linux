@@ -96,5 +96,10 @@ ansible-galaxy install -r requirements.yml -f
 sudo touch  /tmp/ansible-$repo_name/hosts
 sudo echo "localhost" > /tmp/ansible-$repo_name/hosts
 ansible-playbook -i hosts $repo_name.yml -c local -e init=$repo_init
-# echo  "System must restart after 2s, then installation completed"; sleep 2 ; sudo reboot
+
+if [ $repo_init  -ne 0  ]; then
+   echo "Image build success!"
+else
+   echo  "System must restart after 2s, then installation completed"; sleep 2 ; sudo reboot
+fi 
 fi
