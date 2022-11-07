@@ -52,7 +52,7 @@ Follow our [Linux-Desktop image](https://apps.websoft9.com/linux) for installati
 
 ## License
 
-[LGPL-3.0](/License.md), Additional Terms: It is not allowed to publish free or paid image based on this repository in any Cloud platform's Marketplace.
+[LGPL-3.0](/License.md), Additional Terms: Without authorization from Websoft9, it is not allowed to publish free or paid image based on this program in any Cloud platform's Marketplace.
 
 Copyright (c) 2016-present, Websoft9
 
